@@ -1,4 +1,4 @@
-# 「10月20日」最高速度19.4M/S，2024年Nekoray每天更新免费机场订阅节点链接  更新时间 2024-10-20 07:19:03
+# 「10月21日」最高速度20.9M/S，2024年Nekoray每天更新免费机场订阅节点链接  更新时间 2024-10-21 08:08:16
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://nekoraygithub.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,19 +9,19 @@
 
 ### Clash订阅链接
 
-- https://nekoraygithub.github.io/uploads/2024/10/0-20241020.yaml
-- https://nekoraygithub.github.io/uploads/2024/10/1-20241020.yaml
-- https://nekoraygithub.github.io/uploads/2024/10/2-20241020.yaml
-- https://nekoraygithub.github.io/uploads/2024/10/3-20241020.yaml
-- https://nekoraygithub.github.io/uploads/2024/10/4-20241020.yml
+- https://nekoraygithub.github.io/uploads/2024/10/0-20241021.yaml
+- https://nekoraygithub.github.io/uploads/2024/10/1-20241021.yaml
+- https://nekoraygithub.github.io/uploads/2024/10/2-20241021.yaml
+- https://nekoraygithub.github.io/uploads/2024/10/3-20241021.yaml
+- https://nekoraygithub.github.io/uploads/2024/10/4-20241021.yml
 
 ### V2ray订阅链接
 
-- https://nekoraygithub.github.io/uploads/2024/10/0-20241020.txt
-- https://nekoraygithub.github.io/uploads/2024/10/1-20241020.txt
-- https://nekoraygithub.github.io/uploads/2024/10/2-20241020.txt
-- https://nekoraygithub.github.io/uploads/2024/10/3-20241020.txt
-- https://nekoraygithub.github.io/uploads/2024/10/4-20241020.txt
+- https://nekoraygithub.github.io/uploads/2024/10/0-20241021.txt
+- https://nekoraygithub.github.io/uploads/2024/10/1-20241021.txt
+- https://nekoraygithub.github.io/uploads/2024/10/2-20241021.txt
+- https://nekoraygithub.github.io/uploads/2024/10/3-20241021.txt
+- https://nekoraygithub.github.io/uploads/2024/10/4-20241021.txt
 
 ## 更多clash节点订阅 ：
 
