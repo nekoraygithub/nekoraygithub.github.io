@@ -2,13 +2,13 @@
 <html lang="zh-CN">
 
 <head>
-        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-21656.htm" />
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-22135.htm" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@RequestBody接收实体类时，部分字段丢失的问题</title>
+    <title>python 在sql语句中使用%s,%d,%f</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta name="description" content="问题： 1.@RequestBody注解的实体类里，如果存在首字母为小写，第二个字母大写的字段时，此字段会传为null的bug。 private String tUser;  public Strin" />
+        <meta name="description" content="python连接数据库执行增删查改 mysql数据库&nbsp;import pymysql&nbsp; postgresql数据库&nbsp;import psycopg2 普通含%的python语" />
         <!-- Favicon -->
     <link href="__ADDON__/img/nekoraygithub/favicon.ico" rel="icon">
     <!-- google-fonts -->
@@ -90,7 +90,7 @@
     <div class="inner-banner">
         <section class="w3l-breadcrumb">
             <div class="container">
-                <h1 class="inner-text-title font-weight-bold mb-2">@RequestBody接收实体类时，部分字段丢失的问题</h1>
+                <h1 class="inner-text-title font-weight-bold mb-2">python 在sql语句中使用%s,%d,%f</h1>
                 <ul class="breadcrumbs-custom-path">
                     <li><a href="/">首页</a></li>
                     <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
@@ -105,10 +105,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                                      				  				  				<div id="content_views" class="htmledit_views"> <h3>问题：</h3> <p>1.@RequestBody注解的实体类里，如果存在首字母为小写，第二个字母大写的字段时，此字段会传为null的bug。</p> <pre><code class="language-java">private String tUser;  public String getTUser() { 	return tUser; } public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>2.在IDEA中，布尔类型boolean/Boolean的isXXX变量，在自动生成getter和setter方法时，会去除is标识，如图所示。</p> <pre><code class="language-java">private Boolean isSignUpAudit;  public Boolean getSignUpAudit() {     return isSignUpAudit; }  public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <h3></h3> <h3>问题1解决方法：</h3> <p>&nbsp;1、修改字段名</p> <p>2、使用@JsonProperty注解，手动写get和set方法</p> <pre><code class="language-java">@JsonProperty(value = "tUser") private String tUser;  public String getTUser() { 	return tUser; }  public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>或</p> <pre><code class="language-java">private String tUser;  @JsonProperty(value = "tUser") public String getTUser() { 	return tUser; }  @JsonProperty(value = "tUser") public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>3、重写get和set方法，第一个字母小写开头</p> <pre><code class="language-java">private String tUser;  public String gettUser() {     return tUser; }  public void settUser(String tUser) {     this.tUser = tUser; }</code></pre> <h3>问题2解决方法：</h3> <p>1、修改字段名</p> <p>2、使用@JsonProperty注解，手动写get和set方法</p> <pre><code class="language-java">@JsonProperty(value = "isSignUpAudit") private Boolean isSignUpAudit;  public Boolean getSignUpAudit() {     return isSignUpAudit; }  public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <p>或</p> <pre><code class="language-java">private Boolean isSignUpAudit;  @JsonProperty(value = "isSignUpAudit") public Boolean getSignUpAudit() {     return isSignUpAudit; }  @JsonProperty(value = "isSignUpAudit") public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <p>3、重写get和set方法，带上is开头</p> <pre><code class="language-java">private Boolean isSignUpAudit;  public Boolean getIsSignUpAudit() { 	return isSignUpAudit; }  public void setIsSignUpAudit(Boolean isSignUpAudit) { 	this.isSignUpAudit = isSignUpAudit; } </code></pre> </p></div> 			                <div class="clearfix"></div>
+                                      				  				  				<div id="content_views" class="htmledit_views"> <p>python连接数据库执行增删查改</p> <p>mysql数据库&nbsp;import pymysql&nbsp;</p> <p>postgresql数据库&nbsp;import psycopg2</p> <p>普通含%的python语句</p> <p><img decoding="async" alt="" height="40" src="http://img.555519.xyz/uploads/20221228/6944aaa70f268b2c9334a9661950a4f6.jpg"></p> <p><img decoding="async" alt="" height="44" src="http://img.555519.xyz/uploads/20221228/dccf31481756e3e2c2b9210789297e23.jpg">&nbsp;</p> <p><img decoding="async" alt="" height="39" src="http://img.555519.xyz/uploads/20221228/e935958cf68e07662f108d2606bf1128.jpg">&nbsp;</p> <p>sql语句中</p> <p><img loading="lazy" decoding="async" alt="" height="23" src="http://img.555519.xyz/uploads/20221228/9d1c9dd440e2d79c79962e32edd06cf2.jpg">&nbsp;</p> <p>普通sql语句 select * from tables where tablename = 'table_name' ,所以这里该加的引号还是要加&nbsp;</p> <p>不加的情况</p> <p><img loading="lazy" decoding="async" alt="" height="24" src="http://img.555519.xyz/uploads/20221228/4c373c3c16edfa62f616f626cf27e1ce.jpg"></p> <p>翻页的情况</p> <p><img loading="lazy" decoding="async" alt="" height="38" src="http://img.555519.xyz/uploads/20221228/51af764875170e0b9de5e9d63b0d55f0.jpg">&nbsp;like的情况</p> <p><img loading="lazy" decoding="async" alt="" height="36" src="http://img.555519.xyz/uploads/20221228/114601953328b0520676329a4c57b3dc.jpg"></p> <p>因为普通sql语句是 where 列名 like '4301%' 这里需要多加一个%防止转义&nbsp;</p> </p></div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
-                                        <p>上一个：<a href="/news/article-21219.htm">动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）</a></p>
-                                        <p>下一个：<a href="/news/article-21657.htm">猫咪驱虫应该怎么做,需要注意什么呢?（猫猫驱虫教程）</a></p>
+                                        <p>上一个：<a href="/news/article-21657.htm">猫咪驱虫应该怎么做,需要注意什么呢?（猫猫驱虫教程）</a></p>
+                                        <p>下一个：<a href="/news/article-22137.htm">重庆宠物领养吧狗（重庆宠物狗领养中心）</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -118,16 +118,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-5-free-subscribe-node.htm" title="「12月5日」最高速度19.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月5日」最高速度19.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-6-linux-nekoray-node.htm" title="「12月6日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月6日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-24-free-nekoray-node.htm" title="「10月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-21-free-nekoray.htm" title="「9月21日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月21日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-19-clash-meta-windows.htm" title="「8月19日」最高速度20.6M/S，2024年Nekoray Github每天更新免费机场订阅节点链接">「8月19日」最高速度20.6M/S，2024年Nekoray Github每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-20299.htm" title="上海农业大学动物医院官网（上海农业大学动物医院官网招聘）">上海农业大学动物医院官网（上海农业大学动物医院官网招聘）</a></li>
-                        <li class="py-2"><a href="/news/article-21219.htm" title="动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）">动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-24-free-nekoray.htm" title="「9月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-1-windows-nekoray.htm" title="「10月1日」最高速度18.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月1日」最高速度18.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-8-31-free-node-subscribe.htm" title="「8月31日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「8月31日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-21218.htm" title="宠物粮食市场调研报告总结（宠物粮市场分析）">宠物粮食市场调研报告总结（宠物粮市场分析）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-7-linux-nekoray.htm" title="「12月7日」最高速度21.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月7日」最高速度21.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-14-node-share-links.htm" title="「11月14日」最高速度18.3M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月14日」最高速度18.3M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-19-node-share.htm" title="「10月19日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月19日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-2-free-nekoray-node.htm" title="「11月2日」最高速度19M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月2日」最高速度19M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-15-windows-nekoray.htm" title="「11月15日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月15日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-9-20-free-subscribe-node.htm" title="「9月20日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月20日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-20757.htm" title="动物医院社会实践报告怎么写（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写（宠物医院社会实践报告1500）</a></li>
+                        <li class="py-2"><a href="/news/article-22592.htm" title="宠物驱虫剂什么牌子好（宠物驱虫十大品牌）">宠物驱虫剂什么牌子好（宠物驱虫十大品牌）</a></li>
                     </ul>
     </div>
 </div>
