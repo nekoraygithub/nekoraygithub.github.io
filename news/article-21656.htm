@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
     <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
-    
-<!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -105,7 +104,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                                      				  				  				<div id="content_views" class="htmledit_views"> <h3>问题：</h3> <p>1.@RequestBody注解的实体类里，如果存在首字母为小写，第二个字母大写的字段时，此字段会传为null的bug。</p> <pre><code class="language-java">private String tUser;  public String getTUser() { 	return tUser; } public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>2.在IDEA中，布尔类型boolean/Boolean的isXXX变量，在自动生成getter和setter方法时，会去除is标识，如图所示。</p> <pre><code class="language-java">private Boolean isSignUpAudit;  public Boolean getSignUpAudit() {     return isSignUpAudit; }  public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <h3></h3> <h3>问题1解决方法：</h3> <p>&nbsp;1、修改字段名</p> <p>2、使用@JsonProperty注解，手动写get和set方法</p> <pre><code class="language-java">@JsonProperty(value = "tUser") private String tUser;  public String getTUser() { 	return tUser; }  public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>或</p> <pre><code class="language-java">private String tUser;  @JsonProperty(value = "tUser") public String getTUser() { 	return tUser; }  @JsonProperty(value = "tUser") public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>3、重写get和set方法，第一个字母小写开头</p> <pre><code class="language-java">private String tUser;  public String gettUser() {     return tUser; }  public void settUser(String tUser) {     this.tUser = tUser; }</code></pre> <h3>问题2解决方法：</h3> <p>1、修改字段名</p> <p>2、使用@JsonProperty注解，手动写get和set方法</p> <pre><code class="language-java">@JsonProperty(value = "isSignUpAudit") private Boolean isSignUpAudit;  public Boolean getSignUpAudit() {     return isSignUpAudit; }  public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <p>或</p> <pre><code class="language-java">private Boolean isSignUpAudit;  @JsonProperty(value = "isSignUpAudit") public Boolean getSignUpAudit() {     return isSignUpAudit; }  @JsonProperty(value = "isSignUpAudit") public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <p>3、重写get和set方法，带上is开头</p> <pre><code class="language-java">private Boolean isSignUpAudit;  public Boolean getIsSignUpAudit() { 	return isSignUpAudit; }  public void setIsSignUpAudit(Boolean isSignUpAudit) { 	this.isSignUpAudit = isSignUpAudit; } </code></pre> </p></div> 			                <div class="clearfix"></div>
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <h3>问题：</h3> <p>1.@RequestBody注解的实体类里，如果存在首字母为小写，第二个字母大写的字段时，此字段会传为null的bug。</p> <pre><code class="language-java">private String tUser;  public String getTUser() { 	return tUser; } public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>2.在IDEA中，布尔类型boolean/Boolean的isXXX变量，在自动生成getter和setter方法时，会去除is标识，如图所示。</p> <pre><code class="language-java">private Boolean isSignUpAudit;  public Boolean getSignUpAudit() {     return isSignUpAudit; }  public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <h3></h3> <h3>问题1解决方法：</h3> <p>&nbsp;1、修改字段名</p> <p>2、使用@JsonProperty注解，手动写get和set方法</p> <pre><code class="language-java">@JsonProperty(value = "tUser") private String tUser;  public String getTUser() { 	return tUser; }  public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>或</p> <pre><code class="language-java">private String tUser;  @JsonProperty(value = "tUser") public String getTUser() { 	return tUser; }  @JsonProperty(value = "tUser") public void setTUser(String tUser) { 	this.tUser = tUser; }</code></pre> <p>3、重写get和set方法，第一个字母小写开头</p> <pre><code class="language-java">private String tUser;  public String gettUser() {     return tUser; }  public void settUser(String tUser) {     this.tUser = tUser; }</code></pre> <h3>问题2解决方法：</h3> <p>1、修改字段名</p> <p>2、使用@JsonProperty注解，手动写get和set方法</p> <pre><code class="language-java">@JsonProperty(value = "isSignUpAudit") private Boolean isSignUpAudit;  public Boolean getSignUpAudit() {     return isSignUpAudit; }  public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <p>或</p> <pre><code class="language-java">private Boolean isSignUpAudit;  @JsonProperty(value = "isSignUpAudit") public Boolean getSignUpAudit() {     return isSignUpAudit; }  @JsonProperty(value = "isSignUpAudit") public void setSignUpAudit(Boolean signUpAudit) {     isSignUpAudit = signUpAudit; }</code></pre> <p>3、重写get和set方法，带上is开头</p> <pre><code class="language-java">private Boolean isSignUpAudit;  public Boolean getIsSignUpAudit() { 	return isSignUpAudit; }  public void setIsSignUpAudit(Boolean isSignUpAudit) { 	this.isSignUpAudit = isSignUpAudit; } </code></pre> </p></div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-21219.htm">动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）</a></p>
                                         <p>下一个：<a href="/news/article-21657.htm">猫咪驱虫应该怎么做,需要注意什么呢?（猫猫驱虫教程）</a></p>
@@ -118,16 +118,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-12-5-free-subscribe-node.htm" title="「12月5日」最高速度19.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月5日」最高速度19.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-6-linux-nekoray-node.htm" title="「12月6日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月6日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-24-free-nekoray-node.htm" title="「10月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-21-free-nekoray.htm" title="「9月21日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月21日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-8-19-clash-meta-windows.htm" title="「8月19日」最高速度20.6M/S，2024年Nekoray Github每天更新免费机场订阅节点链接">「8月19日」最高速度20.6M/S，2024年Nekoray Github每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-20299.htm" title="上海农业大学动物医院官网（上海农业大学动物医院官网招聘）">上海农业大学动物医院官网（上海农业大学动物医院官网招聘）</a></li>
-                        <li class="py-2"><a href="/news/article-21219.htm" title="动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）">动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-24-free-nekoray.htm" title="「9月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月24日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-20-free-subscribe-node.htm" title="「9月20日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月20日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-20757.htm" title="动物医院社会实践报告怎么写（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写（宠物医院社会实践报告1500）</a></li>
+                        <li class="py-2"><a href="/news/article-25828.htm" title="宠物店寄养协议范本（宠物寄养协议合同范本）">宠物店寄养协议范本（宠物寄养协议合同范本）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-3-linux-nekoray-node.htm" title="「12月3日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月3日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-16-linux-nekoray-node.htm" title="「12月16日」最高速度18.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月16日」最高速度18.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-23971.htm" title="包含动物疫苗接种方法有几种图片及名称的词条">包含动物疫苗接种方法有几种图片及名称的词条</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-22-free-nekoray.htm" title="「9月22日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月22日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-free-node-subscribe.htm" title="「11月19日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月19日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-free-nekoray.htm" title="「11月7日」最高速度21.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月7日」最高速度21.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-14-windows-nekoray.htm" title="「9月14日」最高速度19.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月14日」最高速度19.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-nekoray-node.htm" title="「10月9日」最高速度22.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月9日」最高速度22.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-27-linux-nekoray-node.htm" title="「10月27日」最高速度22.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月27日」最高速度22.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
                     </ul>
     </div>
 </div>
@@ -139,7 +139,7 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+                <h4><span class="badge" style="float: right;">57</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
@@ -167,6 +167,15 @@
         <div class="w3l-footer-16-main">
             <div class="container">
                 <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
                     <p class="copy-text">
                         Nekoray Github节点订阅官网 版权所有
                         <br />
