@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-33838.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Java开发人员的一个长期烦恼是对普通开发人员的日期和时间用例的支持不足。 例如，现有的类（例如java.util.Date和SimpleDateFormatter）是非线程安全的，从而导致用户潜在的" />
+        <!-- Favicon -->
+    <link href="__ADDON__/img/nekoraygithub/favicon.ico" rel="icon">
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                                <a class="navbar-brand" href="/">
+                    <span>Nekoray Github</span>
+                </a>
+                                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-tomorrow-night"> </h1> <p>Java开发人员的一个长期烦恼是对普通开发人员的日期和时间用例的支持不足。</p> <p>例如，现有的类（例如java.util.Date和SimpleDateFormatter）是非线程安全的，从而导致用户潜在的并发问题，这不是一般开发人员在编写日期处理代码时会期望处理的问题。<br /> 一些日期和时间类还表现出相当差的API设计。例如，年份java.util.Date从1900开始，月份从1开始，天从0开始，这不是很直观。</p> <p>这些问题以及其他一些问题导致第三方日期和时间库（例如Joda-Time）的欣欣向荣。</p> <p>为了解决这些问题并在JDK内核中提供更好的支持，针对Java SE 8设计了一个新的没有这些问题的日期和时间API。该项目由Joda-Time（Stephen Colebourne）和Oracle的作者在JSR 310下共同领导，出现在Java SE 8软件包中java.time。</p> </h1> <h2><a id="_13" rel="nofollow"></a>不可变值类</h2> <p>Java现有格式化程序的严重缺陷之一是它们不是线程安全的。这给开发人员带来了负担，使其需要以线程安全的方式使用它们并在其日常处理日期处理代码的过程中考虑并发问题。新的API通过确保其所有核心类都是不可变的并表示定义明确的值来避免此问题。</p> <h2><a id="_16" rel="nofollow"></a>域驱动</h2> <p>新的API模型与代表不同的用例类域非常精确Date和Time严密。这与以前的Java库不同，后者在这方面很差。例如，java.util.Date在时间轴上表示一个时刻（一个自UNIX纪元以来的毫秒数的包装器），但如果调用toString()，结果表明它具有时区，从而引起开发人员之间的困惑。</p> <p>这种对域驱动设计的重视在清晰度和易理解性方面提供了长期利益，但是当从以前的API移植到Java SE 8时，您可能需要考虑应用程序的域日期模型。</p> <h2><a id="_21" rel="nofollow"></a>按时间顺序分隔</h2> <p>新的API使人们可以使用不同的日历系统来满足世界某些地区（例如日本或泰国）用户的需求，而这些用户不一定遵循ISO-8601。这样做不会给大多数开发人员带来额外负担，他们只需要使用标准的时间顺序即可。</p> </h1> <h2><a id="31__Date__26" rel="nofollow"></a>3.1 相比 Date 的优势</h2> <ul> <li>Date 和 SimpleDateFormatter 非线程安全，而 LocalDate 和 LocalTime 和 String 一样，是final类型 - 线程安全且不能被修改。</li> <li>Date 月份从0开始,一月是0，十二月是11。LocalDate 月份和星期都改成了 enum ，不会再用错。</li> <li>Date是一个“万能接口”，它包含日期、时间，还有毫秒数。如果你只需要日期或时间那么有一些数据就没啥用。在新的Java 8中，日期和时间被明确划分为 LocalDate 和 LocalTime，LocalDate无法包含时间，LocalTime无法包含日期。当然，LocalDateTime才能同时包含日期和时间。</li> <li>Date 推算时间(比如往前推几天/ 往后推几天/ 计算某年是否闰年/ 推算某年某月的第一天、最后一天、第一个星期一等等)要结合Calendar要写好多代码，十分恶心！</li> </ul> <pre><code class="prism language-java"><span class="token class-name">LocalDate</span> today<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//本月的第一天</span><span class="token class-name">LocalDate</span> firstday<span class="token operator">=</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>today<span class="token punctuation">.</span><span class="token function">getYear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>today<span class="token punctuation">.</span><span class="token function">getMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//本月的最后一天</span><span class="token class-name">LocalDate</span> lastDay<span class="token operator">=</span>today<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token class-name">TemporalAdjusters</span><span class="token punctuation">.</span><span class="token function">lastDayOfMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>两个都是本地的，因为它们从观察者的角度表示日期和时间，例如桌子上的日历或墙上的时钟。</p> <p>还有一种称为复合类<code>LocalDateTime</code>，这是一个LocalDate和LocalTime的配对。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/aebfb72ac90f9b3758fe3f5e98160ad1.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> <p>时区将不同观察者的上下文区分开来，在这里放在一边；不需要上下文时，应使用这些本地类。这些类甚至可以用于表示具有一致时区的分布式系统上的时间。</p> <h2><a id="_API_48" rel="nofollow"></a>常用 API</h2> <h3><a id="now_49" rel="nofollow"></a>now()</h3> <p>获取在默认的时区系统时钟内的当前日期。该方法将查询默认时区内的系统时钟，以获取当前日期。<br /> 使用该方法将防止使用测试用的备用时钟，因为时钟是硬编码的。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/81f01493c99465e3e3c01d71b98d6874.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> <p>方便的加减年月日，而不必亲自计算！<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/b25f4889d5ea927246f6bdd1c1d32007.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> <h3><a id="plusMonths_57" rel="nofollow"></a>plusMonths</h3> <p>返回此副本LocalDate添加了几个月的指定数目。<br /> 此方法将分三步指定金额的几个月字段：</p> <ul> <li>将输入的月数加到month-of-year字段</li> <li>校验结果日期是否无效</li> <li>调整 day-of-month ，如果有必要的最后有效日期</li> </ul> <p>例如，2007-03-31加一个月会导致无效日期2007年4月31日。并非返回一个无效结果，而是 2007-04-30才是最后有效日期。调用实例的不可变性不会被该方法影响。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/9c5463e8418a76db9a9fd28229f3948c.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> <h3><a id="_66" rel="nofollow"></a>当天的零点、结束时间</h3> <pre><code class="prism language-java"><span class="token comment">// 2021-06-30 00:00:00</span><span class="token class-name">LocalDateTime</span> todayStart<span class="token operator">=</span><span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token class-name">LocalTime</span><span class="token punctuation">.</span>MIN<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">String</span> formatString<span class="token operator">=</span> todayStart<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 2021-06-30 23:59:59</span><span class="token class-name">LocalDateTime</span> todayEnd<span class="token operator">=</span><span class="token class-name">LocalDateTime</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token class-name">LocalDate</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token class-name">LocalTime</span><span class="token punctuation">.</span>MAX<span class="token punctuation">)</span><span class="token punctuation">;</span> formatString<span class="token operator">=</span> todayEnd<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span><span class="token class-name">DateTimeFormatter</span><span class="token punctuation">.</span><span class="token function">ofPattern</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <h2><a id="_77" rel="nofollow"></a>工厂方法</h2> <p>新API中的所有核心类都是通过熟练的工厂方法构造。</p> <ul> <li>当通过其构成域构造值时，称为工厂of</li> <li>从其他类型转换时，工厂称为from</li> <li>也有将字符串作为参数的解析方法。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/f97b4f80bf9cd65bc24b7cb4d4c0899c.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></li> </ul> <h2><a id="getter_83" rel="nofollow"></a>getter约定</h2> <ul> <li>为了从Java SE 8类获取值，使用了标准的Java getter约定，如下：<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/efe2378350c1201b8924922af53d3053.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></li> </ul> <h2><a id="_86" rel="nofollow"></a>更改对象值</h2> <p>也可以更改对象值以执行计算。因为新API中所有核心类都是不可变的，所以将调用这些方法with并返回新对象，而不是使用setter。也有基于不同字段的计算方法。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/27019b0a30a302c887142d5623106967.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> <h2><a id="_89" rel="nofollow"></a>调整器</h2> <p>新的API还具有调整器的概念—一块代码块，可用于包装通用处理逻辑。可以编写一个WithAdjuster，用于设置一个或多个字段，也可编写一个PlusAdjuster用于添加或减去某些字段。值类还可以充当调节器，在这种情况下，它们将更新它们表示的字段的值。内置调节器由新的API定义，但是如果您有想要重用的特定业务逻辑，则可以编写自己的调节器。</p> <pre><code class="prism language-java"><span class="token keyword">import</span><span class="token keyword">static</span><span class="token namespace">java<span class="token punctuation">.</span>time<span class="token punctuation">.</span>temporal<span class="token punctuation">.</span></span><span class="token class-name">TemporalAdjusters</span><span class="token punctuation">.</span>*<span class="token punctuation">;</span><span class="token class-name">LocalDateTime</span> timePoint<span class="token operator">=</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> foo<span class="token operator">=</span> timePoint<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token function">lastDayOfMonth</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> bar<span class="token operator">=</span> timePoint<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token function">previousOrSame</span><span class="token punctuation">(</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>WEDNESDAY<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 使用值类作为调整器</span> timePoint<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token class-name">LocalTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <p>新的API通过提供表示日期，时间和带时间的日期的类型来支持不同的精确度时间点，但是显然，精确度的概念比此精确度更高。</p> <p>该truncatedTo方法存在支持这种使用情况下，它可以让你的值截断到字段，如下</p> <pre><code class="prism language-java"><span class="token class-name">LocalTime</span> truncatedTime<span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">truncatedTo</span><span class="token punctuation">(</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>SECONDS<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <p>我们之前查看的本地类抽象了时区引入的复杂性。时区是一组规则，对应于标准时间相同的区域。大约有40个。时区由它们相对于协调世界时（UTC，Coordinated Universal Time）的偏移量定义。它们大致同步移动，但有一定差异。</p> <p>时区可用两个标识符来表示：缩写，例如“ PLT”，更长的例如“ Asia / Karachi”。在设计应用程序时，应考虑哪种情况适合使用时区，什么时候需要偏移量。</p> <ul> <li> <p><code>ZoneId</code>是区域的标识符。每个ZoneId规则都对应一些规则，这些规则定义了该位置的时区。在设计软件时，如果考虑使用诸如“ PLT”或“ Asia / Karachi”之类的字符串，则应改用该域类。一个示例用例是存储用户对其时区的偏好。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/3cc46c63f3d7e29e16a8164b3a39b55b.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> </li> <li> <p><code>ZoneOffset</code>是格林威治/ UTC与时区之间的差异的时间段。可在特定的<code>ZoneId</code>，在特定时间被解析，如清单7所示。</p> </li> </ul> <pre><code class="prism language-java"><span class="token class-name">ZoneOffset</span> offset<span class="token operator">=</span><span class="token class-name">ZoneOffset</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token string">"+2:00"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <p><code>ZonedDateTime</code>是具有完全限定时区的日期和时间。这样可以解决任何时间点的偏移。<br /> 最佳实践：若要表示日期和时间而不依赖特定服务器的上下文，则应使用<code>ZonedDateTime</code>。</p> <pre><code class="prism language-java"><span class="token class-name">ZonedDateTime</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span><span class="token string">"2007-12-03T10:15:30+01:00[Europe/Paris]"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p><code>OffsetDateTime</code>是具有已解决偏移量的日期和时间。这对于将数据序列化到数据库中很有用，如果服务器在不同时区，则还应该用作记录时间戳的序列化格式。</p> <p><code>OffsetTime</code> 是具有确定的偏移量的时间，如下：</p> <pre><code class="prism language-java"><span class="token class-name">OffsetTime</span> time<span class="token operator">=</span><span class="token class-name">OffsetTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// changes offset, while keeping the same point on the timeline</span><span class="token class-name">OffsetTime</span> sameTimeDifferentOffset<span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">withOffsetSameInstant</span><span class="token punctuation">(</span>     offset<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// changes the offset, and updates the point on the timeline</span><span class="token class-name">OffsetTime</span> changeTimeWithNewOffset<span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">withOffsetSameLocal</span><span class="token punctuation">(</span>     offset<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// Can also create new object with altered fields as before</span> changeTimeWithNewOffset<span class="token punctuation">.</span><span class="token function">withHour</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">plusSeconds</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">OffsetTime</span> time<span class="token operator">=</span><span class="token class-name">OffsetTime</span><span class="token punctuation">.</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// changes offset, while keeping the same point on the timeline</span><span class="token class-name">OffsetTime</span> sameTimeDifferentOffset<span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">withOffsetSameInstant</span><span class="token punctuation">(</span>     offset<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// changes the offset, and updates the point on the timeline</span><span class="token class-name">OffsetTime</span> changeTimeWithNewOffset<span class="token operator">=</span> time<span class="token punctuation">.</span><span class="token function">withOffsetSameLocal</span><span class="token punctuation">(</span>     offset<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// Can also create new object with altered fields as before</span> changeTimeWithNewOffset<span class="token punctuation">.</span><span class="token function">withHour</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">plusSeconds</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>Java中已有一个时区类，java.util.TimeZone但Java SE 8并没有使用它，因为所有JSR 310类都是不可变的并且时区是可变的。</p> </h1> <p>Period代表诸如“ 3个月零一天”的值，它是时间线上的距离。这与到目前为止我们讨论过的其他类形成了鲜明的对比，它们是时间轴上的重点。</p> <pre><code class="prism language-java"><span class="token comment">// 3 年, 2 月, 1 天</span><span class="token class-name">Period</span> period<span class="token operator">=</span><span class="token class-name">Period</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 使用 period 修改日期值</span><span class="token class-name">LocalDate</span> newDate<span class="token operator">=</span> oldDate<span class="token punctuation">.</span><span class="token function">plus</span><span class="token punctuation">(</span>period<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">ZonedDateTime</span> newDateTime<span class="token operator">=</span> oldDateTime<span class="token punctuation">.</span><span class="token function">minus</span><span class="token punctuation">(</span>period<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// Components of a Period are represented by ChronoUnit values</span><span class="token function">assertEquals</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> period<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>DAYS<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// 3 years, 2 months, 1 day</span><span class="token class-name">Period</span> period<span class="token operator">=</span><span class="token class-name">Period</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// You can modify the values of dates using periods</span><span class="token class-name">LocalDate</span> newDate<span class="token operator">=</span> oldDate<span class="token punctuation">.</span><span class="token function">plus</span><span class="token punctuation">(</span>period<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">ZonedDateTime</span> newDateTime<span class="token operator">=</span> oldDateTime<span class="token punctuation">.</span><span class="token function">minus</span><span class="token punctuation">(</span>period<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// Components of a Period are represented by ChronoUnit values</span><span class="token function">assertEquals</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> period<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">ChronoUnit</span><span class="token punctuation">.</span>DAYS<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> </h1> <p>Duration是时间线上按时间度量的距离，它实现了与相似的目的Period，但精度不同：</p> <pre><code class="prism language-java"><span class="token comment">// 3 s 和 5 ns 的 Duration</span><span class="token class-name">Duration</span> duration<span class="token operator">=</span><span class="token class-name">Duration</span><span class="token punctuation">.</span><span class="token function">ofSeconds</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">Duration</span> oneDay<span class="token operator">=</span><span class="token class-name">Duration</span><span class="token punctuation">.</span><span class="token function">between</span><span class="token punctuation">(</span>today<span class="token punctuation">,</span> yesterday<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">// A duration of 3 seconds and 5 nanoseconds</span><span class="token class-name">Duration</span> duration<span class="token operator">=</span><span class="token class-name">Duration</span><span class="token punctuation">.</span><span class="token function">ofSeconds</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token class-name">Duration</span> oneDay<span class="token operator">=</span><span class="token class-name">Duration</span><span class="token punctuation">.</span><span class="token function">between</span><span class="token punctuation">(</span>today<span class="token punctuation">,</span> yesterday<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre> <p>可以对Duration实例执行常规的加，减和“ with”运算，还可以使用修改日期或时间的值Duration。</p> </h1> <p>为了满足使用非ISO日历系统的开发人员的需求，Java SE 8引入了Chronology，代表日历系统，并充当日历系统中时间点的工厂。也有一些接口对应于核心时间点类，但通过</p> <pre><code class="prism language-java"><span class="token class-name">Chronology</span><span class="token operator">:</span><span class="token class-name">ChronoLocalDate</span><span class="token class-name">ChronoLocalDateTime</span><span class="token class-name">ChronoZonedDateTime</span><span class="token class-name">Chronology</span><span class="token operator">:</span><span class="token class-name">ChronoLocalDate</span><span class="token class-name">ChronoLocalDateTime</span><span class="token class-name">ChronoZonedDateTime</span></code></pre> <p>这些类仅适用于正在开发高度国际化的应用程序且需要考虑本地日历系统的开发人员，没有这些要求的开发人员不应使用它们。有些日历系统甚至没有一个月或一周的概念，因此需要通过非常通用的字段API进行计算。</p> </h1> <p>Java SE 8还具有一些其他常见用例的类。有一个MonthDay类，其中包含一对Month和Day，对于表示生日非常有用。该YearMonth类涵盖了信用卡开始日期和到期日期的用例以及人们没有指定日期的场景。</p> <p>Java SE 8中的JDBC将支持这些新类型，但不会更改公共JDBC API。现有的泛型setObject和getObject方法就足够了。</p> <p>这些类型可以映射到特定于供应商的数据库类型或ANSI SQL类型。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221117/507354c1c67ee1ad2cc2505924c493ca.jpg" alt="告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解"></p> </h1> <p>Java SE 8在java.time中附带一个新的日期和时间API，为开发人员提供了大大改善的安全性和功能。新的API很好地建模了该领域，并提供了用于对各种开发人员用例进行建模的大量类。</p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-33351.htm">疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么</a></p>
+                                        <p>下一个：<a href="/news/article-33839.htm">Parquet文件格式介绍和读写流程</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2024-12-13-node-share-links.htm" title="「12月13日」最高速度21.5M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月13日」最高速度21.5M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-27690.htm" title="宠物粮食生产厂家排名前十 宠物粮食生产厂家排名前十名">宠物粮食生产厂家排名前十 宠物粮食生产厂家排名前十名</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-17-share-windows-nekoray.htm" title="「11月17日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月17日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-11-free-high-speed-nodes.htm" title="「11月11日」最高速度20.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月11日」最高速度20.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-33351.htm" title="疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么">疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-free-subscribe-node.htm" title="「10月14日」最高速度22.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月14日」最高速度22.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-25828.htm" title="宠物店寄养协议范本（宠物寄养协议合同范本）">宠物店寄养协议范本（宠物寄养协议合同范本）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-free-node-subscribe-links.htm" title="「12月30日」最高速度18.3M/S，2024年Nekoray每天更新免费机场订阅分享">「12月30日」最高速度18.3M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-4-node-share-links.htm" title="「12月4日」最高速度18.5M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月4日」最高速度18.5M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-nekoray-node.htm" title="「12月22日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅分享">「12月22日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">13</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>

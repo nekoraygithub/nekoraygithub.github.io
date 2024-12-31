@@ -2,14 +2,13 @@
 <html lang="zh-CN">
 
 <head>
-        <link rel="canonical" href="https://nekoraygithub.github.io" />
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-33839.htm" />
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>2024-10归档 - 第3页 - Nekoray Github节点订阅官网</title>
+    <title>Parquet文件格式介绍和读写流程</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta name="keywords" content="2024-10归档Nekoray Github节点订阅官网" />
-        <meta name="description" content="2024-10归档，当前是第3页" />
+        <meta name="description" content="Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底" />
         <!-- Favicon -->
     <link href="__ADDON__/img/nekoraygithub/favicon.ico" rel="icon">
     <!-- google-fonts -->
@@ -32,7 +31,7 @@
      crossorigin="anonymous"></script>
 </head>
 
-<body data-page="category">
+<body data-page="detail">
         <!--header-->
     <header id="site-header" class="fixed-top">
         <div class="container">
@@ -90,10 +89,11 @@
     <div class="inner-banner">
         <section class="w3l-breadcrumb">
             <div class="container">
-                <h1 class="inner-text-title font-weight-bold mb-2">2024-10 归档</h1>
+                <h1 class="inner-text-title font-weight-bold mb-2">Parquet文件格式介绍和读写流程</h1>
                 <ul class="breadcrumbs-custom-path">
                     <li><a href="/">首页</a></li>
-                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>2024-10 归档</li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
                 </ul>
             </div>
         </section>
@@ -104,24 +104,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
-                    <div class="xcblog-blog-list">
-                                                <div class="row item xcblog-blog-item" data-date="2024-10-01">
-                            <div class="col-md-3 content-photo">
-                                <a href="/free-nodes/2024-10-1-windows-nekoray.htm" class="xcblog-blog-url">
-                                    <img src="/uploads/20240819/116bc54c1b0a53708171f2497109c299.webp" class="img-fluid" alt="「10月1日」最高速度18.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">
-                                </a>
-                            </div>
-                            <div class="col-md-9 content-left">
-                                <a href="/free-nodes/2024-10-1-windows-nekoray.htm" class="xcblog-blog-url">
-                                    <h3 class="mb-3 xcblog-blog-title">
-                                        「10月1日」最高速度18.4M/S，2024年Nekoray每天更新免费机场订阅节点链接                                    </h3>
-                                </a>
-                                <p>这一次的节点更新覆盖了新加坡、韩国、日本、美国、加拿大、香港、欧洲等地区,最高速度可达18.4 M/S。只需复制下方的Clash/v2ray订阅链接,在客户端添加后即可正常使用。</p>
-                            </div>
-                        </div>
-                        
-                        <ul class="pagination"><li><a href="/date/2024-10/page-3.htm">&laquo;</a></li> <li><a href="/date/2024-10/">1</a></li><li><a href="/date/2024-10/page-2.htm">2</a></li><li><a href="/date/2024-10/page-3.htm">3</a></li><li class="active"><span>4</span></li> <li class="disabled"><span>&raquo;</span></li></ul>                    </div>
-                </div>
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> </h1> <p style="text-indent:50px;">Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底是什么样的</p> <p style="text-indent:50px;">一个Parquet文件是<strong>由一个header以及一个或多个block块组成，以一个footer结尾</strong>。header中只包含一个4个字节的数字PAR1用来识别整个Parquet文件格式。文件中<strong>所有的metadata都存在于footer中</strong>。footer中的metadata包含了格式的版本信息，schema信息、key-value paris以及所有block中的metadata信息。footer中最后两个字段为一个以4个字节长度的footer的metadata,以及同header中包含的一样的PAR1。</p> <p style="text-indent:50px;">读取一个Parquet文件时，需要完全读取Footer的meatadata，Parquet格式文件不需要读取sync markers这样的标记分割查找，因为所有block的边界都存储于footer的metadata中(因为metadata的写入是在所有blocks块写入完成之后的，所以吸入操作包含的所有block的位置信息都是存在于内存直到文件close）</p> <p style="text-indent:50px;">这里注意，不像sequence files以及Avro数据格式文件的header以及sync markers是用来分割blocks。Parquet格式文件不需要sync markers，因此block的边界存储与footer的meatada中。</p> <p style="text-indent:50px;">parquet文件格式如图1：</p> <p style="text-indent:50px;"><img fetchpriority="high" decoding="async" alt="" class="has" height="291" src="http://img.555519.xyz/uploads3/20220903/f1d6f0dd87ae6bbcc7b5a3597ece1097.jpg"></p> <p style="text-indent:50px;">图1：parquet文件的格式结构</p> <p style="text-indent:50px;">Parquet文件在磁盘上的分布情况如图2所示。所有的数据被水平切分成Row</p> <p style="text-indent:50px;">group，一个Row group包含这个Row</p> <p style="text-indent:50px;">group对应的区间内的所有列的column chunk。一个column</p> <p style="text-indent:50px;">chunk负责存储某一列的数据，这些数据是这一列的Repetition levels, Definition levels和values（详见后文）。一个column</p> <p style="text-indent:50px;">chunk是由Page组成的，Page是压缩和编码的单元，对数据模型来说是透明的。一个Parquet文件最后是Footer，存储了文件的元数据信息和统计信息。Row group是数据读写时候的缓存单元，所以推荐设置较大的Row</p> <p style="text-indent:50px;">group从而带来较大的并行度，当然也需要较大的内存空间作为代价。一般情况下推荐配置一个Row group大小1G，一个HDFS块大小1G，一个HDFS文件只含有一个块</p> <p><img decoding="async" alt="" class="has" height="450" src="http://img.555519.xyz/uploads3/20220903/5db7abc35cb9ce2911899de9a3773e91.jpg"></p> <p>图2：文件在磁盘上的分布</p> </h1> <p>parquet写的时候需要指定schema，读的时候会自动识别schema</p> <p>每一个字段有三个属性：重复数、数据类型和字段名，重复数可以是以下三种：<br /> &nbsp; &nbsp; &nbsp; &nbsp; required(出现1次)<br /> &nbsp; &nbsp; &nbsp; &nbsp; repeated(出现0次或多次)<br /> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;optional(出现0次或1次)</p> <p>数据类型有:<br /> INT64, INT32, BOOLEAN, BINARY(字符串), FLOAT, DOUBLE, INT96, FIXED_LEN_BYTE_ARRAY</p> <p>例如：</p> <pre class="has"><code class="language-java">private static String schemaStr = "message schema {" + "repeated int64 rowkey;"             +"repeated int64 family;"+ "repeated int64 colume;"+"repeated int64 value;}";     static MessageType schema = MessageTypeParser.parseMessageType(schemaStr);</code></pre> <p>具体代码详见另一篇：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/qiangzi_lg/article/details/86676538"  rel="nofollow">https://blog.csdn.net/qiangzi_lg/article/details/86676538</a></p> <p>文章摘自：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.jianshu.com/p/b823c727fe46"  rel="nofollow">https://www.jianshu.com/p/b823c727fe46</a>和<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/yangsy0915/p/5565309.html"  rel="nofollow">https://www.cnblogs.com/yangsy0915/p/5565309.html</a></p> </div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-33838.htm">告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解</a></p>
+                                    </div>
+                                </div>
                 <div class="col-md-3">
                     <div class="panel panel-default">
     <div class="panel-heading">
@@ -129,16 +117,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-10-6-nekoray-node.htm" title="「10月6日」最高速度22.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月6日」最高速度22.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-15-windows-nekoray.htm" title="「11月15日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月15日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-26-nekoray-node.htm" title="「11月26日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月26日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-31-nekoray-node.htm" title="「12月31日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享">「12月31日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-23049.htm" title="动物疫苗公司排名榜单 动物疫苗公司排名榜单最新">动物疫苗公司排名榜单 动物疫苗公司排名榜单最新</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-19-free-node-subscribe.htm" title="「11月19日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月19日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-20757.htm" title="动物医院社会实践报告怎么写（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写（宠物医院社会实践报告1500）</a></li>
+                        <li class="py-2"><a href="/news/article-30503.htm" title="免费领养宠物店在哪里（免费领养宠物有套路吗?）">免费领养宠物店在哪里（免费领养宠物有套路吗?）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-nekoray.htm" title="「12月29日」最高速度22.9M/S，2024年Nekoray每天更新免费机场订阅分享">「12月29日」最高速度22.9M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-27215.htm" title="IDEA Debug过程中使用Drop Frame或Reset Frame实现操作回退">IDEA Debug过程中使用Drop Frame或Reset Frame实现操作回退</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-29-node-share.htm" title="「11月29日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月29日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
                         <li class="py-2"><a href="/free-nodes/2024-10-26-linux-nekoray-node.htm" title="「10月26日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月26日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-32421.htm" title="python中sql查询in的使用">python中sql查询in的使用</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-1-nekoray-node.htm" title="「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-24391.htm" title="领养狗狗会带来好运吗为什么（领养狗狗有什么好处和坏处）">领养狗狗会带来好运吗为什么（领养狗狗有什么好处和坏处）</a></li>
-                        <li class="py-2"><a href="/news/article-27690.htm" title="宠物粮食生产厂家排名前十 宠物粮食生产厂家排名前十名">宠物粮食生产厂家排名前十 宠物粮食生产厂家排名前十名</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-2-free-subscribe-node.htm" title="「12月2日」最高速度19.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月2日」最高速度19.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-5-nekoray-node.htm" title="「10月5日」最高速度19.6M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月5日」最高速度19.6M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-11-free-subscribe-node.htm" title="「12月11日」最高速度20M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月11日」最高速度20M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
                     </ul>
     </div>
 </div>
