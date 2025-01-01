@@ -108,6 +108,7 @@
                   				  				  				<div id="content_views" class="htmledit_views"> </h1> <p style="text-indent:50px;">Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底是什么样的</p> <p style="text-indent:50px;">一个Parquet文件是<strong>由一个header以及一个或多个block块组成，以一个footer结尾</strong>。header中只包含一个4个字节的数字PAR1用来识别整个Parquet文件格式。文件中<strong>所有的metadata都存在于footer中</strong>。footer中的metadata包含了格式的版本信息，schema信息、key-value paris以及所有block中的metadata信息。footer中最后两个字段为一个以4个字节长度的footer的metadata,以及同header中包含的一样的PAR1。</p> <p style="text-indent:50px;">读取一个Parquet文件时，需要完全读取Footer的meatadata，Parquet格式文件不需要读取sync markers这样的标记分割查找，因为所有block的边界都存储于footer的metadata中(因为metadata的写入是在所有blocks块写入完成之后的，所以吸入操作包含的所有block的位置信息都是存在于内存直到文件close）</p> <p style="text-indent:50px;">这里注意，不像sequence files以及Avro数据格式文件的header以及sync markers是用来分割blocks。Parquet格式文件不需要sync markers，因此block的边界存储与footer的meatada中。</p> <p style="text-indent:50px;">parquet文件格式如图1：</p> <p style="text-indent:50px;"><img fetchpriority="high" decoding="async" alt="" class="has" height="291" src="http://img.555519.xyz/uploads3/20220903/f1d6f0dd87ae6bbcc7b5a3597ece1097.jpg"></p> <p style="text-indent:50px;">图1：parquet文件的格式结构</p> <p style="text-indent:50px;">Parquet文件在磁盘上的分布情况如图2所示。所有的数据被水平切分成Row</p> <p style="text-indent:50px;">group，一个Row group包含这个Row</p> <p style="text-indent:50px;">group对应的区间内的所有列的column chunk。一个column</p> <p style="text-indent:50px;">chunk负责存储某一列的数据，这些数据是这一列的Repetition levels, Definition levels和values（详见后文）。一个column</p> <p style="text-indent:50px;">chunk是由Page组成的，Page是压缩和编码的单元，对数据模型来说是透明的。一个Parquet文件最后是Footer，存储了文件的元数据信息和统计信息。Row group是数据读写时候的缓存单元，所以推荐设置较大的Row</p> <p style="text-indent:50px;">group从而带来较大的并行度，当然也需要较大的内存空间作为代价。一般情况下推荐配置一个Row group大小1G，一个HDFS块大小1G，一个HDFS文件只含有一个块</p> <p><img decoding="async" alt="" class="has" height="450" src="http://img.555519.xyz/uploads3/20220903/5db7abc35cb9ce2911899de9a3773e91.jpg"></p> <p>图2：文件在磁盘上的分布</p> </h1> <p>parquet写的时候需要指定schema，读的时候会自动识别schema</p> <p>每一个字段有三个属性：重复数、数据类型和字段名，重复数可以是以下三种：<br /> &nbsp; &nbsp; &nbsp; &nbsp; required(出现1次)<br /> &nbsp; &nbsp; &nbsp; &nbsp; repeated(出现0次或多次)<br /> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;optional(出现0次或1次)</p> <p>数据类型有:<br /> INT64, INT32, BOOLEAN, BINARY(字符串), FLOAT, DOUBLE, INT96, FIXED_LEN_BYTE_ARRAY</p> <p>例如：</p> <pre class="has"><code class="language-java">private static String schemaStr = "message schema {" + "repeated int64 rowkey;"             +"repeated int64 family;"+ "repeated int64 colume;"+"repeated int64 value;}";     static MessageType schema = MessageTypeParser.parseMessageType(schemaStr);</code></pre> <p>具体代码详见另一篇：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://blog.csdn.net/qiangzi_lg/article/details/86676538"  rel="nofollow">https://blog.csdn.net/qiangzi_lg/article/details/86676538</a></p> <p>文章摘自：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.jianshu.com/p/b823c727fe46"  rel="nofollow">https://www.jianshu.com/p/b823c727fe46</a>和<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/yangsy0915/p/5565309.html"  rel="nofollow">https://www.cnblogs.com/yangsy0915/p/5565309.html</a></p> </div> 			                <div class="clearfix"></div>
                 <div class="col-md-12 mt-5">
                                         <p>上一个：<a href="/news/article-33838.htm">告别jodatime!拥抱Java8日期时间类LocalDate、LocalDateTime详解</a></p>
+                                        <p>下一个：<a href="/news/article-34315.htm">@Order的使用与Aop多切面的执行顺序</a></p>
                                     </div>
                                 </div>
                 <div class="col-md-3">
@@ -117,16 +118,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-11-26-nekoray-node.htm" title="「11月26日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月26日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-31-nekoray-node.htm" title="「12月31日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享">「12月31日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-23049.htm" title="动物疫苗公司排名榜单 动物疫苗公司排名榜单最新">动物疫苗公司排名榜单 动物疫苗公司排名榜单最新</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-19-free-node-subscribe.htm" title="「11月19日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月19日」最高速度22.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-20757.htm" title="动物医院社会实践报告怎么写（宠物医院社会实践报告1500）">动物医院社会实践报告怎么写（宠物医院社会实践报告1500）</a></li>
-                        <li class="py-2"><a href="/news/article-30503.htm" title="免费领养宠物店在哪里（免费领养宠物有套路吗?）">免费领养宠物店在哪里（免费领养宠物有套路吗?）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-29-free-nekoray.htm" title="「12月29日」最高速度22.9M/S，2024年Nekoray每天更新免费机场订阅分享">「12月29日」最高速度22.9M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/news/article-27215.htm" title="IDEA Debug过程中使用Drop Frame或Reset Frame实现操作回退">IDEA Debug过程中使用Drop Frame或Reset Frame实现操作回退</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-29-node-share.htm" title="「11月29日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月29日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-26-linux-nekoray-node.htm" title="「10月26日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月26日」最高速度21.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-7-free-nekoray.htm" title="「11月7日」最高速度21.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月7日」最高速度21.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-12-linux-nekoray-node.htm" title="「12月12日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月12日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-33351.htm" title="疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么">疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-20-free-nekoray.htm" title="「10月20日」最高速度22.3M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月20日」最高速度22.3M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-9-25-node-share.htm" title="「9月25日」最高速度18.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月25日」最高速度18.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-9-nekoray-node.htm" title="「10月9日」最高速度22.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月9日」最高速度22.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-3-free-subscribe-node.htm" title="「11月3日」最高速度21.1M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月3日」最高速度21.1M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-19-node-share.htm" title="「10月19日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月19日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-14-free-subscribe-node.htm" title="「10月14日」最高速度22.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月14日」最高速度22.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-28150.htm" title="python里函数怎么样使用元组或字典作为参数调用">python里函数怎么样使用元组或字典作为参数调用</a></li>
                     </ul>
     </div>
 </div>
@@ -137,6 +138,9 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">3</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
