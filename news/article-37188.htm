@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-37188.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TypeScript 与 JavaScript 的区别（TypeScript万字基础入门，了解TS，看这一篇就够了）</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（ES6 教程）。TypeScript 由微软开发的自由和开源的编程语言。TypeScript 设计目标" />
+        <!-- Favicon -->
+    <link href="__ADDON__/img/nekoraygithub/favicon.ico" rel="icon">
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                                <a class="navbar-brand" href="/">
+                    <span>Nekoray Github</span>
+                </a>
+                                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">TypeScript 与 JavaScript 的区别（TypeScript万字基础入门，了解TS，看这一篇就够了）</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <p>TypeScript 是 JavaScript 的一个超集，支持 ECMAScript 6 标准（<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/w3cnote/es6-tutorial.html"  title="ES6 教程" rel="nofollow">ES6 教程</a>）。TypeScript 由微软开发的自由和开源的编程语言。TypeScript 设计目标是开发大型应用，它可以编译成纯 JavaScript，编译出来的 JavaScript 可以运行在任何浏览器上。</p> <p>TypeScript 是一种给 JavaScript 添加特性的语言扩展。增加的功能包括：</p> <ul> <li>类型批注和编译时类型检查</li> <li>类型推断</li> <li>类型擦除</li> <li>接口</li> <li>枚举</li> <li>Mixin</li> <li>泛型编程</li> <li>名字空间</li> <li>元组</li> <li>Await&nbsp;</li> </ul> <p>从 ECMA 2015 反向移植而来：</p> <ul> <li>类</li> <li>模块</li> <li>lambda 函数的箭头语法</li> <li>可选参数以及默认参数</li> </ul> <h2>TypeScript&nbsp;与 JavaScript 的区别</h2> <p>TypeScript 是 JavaScript 的超集，扩展了 JavaScript 的语法，因此现有的 JavaScript 代码可与 TypeScript 一起工作无需任何修改，TypeScript 通过类型注解提供编译时的静态类型检查。</p> <p>TypeScript 可处理已有的 JavaScript 代码，并只对其中的 TypeScript 代码进行编译。</p> <p style="text-align:center;"><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20221230/5f7e8decc52b23cf36a2071b4f91861d.jpg"></p> <p>&nbsp;第一个TypeScript实例：</p> <pre><code>const greet : string = "Hello World!" console.log(greet)</code></pre> <p>为了演示方便，本文中的例子均在vue3项目运行。</p> <h3> <img fetchpriority="high" decoding="async" alt="" height="489" src="http://img.555519.xyz/uploads/20221230/de792ed997c7e3459530f88d43a13aa7.jpg">TypeScript基础语法</h3> <p>第一个TypeScript程序（之后的代码演示省略&lt;script&gt;标签，也不展示控制台截图）</p> <pre><code>&lt;script lang="ts"&gt;   const greet : string = "hello world！"   console.log(greet); &lt;/script&gt;</code></pre> <p><img decoding="async" alt="" height="99" src="http://img.555519.xyz/uploads/20221230/42afe8a7ff94ad80b22ca9e1ea3c185e.jpg"></p> <p>对比一下JavaScript的代码</p> <pre><code>const greet = "hello world！" console.log(greet);</code></pre> <p>TypeScript中的保留字与JavaScript基本一致</p> <p><img decoding="async" alt="" height="590" src="http://img.555519.xyz/uploads/20221230/1a86164573499341b21aef18c9177a8f.jpg"></p> <p>TypeScript 会忽略程序中出现的空格、制表符和换行符。空格、制表符通常用来缩进代码，使代码易于阅读和理解。TypeScript 区分大写和小写字符。每行指令都是一段语句，你可以使用分号或不使用， 分号在 TypeScript 中是可选的，建议使用。注释与JavaScript使用一致。</p> <h3>TypeScript基础类型</h3> <p>any（任意类型）：声明为 any 的变量可以赋予任意类型的值。</p> <p>number（数字类型）：双精度 64 位浮点值。它可以用来表示整数和分数。</p> <p>string（字符串类型）：一个字符系列，使用单引号（'）或双引号（"）来表示字符串类型。反引号（`）来定义多行文本和内嵌表达式。</p> <p>boolean（布尔类型）：表示逻辑值：true 和 false。</p> <p>数组类型、元组。</p> <p>enum（枚举类型）：枚举类型用于定义数值集合。</p> <p>void：用于标识方法返回值的类型，表示该方法没有返回值。</p> <p>null：表示对象值缺失。</p> <p>undefined：用于初始化变量为一个未定义的值。</p> <p>never：never 是其它类型（包括 null 和 undefined）的子类型，代表从不会出现的值。</p> <p><strong>Any</strong></p> <p>任意值是 TypeScript 针对编程时类型不明确的变量使用的一种数据类型，它常用于以下情况。</p> <p>1、变量的值会动态改变时，比如来自用户的输入，任意值类型可以让这些变量跳过编译阶段的类型检查，示例代码如下：</p> <pre><code>let flag: any = 1;    // 数字类型 flag = 'my name is leo';    // 字符串类型 flag = true;    // 布尔类型</code></pre> <p>2、定义存储各种类型数据的数组时，示例代码如下：</p> <pre><code>let list: any[] = ['leo',25,true]; list[1] = 'lion';</code></pre> <p><strong>Null </strong>和 <strong>Undefined</strong></p> <p>null，在 JavaScript 中 null 表示 "什么都没有"。null是一个只有一个值的特殊类型。表示一个空对象引用。用 typeof 检测 null 返回是 object。</p> <p>undefined，在 JavaScript 中, undefined 是一个没有设置值的变量。typeof 一个没有值的变量会返回 undefined。Null 和 Undefined 是其他任何类型（包括 void）的子类型，可以赋值给其它类型，即其他类型可以转成这两种类型，如字符串类型，此时，赋值后的类型会变成 null 或 undefined。</p> <pre><code>let num: number; num = 1; // 运行正确 num = undefined;    // 运行正确，此时为undefined类型 num = null;    // 运行正确，此时为null类型</code></pre> <p><strong>Never</strong></p> <p>never 是其它类型（包括 null 和 undefined）的子类型，代表从不会出现的值。这意味着声明为 never 类型的变量只能被 never 类型所赋值，在函数中它通常表现为抛出异常或无法执行到终止点（例如无限循环），示例代码如下：</p> <pre><code>let n: never; let num: number;  // 运行错误，数字类型不能转为never类型 n = 123;  // 运行正确，never 类型可以赋值给never类型 n = (()=&gt;{ throw new Error('exception')})();  // 运行正确，never 类型可以赋值给数字类型 num = (()=&gt;{ throw new Error('exception')})();  // 返回值为never的函数可以是抛出异常的情况 function error(message: string): never {     throw new Error(message); }  // 返回值为never的函数可以是无法被执行到的终止点的情况 function loop(): never {     while (true) {} }</code></pre> <h3>TypeScript变量声明</h3> <p>TypeScript 变量的命名规则：</p> <p>1、变量名称可以包含数字和字母。</p> <p>2、除了下划线&nbsp;_&nbsp;和美元&nbsp;$&nbsp;符号外，不能包含其他特殊字符，包括空格。</p> <p>3、变量名不能以数字开头。</p> <p>以下为四种声明变量的方式</p> <pre><code>//var [变量名] : [类型] = 值; 声明变量的类型及初始值 var uname:string = "leo";  //var [变量名] : [类型]; 声明变量的类型，但没有初始值，变量值会设置为undefined var uname:string;  //var [变量名] = 值; 声明变量并初始值，但不设置类型，该变量可以是任意类型 var uname = "leo";  //var [变量名]; 声明变量没有设置类型和初始值，类型可以是任意类型，默认初始值为undefined var uname;  //总结：声明时，没有类型，类型就是any；没有初始值，初始值就是undefined</code></pre> <p>实例：</p> <pre><code>var uname:string = "leo"; var age:number = 25;  //对应js var uname = "leo"; var age = 25;</code></pre> <p>TypeScript 遵循强类型，如果将不同的类型赋值给变量会编译错误，而JavaScript则不会，因为她是弱类型语言，如下实例：</p> <pre><code>var num:number = "leo"     // 编译错误  //对应的js var num = 100 num = "leo"     // 编译不报错</code></pre> <p><strong>类型推断</strong></p> <p>当类型没有给出时，TypeScript 编译器利用类型推断来推断类型。如果由于缺乏声明而不能推断出类型，那么它的类型被视作默认的动态 any 类型。</p> <pre><code>var num = 100;    // 类型推断为 number num = "leo";      // 编译错误，相当于上例 var num:number = "leo"</code></pre> <p><strong>变量作用域</strong></p> <p>TypeScript 有以下几种作用域：</p> <p><strong>全局作用域</strong>&nbsp;− 全局变量定义在程序结构的外部，它可以在你代码的任何位置使用。</p> <p><strong>类作用域</strong>&nbsp;− 这个变量也可以称为&nbsp;<strong>字段</strong>。类变量声明在一个类里头，但在类的方法外面。 该变量可以通过类的对象来访问。类变量也可以是静态的，静态的变量可以通过类名直接访问。</p> <p><strong>局部作用域</strong>&nbsp;− 局部变量，局部变量只能在声明它的一个代码块（如：方法）中使用。</p> <p>如以下例子：</p> <pre><code>var global_num = 10          // 全局变量 class Person {     age = 18;                 // 实例变量    static score = 100;       // 静态变量    eat():void {        var food = 'apple';    // 局部变量    }  }  console.log("全局变量为: " + global_num)   console.log(Person.score)    // 静态变量，直接通过类名访问 var person = new Person();  console.log("实例变量: " + person.age)</code></pre> <p>TypeScript的运算符、条件语句、循环与JavaScript基本一致。</p> <h3>TypeScript函数</h3> <pre><code>function function_name() {     // 执行代码 }  //调用函数 function_name()</code></pre> <p><strong>函数返回值</strong>&nbsp;</p> <p>TypeScript的函数返回值与JavaScript的函数返回值略有不同。TypeScript的函数返回值的格式：</p> <pre><code>function function_name():return_type {      // 语句     return value;  }  //与js相比，ts的函数返回值需要指定 return_type返回值的类型。</code></pre> <p>如下实例：</p> <pre><code>//ts function greet():string { // 返回一个字符串     return "Hello World！"  }  //js function greet() {     return "Hello World！"  } </code></pre> <p><strong>带参数函数</strong></p> <p>语法格式如下所示：</p> <pre><code>function func_name( param1 [:datatype], param2 [:datatype]) {   //datatype为参数类型      //执行代码   }</code></pre> <p>实例：</p> <pre><code>//ts function add(x: number, y: number): number {  //函数返回值为number，参数的数据类型也为number     return x + y; }  //js function add(x, y) {     return x + y; }</code></pre> <p><strong>可选参数和默认参数</strong></p> <p>可选参数，在 TypeScript 函数里，如果我们定义了几个参数，则我们必须传入几个参数，除非将这些参数设置为可选，可选参数使用问号标识 ？。</p> <pre><code>function fullName(firstName: string, lastName: string) {  //调用函数必须传入两个参数，否则报错     return firstName + " " + lastName; }   let name1 = buildName("leo");                  // 错误，缺少参数 let name2 = buildName("leo", "lion", "gao");   // 错误，参数太多了 let name3 = buildName("leo", "lion");          // 正确</code></pre> <p>修改为可选参数之后</p> <pre><code>function fullName(firstName: string, lastName?: string) { //此时lastName为可选参数，非必传     if(lastName){         return firstName + " " + lastName;     }else {         return firstName;     }  }   let name1 = buildName("leo");                  // 正确 let name2 = buildName("leo", "lion", "gao");   // 错误，参数太多了 let name3 = buildName("leo", "lion");          // 正确  //ts函数设置可选参数时，只能少传，不能多传，相比之下，js函数的参数可以多传，按顺序取参数。</code></pre> <p>默认参数，可以设置参数的默认值，这样在调用函数的时候，如果不传入该参数的值，则使用默认参数，语法格式为：</p> <pre><code>function function_name(param1[:type],param2[:type] = default_value) {       //执行代码 }  //default_value为默认值，当不传入该参数时，取默认值。</code></pre> <p>注意：参数不能同时设置为可选和默认。&nbsp;</p> <p>以下实例函数的参数lastName设置了默认值为'lion'，调用该函数时如果未传入参数则使用该默认值：</p> <pre><code>function fullName(firstName:string,lastName:string = 'lion') {       console.log(firstName + " " + lastName);  }  fullName('leo')         //leo lion，lastName取默认值 fullName('leo','gao')   //leo gao</code></pre> <p><strong>剩余参数</strong></p> <p>有一种情况，我们不知道要向函数传入多少个参数，这时候我们就可以使用剩余参数来定义。剩余参数语法允许我们将一个不确定数量的参数作为一个数组传入。</p> <pre><code>function fullName(firstName: string, ...restOfName: string[]) {     return firstName + " " + restOfName.join(" "); }    let uname = fullName("leo", "lion", "ggj", "gao");</code></pre> <p><strong>匿名函数</strong></p> <p>匿名函数是一个没有函数名的函数。匿名函数在程序运行时动态声明，除了没有函数名外，其他的与标准函数一样。我们可以将匿名函数赋值给一个变量，这种表达式就成为函数表达式。</p> <pre><code>var greet = function() {  //不带参数的匿名函数     return "hello world！";   }  console.log(msg())   var add = function(a,b) {  //带参数的匿名函数     return a + b;   }  console.log(add(2,3))</code></pre> <p><strong>匿名函数自调用</strong></p> <pre><code>(function () {      var str = "Hello World！";        console.log(str)       })()</code></pre> <p><strong>构造函数</strong></p> <p>TypeScript 也支持使用 JavaScript 内置的构造函数 Function() 来定义函数：</p> <pre><code>var res = new Function ([arg1[, arg2[, ...argN]],] functionBody)</code></pre> <pre><code>var myFunction = new Function("a", "b", "return a * b");  var x = myFunction(4, 3);  console.log(x);</code></pre> <p><strong>箭头函数</strong></p> <pre><code>( [param1, parma2,…param n] )=&gt;statement;</code></pre> <pre><code>var add = (x:number)=&gt; {         x = 10 + x      console.log(x)   }  foo(100)</code></pre> <p>我们可以不指定函数的参数类型，通过函数内来推断参数类型：</p> <pre><code>var func = (x)=&gt; {      if(typeof x=="number") {          console.log(x+" 是一个数字")      } else if(typeof x=="string") {          console.log(x+" 是一个字符串")      }   }  func(12)  func("Tom")</code></pre> <p>&nbsp;更多例子</p> <pre><code>var display = x =&gt; {      //单个参数 () 是可选的     console.log("输出为 "+x)  }  display(12)   var disp =()=&gt; {     //无参数时可以设置空括号     console.log("Function invoked");  }  disp();</code></pre> <p><strong>函数重载</strong></p> <p>重载是方法名字相同，而参数不同，返回类型可以相同也可以不同。每个重载的方法（或者构造函数）都必须有一个独一无二的参数类型列表。</p> <pre><code>//参数类型与参数数量不同 function disp(s1:string):void;  function disp(n1:number,s1:string):void;    function disp(x:any,y?:any):void {      console.log(x);      console.log(y);  }</code></pre> <p>TypeScript中的Number、String、Array（数组）类型语JavaScript基本一致。</p> <h3>TypeScript Map对象</h3> <p>Map 对象保存键值对，并且能够记住键的原始插入顺序。任何值(对象或者原始值) 都可以作为一个键或一个值。Map 是 ES6 中引入的一种新的数据结构，可以参考&nbsp;<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/w3cnote/es6-map-set.html"  title="ES6 Map 与 Set" rel="nofollow">ES6 Map 与 Set</a>。</p> <p>TypeScript 使用 Map 类型和 new 关键字来创建 Map：</p> <pre><code>let myMap = new Map();</code></pre> <p>初始化 Map，可以以数组的格式来传入键值对：</p> <pre><code>let myMap = new Map([     ["key1", "value1"],     ["key2", "value2"] ]); </code></pre> <p><img loading="lazy" decoding="async" alt="" height="443" src="http://img.555519.xyz/uploads/20221230/baf4eb1e339120db95fa03767c59882d.jpg"></p> <pre><code>let nameSiteMapping = new Map();   // 设置 Map 对象 nameSiteMapping.set("Google", 1); nameSiteMapping.set("Runoob", 2); nameSiteMapping.set("Taobao", 3);   // 获取键对应的值 console.log(nameSiteMapping.get("Runoob"));     // 2   // 判断 Map 中是否包含键对应的值 console.log(nameSiteMapping.has("Taobao"));       // true console.log(nameSiteMapping.has("Zhihu"));        // false   // 返回 Map 对象键/值对的数量 console.log(nameSiteMapping.size);                // 3   // 删除 Runoob console.log(nameSiteMapping.delete("Runoob"));    // true console.log(nameSiteMapping); // 移除 Map 对象的所有键/值对 nameSiteMapping.clear();             // 清除 Map console.log(nameSiteMapping);</code></pre> <p>使用for...of来迭代Map对象。</p> <pre><code>let nameSiteMapping = new Map();   nameSiteMapping.set("Google", 1); nameSiteMapping.set("Runoob", 2); nameSiteMapping.set("Taobao", 3);   // 迭代 Map 中的 key for (let key of nameSiteMapping.keys()) {     console.log(key);                   }   // 迭代 Map 中的 value for (let value of nameSiteMapping.values()) {     console.log(value);                  }   // 迭代 Map 中的 key =&gt; value for (let entry of nameSiteMapping.entries()) {     console.log(entry[0], entry[1]);    }</code></pre> <h3>TypeScript元组</h3> <p>我们知道数组中元素的数据类型都一般是相同的（any[] 类型的数组可以不同），如果存储的元素数据类型不同，则需要使用元组。元组中允许存储不同类型的元素，元组可以作为参数传递给函数。</p> <p>创建元组的语法格式如下：</p> <pre><code>var tuple_name = [value1,value2,value3,…value n]</code></pre> <p>实例</p> <pre><code>//声明一个元组并初始化 var mytuple = [10,'leo',25,true];   //也可以先声明一个空元组，然后再初始化 var mytuple = [];  mytuple[0] = 10 mytuple[1] = 'leo' mytuple[2] = 25 mytuple[3] = true   //访问元组，使用索引来访问 tuple_name[index]</code></pre> <p><strong>元组运算</strong></p> <p>1、push() 向元组添加元素，添加在最后面。</p> <p>2、pop() 从元组中移除元素（最后一个），并返回移除的元素。</p> <pre><code>var mytuple = [10,"Hello","World","typeScript"];  mytuple.push(25)  // [10,"Hello","World","typeScript",25]  mytuple.pop()  // [10,"Hello","World","typeScript"]</code></pre> <p><strong>更新元组</strong></p> <p>元组是可变的，这意味着我们可以对元组进行更新操作：、</p> <pre><code>var mytuple = [10, "leo", "lion"]; // 创建一个元组   // 更新元组元素 mytuple[0] = 25     // [25, "leo", "lion"]</code></pre> <p><strong>解构元组</strong></p> <p>我们也可以把元组元素赋值给变量，如下所示：</p> <pre><code>var user =[25,"leo"]  var [age,uname] = user console.log( age )       // 25 console.log( uname )     // 'leo'</code></pre> <h3>TypeScript联合类型</h3> <p>联合类型（Union Types）可以通过管道(|)将变量设置多种类型，赋值时可以根据设置的类型来赋值。</p> <p><strong>注意</strong>：只能赋值指定的类型，如果赋值其它类型就会报错。</p> <pre><code>Type1|Type2|Type3</code></pre> <p>实例</p> <pre><code>//声明一个联合类型 var flag:string|number|boolean  flag = 25 console.log("数字为 ", flag)   // 数字为 25  flag = 'leo'  console.log("字符串为 ", flag)   // 字符串为 leo  flag = true  console.log("布尔值为 ", flag)   //布尔值为 true</code></pre> <p>如果赋值其它类型就会报错：</p> <pre><code>var flag:string|number  flag = true  //报错，联合类型不包括boolean</code></pre> <p>也可以将联合类型作为函数参数使用：</p> <pre><code>function fullName(name:string|string[]) {  //此时参数类型可以是字符串，也可以是字符串数组     if(typeof name == "string") {          console.log(name)      } else {         var i;          for(i = 0;i&lt;name.length;i++) {          console.log(name[i])         }      }  }  fullName("leo") fullName(["leo","lion","ggj","gao"])</code></pre> <p>也可以将数组声明为联合类型：</p> <pre><code>var arr:number[]|string[];  //数字数组或者字符串数组</code></pre> <h3>TypeScript接口</h3> <p>接口是一系列抽象方法的声明，是一些方法特征的集合，这些方法都应该是抽象的，需要由具体的类去实现，然后第三方就可以通过这组抽象方法调用，让具体的类执行具体的方法。</p> <p>TypeScript 接口定义如下：</p> <pre><code>interface interface_name {  }</code></pre> <p>实例</p> <p>以下实例中，我们定义了一个接口 IPerson，接着定义了一个变量 customer，它的类型是 IPerson。customer 实现了接口 IPerson 的属性和方法。</p> <pre><code>interface IPerson {      firstName:string,      lastName:string,      sayHi: ()=&gt;string  }   //实现接口 var customer:IPerson = {      firstName:"Tom",     lastName:"Hanks",      sayHi: ():string =&gt;{return "Hi there"}  }  //实现接口 var employee:IPerson = {      firstName:"Jim",     lastName:"Blakes",      sayHi: ():string =&gt;{return "Hello!!!"}  }  </code></pre> <p><strong>联合类型和接口</strong></p> <p>以下实例演示了如何在接口中使用联合类型：</p> <pre><code>interface RunOptions {      program:string;      commandline:string[]|string|(()=&gt;string);  }    // commandline 是字符串 var options:RunOptions = {program:"test1",commandline:"Hello"};  console.log(options.commandline)     // commandline 是字符串数组 options = {program:"test1",commandline:["Hello","World"]};  console.log(options.commandline[0]);  console.log(options.commandline[1]);</code></pre> <p><strong>接口继承</strong></p> <p>接口继承就是说接口可以通过其他接口来扩展自己。Typescript 允许接口继承多个接口。继承使用关键字&nbsp;extends。</p> <pre><code>//单接口继承 Child_interface_name extends super_interface_name  //多接口继承，继承的各个接口使用逗号 , 分隔。 Child_interface_name extends super_interface1_name, super_interface2_name,…,super_interfaceN_name</code></pre> <p>单实例继承&nbsp;</p> <pre><code>interface Person {     age:number  }    interface Musician extends Person {     instrument:string  }    var drummer = &lt;Musician&gt;{};  drummer.age = 25  drummer.instrument = "Drums"  console.log("年龄:  "+drummer.age) console.log("喜欢的乐器:  "+drummer.instrument)  // 年龄:  25 // 喜欢的乐器:  Drums</code></pre> <p>多实例继承</p> <pre><code>interface IParent1 {      v1:number  }    interface IParent2 {      v2:number  }    interface Child extends IParent1, IParent2 { }  var Iobj:Child = { v1:12, v2:23} </code></pre> <h3>TypeScript类</h3> <p>TypeScript 是面向对象的 JavaScript。类描述了所创建的对象共同的属性和方法。TypeScript 支持面向对象的所有特性，比如 类、接口等。</p> <p>TypeScript 类定义方式如下：</p> <pre><code>class class_name {      // 类作用域 }</code></pre> <p>定义类的关键字为 class，后面紧跟类名，类可以包含以下几个模块（类的数据成员）：</p> <p>1、<strong>字段</strong>&nbsp;− 字段是类里面声明的变量。字段表示对象的有关数据。</p> <p>2、<strong>构造函数</strong>&nbsp;− 类实例化时调用，可以为类的对象分配内存。</p> <p>3、<strong>方法</strong>&nbsp;− 方法为对象要执行的操作。</p> <p>实例，创建类的数据成员：</p> <pre><code>class Car {      // 字段      color:string;        // 构造函数      constructor(color:string) {          this.color = color     }         // 方法      show():void {         console.log("颜色为 :   " + this.color)      }  }</code></pre> <p>我们使用 new 关键字来实例化类的对象，类实例化时会调用构造函数，例如：</p> <pre><code>var obj = new Car("blue")</code></pre> <p>类中的字段属性和方法可以使用&nbsp;.&nbsp;号来访问：</p> <pre><code>// 访问属性 obj.color   // 访问方法 obj.show()</code></pre> <p><strong>类的继承</strong></p> <p>TypeScript 支持继承类，即我们可以在创建类的时候继承一个已存在的类，这个已存在的类称为父类，继承它的类称为子类。类继承使用关键字&nbsp;extends，子类除了不能继承父类的私有成员(方法和属性)和构造函数，其他的都可以继承。TypeScript 一次只能继承一个类，不支持继承多个类，但 TypeScript 支持多重继承（A 继承 B，B 继承 C）。</p> <p>实例</p> <p>类的继承：实例中创建了 Shape 类，Circle 类继承了 Shape 类，Circle 类可以直接使用 Area 属性：</p> <pre><code>class Shape {     Area:number         constructor(a:number) {        this.Area = a     }  }    class Circle extends Shape {     show():void {        console.log("圆的面积:  "+this.Area)     }  }    var obj = new Circle(223);  obj.show()        // 圆的面积:  223</code></pre> <p>需要注意的是子类只能继承一个父类，TypeScript 不支持继承多个类，但支持多重继承，如下实例：</p> <pre><code>class Root {     str:string;  }    class Child extends Root {}  class Leaf extends Child {} // 多重继承，继承了 Child 和 Root 类</code></pre> <p><strong>继承类的方法重写</strong></p> <p>类继承后，子类可以对父类的方法重新定义，这个过程称之为方法的重写。其中 super 关键字是对父类的直接引用，该关键字可以引用父类的属性和方法。</p> <pre><code>class PrinterClass {     doPrint():void {       console.log("父类的 doPrint() 方法。")     }  }    class StringPrinter extends PrinterClass {     doPrint():void {        super.doPrint() // 调用父类的函数       console.log("子类的 doPrint()方法。")   //此处对父类方法进行重写    }  }</code></pre> <p><strong>static关键字</strong></p> <p>上面提到，static 关键字用于定义类的数据成员（属性和方法）为静态的，静态成员可以直接通过类名调用。</p> <pre><code>class StaticMem {      static num:number;         static disp():void {        console.log("num 值为 "+ StaticMem.num)     }  }   //直接通过类名调用静态属性和方法 StaticMem.num = 12     // 初始化静态变量 StaticMem.disp()       // 调用静态方法</code></pre> <p>扩展：instanceof 运算符用于判断对象是否是指定的类型，如果是返回 true，否则返回 false。</p> <pre><code>class Person { }  var obj = new Person()  var isPerson = obj instanceof Person;    //true</code></pre> <p><strong>访问控制修饰符</strong></p> <p>TypeScript 中，可以使用访问控制符来保护对类、变量、方法和构造方法的访问。TypeScript 支持 3 种不同的访问权限。</p> <p>1、<strong>public（默认）</strong>&nbsp;: 公有，可以在任何地方被访问。</p> <p>2、<strong>protected</strong>&nbsp;: 受保护，可以被其自身以及其子类和父类访问。</p> <p>3、<strong>private</strong>&nbsp;: 私有，只能被其定义所在的类访问。</p> <p>以下实例定义了两个变量 str1 和 str2，str1 为 public，str2 为 private，实例化后可以访问 str1，如果要访问 str2 则会编译错误。</p> <pre><code>class Encapsulate {     str1:string = "Hello"     private str2:string = "World" }   var obj = new Encapsulate()  console.log(obj.str1)     // 可访问  console.log(obj.str2)   // 编译错误， str2 是私有属性</code></pre> <p><strong>类和接口</strong></p> <p>类可以实现接口，使用关键字 implements，并将 interest 字段作为类的属性使用。</p> <p>以下实例红 AgriLoan 类实现了 ILoan 接口：</p> <pre><code>interface ILoan {     interest:number  }    class AgriLoan implements ILoan {     interest:number     rebate:number         constructor(interest:number,rebate:number) {        this.interest = interest        this.rebate = rebate     }  }    var obj = new AgriLoan(10,1)  console.log("利润为 : "+obj.interest+"，抽成为 : "+obj.rebate )   // 利润为 : 10，抽成为 : 1</code></pre> <p>TypeScript与JavaScript中的对象基本一致。</p> <h3>TypeScript命名空间</h3> <p>命名空间一个最明确的目的就是解决重名问题。命名空间定义了标识符的可见范围，一个标识符可在多个名字空间中定义，它在不同名字空间中的含义是互不相干的。这样，在一个新的名字空间中可定义任何标识符，它们不会与任何已有的标识符发生冲突，因为已有的定义都处于其他名字空间中。</p> <p>TypeScript 中命名空间使用&nbsp;namespace&nbsp;来定义，语法格式如下：</p> <pre><code>namespace SomeNameSpaceName {     export interface ISomeInterfaceName {      }      export class SomeClassName {      }   }</code></pre> <p>以上定义了一个命名空间 SomeNameSpaceName，如果我们需要在外部可以调用 SomeNameSpaceName 中的类和接口，则需要在类和接口添加&nbsp;export&nbsp;关键字。</p> <p>要在另外一个命名空间调用语法格式为：</p> <pre><code>SomeNameSpaceName.SomeClassName;</code></pre> <p><strong><span style="color:#ff9900;">总结：以上为TypeScript的基础知识，可以看出TypeScript与JavaScript其中一些区别</span></strong></p> <p><strong><span style="color:#ff9900;">1、TypeScript是JavaScript的超集，即你可以TypeScript在中使用原生JavaScript语法。</span></strong></p> <p><strong><span style="color:#ff9900;">2、TypeScript是静态类语言（强类型），编译时进行类型检查；而JavaScript是动态类语言（弱类型）在运行时进行类型判断，相对更灵活。</span></strong></p> <p><strong><span style="color:#ff9900;">3、TypeScript在JavaScript基础类型上，增加了void、never、any、元组、枚举、以及一些高级类型，还有类、接口、命名空间与更多面向对象的内容等。</span></strong></p> <p><strong><span style="color:#ff9900;">4、JavaScript没有重载概念，TypeScript可以重载。</span></strong></p> <p><strong><span style="color:#ff9900;">5、TypeScript最终仍要编译为弱类型，基于对象的原生的JavaScript，再运行。</span></strong></p> <p>参考链接：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.runoob.com/typescript/ts-tutorial.html"  title="TypeScript 教程 | 菜鸟教程" rel="nofollow">TypeScript 教程 | 菜鸟教程</a></p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-36703.htm">广州宠物猫领养中心地址电话是多少（广州市猫狗免费领养市场在哪里）</a></p>
+                                        <p>下一个：<a href="/news/article-37191.htm">宠物寄养协议书范本（宠物寄养协议有法律效力吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-26273.htm" title="动物的疫苗多少钱一针打（动物疫苗多少钱一支）">动物的疫苗多少钱一针打（动物疫苗多少钱一支）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-21-node-share.htm" title="「10月21日」最高速度18.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月21日」最高速度18.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-30-free-node-subscribe-links.htm" title="「12月30日」最高速度18.3M/S，2024年Nekoray每天更新免费机场订阅分享">「12月30日」最高速度18.3M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-24-nekoray-node.htm" title="「12月24日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅分享">「12月24日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-10-30-free-nekoray.htm" title="「10月30日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月30日」最高速度21.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-26270.htm" title="前端之vue3生命周期、hook封装组合式api">前端之vue3生命周期、hook封装组合式api</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-31-nekoray-node.htm" title="「12月31日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享">「12月31日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-1-free-node-subscribe.htm" title="「1月1日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享">「1月1日」最高速度19M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-11-20-free-node-subscribe-links.htm" title="「11月20日」最高速度18.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月20日」最高速度18.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-27692.htm" title="厦门领养宠物猫中心电话地址（厦门领养宠物猫中心电话地址）">厦门领养宠物猫中心电话地址（厦门领养宠物猫中心电话地址）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">21</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
