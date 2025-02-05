@@ -1,0 +1,482 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-49575.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Java基础|Java8接口新特性</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="文章目录  1 接口特性 2 Java8接口-新特性 3 具体用例     接口不是类，不能使用 new 实例化一个接口； 不能构造接口的对象，但可声明接口的变量； 接口变量必须引用实现了接口的类对象" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-49575.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="Java基础|Java8接口新特性" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/fadfa3a62bab3dbe25670dba03f0f624.webp" />
+        <meta property="og:release_date" content="2025-02-01T07:14:56" />
+    <meta property="og:updated_time" content="2025-02-01T07:14:56" />
+        <meta property="og:description" content="文章目录  1 接口特性 2 Java8接口-新特性 3 具体用例     接口不是类，不能使用 new 实例化一个接口； 不能构造接口的对象，但可声明接口的变量； 接口变量必须引用实现了接口的类对象" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Java基础|Java8接口新特性">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="#">关于</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">联系</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">Java基础|Java8接口新特性</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> <div class="toc"> <h3>文章目录</h3> <ul> <li><a href="#1__1" rel="nofollow">1 接口特性</a></li> <li><a href="#2_Java8_12" rel="nofollow">2 Java8接口-新特性</a></li> <li><a href="#3__24" rel="nofollow">3 具体用例</a></li> </ul> </div> </h1> <ol> <li>接口不是类，不能使用 new 实例化一个接口；</li> <li>不能构造接口的对象，但可声明接口的变量；</li> <li>接口变量必须引用实现了接口的类对象；</li> <li>可以使用 instanceof 检查一个对象是否实现了某个特定的接口；</li> <li>可以建立类的继承关系一样，接口可以继承接口进行扩展；</li> <li>接口中不能包含实例域或静态方法，但可包含常量；</li> <li>接口中声明的方法自动地设置为 public；</li> <li>接口中的域（即常量）自动地设置为 public static final;</li> </ol> </h1> <ol> <li>静态方法。<br /> JavaSE8 允许在接口中增加<strong>静态方法</strong>；</li> <li>默认方法。<br /> 可以为接口方法提供一个默认实现，必须使用 default 修饰符标记这个方法；</li> <li>解决默认方法冲突问题：<br /> 如果接口中将一个方法定义为默认方法，然后在超类或另一个接口中定义了同样的方法。就要解决冲突，规则如下：<br /> ① 超类优先。如果超类提供了一个具体方法，同名且有相同参数类型的默认方法会被忽略。<br /> ②接口冲突。如果一个超接口提供了一个默认方法，另一个接口提供了一个同名而且参数类型相同的方法，必须覆盖这个方法来解决冲突。<br /> ③类优先原则。如果一个类扩展了一个超类，同时实现了一个接口，并且从超类和接口继承了相同的方法。此种情况使用类优先原则，接口的默认方法会被忽略。</li> </ol> </h1> <p>接口PersonInfo</p> <pre><code class="prism language-java"><span class="token comment">/**  * @version $Id: PersonInfo.java, v 0.1 2017年6月9日 下午5:19:14  */</span> <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">PersonInfo</span> <span class="token punctuation">{<!-- --></span>     <span class="token comment">//方法都自动设置为public</span>     <span class="token keyword">void</span> <span class="token function">printAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token comment">//常量自动设置为 public static final</span>     <span class="token class-name">String</span> DEFAULT_NAME <span class="token operator">=</span> <span class="token string">"TIANCI"</span><span class="token punctuation">;</span>      <span class="token keyword">int</span>    DEFAULT_AGE  <span class="token operator">=</span> <span class="token number">18</span><span class="token punctuation">;</span>      <span class="token class-name">String</span> DEFAULT_SEX  <span class="token operator">=</span> <span class="token string">"男"</span><span class="token punctuation">;</span>      <span class="token comment">//javaSE8可以有静态方法</span>     <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">printSex</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>DEFAULT_SEX<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">;</span>      <span class="token comment">//javaSE8 可以为接口方法提供默认实现，default进行标记</span>     <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>DEFAULT_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token punctuation">}</span> </code></pre> <hr/> <p>接口PersonHobby</p> <pre><code class="prism language-java"><span class="token comment">/**  * @version $Id: PersonHobby.java, v 0.1 2017年6月9日 下午5:41:59  */</span> <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">PersonHobby</span> <span class="token punctuation">{<!-- --></span>     <span class="token class-name">String</span> DEFAULT_HOBBY <span class="token operator">=</span> <span class="token string">"运动"</span><span class="token punctuation">;</span>      <span class="token keyword">default</span> <span class="token keyword">void</span> <span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"hobby name is:"</span> <span class="token operator">+</span> DEFAULT_HOBBY<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span>  </code></pre> <hr/> <p>类Person</p> <pre><code class="prism language-java"><span class="token comment">/**  * Person类实现了两个接口，两个接口中都有默认的实现方法printName()  * 造成冲突，解决冲突的办法就是在类中覆盖这个方法  * 方法具体实现可以是重写，也可以选择调用具体接口的默认实现方法  * @version $Id: Person.java, v 0.1 2017年6月9日 下午5:19:00  */</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token keyword">implements</span> <span class="token class-name">PersonInfo</span><span class="token punctuation">,</span> <span class="token class-name">PersonHobby</span> <span class="token punctuation">{<!-- --></span>      <span class="token keyword">private</span> <span class="token class-name">String</span> age<span class="token punctuation">;</span>     <span class="token keyword">private</span> <span class="token class-name">String</span> name<span class="token punctuation">;</span>      <span class="token punctuation">{<!-- --></span>         age <span class="token operator">=</span> <span class="token string">"age init from Person."</span><span class="token punctuation">;</span>         name <span class="token operator">=</span> <span class="token string">"name init form Person."</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>      <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">printAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>      <span class="token comment">//两个接口都有该方法默认实现，进行覆写来解决冲突</span>     <span class="token comment">//方法具体实现可以是重写，也可以选择调用具体接口的默认实现方法</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token comment">/*调用具体的接口默认实现         PersonInfo.super.printName();*/</span>         <span class="token comment">/* 调用具体的接口默认实现         PersonHobby.super.printName();*/</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <hr/> <p>测试代码</p> <pre><code class="prism language-java"><span class="token comment">/**  * @version $Id: Test.java, v 0.1 2017年6月9日 下午5:45:44  */</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token class-name">Person</span> person1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">//可以使用接口声明变量,变量必须引用实现了接口的类对象</span>         <span class="token comment">//但对象的能力只拥有声明的接口类型中的能力</span>         <span class="token comment">//如person3和person4没有printAge()的能力</span>         <span class="token class-name">PersonInfo</span> person2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">PersonHobby</span> person3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">PersonHobby</span> person4 <span class="token operator">=</span> person1<span class="token punctuation">;</span>          person1<span class="token punctuation">.</span><span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person1<span class="token punctuation">.</span><span class="token function">printAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"-------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person2<span class="token punctuation">.</span><span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person2<span class="token punctuation">.</span><span class="token function">printAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"-------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person3<span class="token punctuation">.</span><span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         person4<span class="token punctuation">.</span><span class="token function">printName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">/*              * 对象的能力只拥有声明的接口类型中的能力          * person3和person4没有printAge()能力，下面方法不可用          * person3.printAge();          * person4.printAge();         */</span>         <span class="token comment">//使用接口调用接口中声明的静态方法</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"----接口中静态方法---"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">PersonInfo</span><span class="token punctuation">.</span><span class="token function">printSex</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"----访问接口中常量---"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">PersonInfo</span><span class="token punctuation">.</span>DEFAULT_AGE<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">PersonInfo</span><span class="token punctuation">.</span>DEFAULT_NAME<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">PersonInfo</span><span class="token punctuation">.</span>DEFAULT_SEX<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token class-name">PersonHobby</span><span class="token punctuation">.</span>DEFAULT_HOBBY<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <p>测试结果：</p> <pre><code class="prism language-java">name init form <span class="token class-name">Person</span><span class="token punctuation">.</span> age init from <span class="token class-name">Person</span><span class="token punctuation">.</span> <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> name init form <span class="token class-name">Person</span><span class="token punctuation">.</span> age init from <span class="token class-name">Person</span><span class="token punctuation">.</span> <span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span> name init form <span class="token class-name">Person</span><span class="token punctuation">.</span> name init form <span class="token class-name">Person</span><span class="token punctuation">.</span> <span class="token operator">--</span><span class="token operator">--</span>接口中静态方法<span class="token operator">--</span><span class="token operator">-</span> 男 <span class="token operator">--</span><span class="token operator">--</span>访问接口中常量<span class="token operator">--</span><span class="token operator">-</span> <span class="token number">18</span> TIANCI 男 运动 </code></pre> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-49574.htm">【SpringMVC笔记02】SpringMVC接收请求参数的几种方式</a></p>
+                                        <p>下一个：<a href="/news/article-50092.htm">win11系统如何添加pdf虚拟打印机</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-44636.htm" title="宠爱国际医院行不行 宠爱国际医院2014年事件">宠爱国际医院行不行 宠爱国际医院2014年事件</a></li>
+                        <li class="py-2"><a href="/news/article-29078.htm" title="十大动物疫苗公司排名前十有哪些 十大动物疫苗公司排名前十有哪些品牌">十大动物疫苗公司排名前十有哪些 十大动物疫苗公司排名前十有哪些品牌</a></li>
+                        <li class="py-2"><a href="/news/article-36102.htm" title="开个宠物诊所需要多少钱（开一家宠物诊所收入怎么样）">开个宠物诊所需要多少钱（开一家宠物诊所收入怎么样）</a></li>
+                        <li class="py-2"><a href="/news/article-35068.htm" title="Docker镜像构建之docker commit">Docker镜像构建之docker commit</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-nekoray-node.htm" title="「12月22日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅分享">「12月22日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-1-nekoray-node.htm" title="「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-23-node-share.htm" title="「1月23日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享">「1月23日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-31949.htm" title="动物防疫经费使用实施方案最新（动物防疫等补助经费实施方案）">动物防疫经费使用实施方案最新（动物防疫等补助经费实施方案）</a></li>
+                        <li class="py-2"><a href="/news/article-26752.htm" title="致命行动（致命行动电视剧大全）">致命行动（致命行动电视剧大全）</a></li>
+                        <li class="py-2"><a href="/news/article-23971.htm" title="包含动物疫苗接种方法有几种图片及名称的词条">包含动物疫苗接种方法有几种图片及名称的词条</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">12</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>

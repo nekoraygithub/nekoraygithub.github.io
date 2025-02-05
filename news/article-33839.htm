@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://nekoraygithub.github.io/news/article-33839.htm" />
@@ -10,7 +10,35 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta name="description" content="Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底" />
         <!-- Favicon -->
-    <link href="__ADDON__/img/nekoraygithub/favicon.ico" rel="icon">
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-33839.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="Parquet文件格式介绍和读写流程" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/bf5832f555c851aaa338b5ad2062c0a0.webp" />
+        <meta property="og:release_date" content="2024-12-31T05:56:45" />
+    <meta property="og:updated_time" content="2024-12-31T05:56:45" />
+        <meta property="og:description" content="Parquet是面向分析型业务的列式存储格式，由Twitter和Cloudera合作开发，2015年5月从Apache的孵化器里毕业成为Apache顶级项目，那么这里就总结下Parquet数据结构到底" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Parquet文件格式介绍和读写流程">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
     <!-- google-fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- //google-fonts -->
@@ -118,16 +146,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-9-8-free-node-subscribe.htm" title="「9月8日」最高速度22.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月8日」最高速度22.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-17-free-high-speed-nodes.htm" title="「9月17日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月17日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-1-windows-nekoray.htm" title="「10月1日」最高速度18.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月1日」最高速度18.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-16-free-node-subscribe.htm" title="「11月16日」最高速度18.5M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月16日」最高速度18.5M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-7-free-high-speed-nodes.htm" title="「10月7日」最高速度20.2M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月7日」最高速度20.2M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-20758.htm" title="动物疫苗厂家有哪些名字呢 动物疫苗厂家有哪些名字呢图片">动物疫苗厂家有哪些名字呢 动物疫苗厂家有哪些名字呢图片</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-9-28-node-share.htm" title="「9月28日」最高速度22.3M/S，2024年Nekoray每天更新免费机场订阅节点链接">「9月28日」最高速度22.3M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-21219.htm" title="动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）">动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-3-free-subscribe-node.htm" title="「11月3日」最高速度21.1M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月3日」最高速度21.1M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-22-free-nekoray-node.htm" title="「12月22日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅分享">「12月22日」最高速度22.6M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-33351.htm" title="疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么">疫苗分类包括动物疫苗吗 疫苗分类包括动物疫苗吗为什么</a></li>
+                        <li class="py-2"><a href="/news/article-43625.htm" title="动物疫苗和人体疫苗生产有什么区别呢视频 动物疫苗和人体疫苗生产有什么区别呢视频讲解">动物疫苗和人体疫苗生产有什么区别呢视频 动物疫苗和人体疫苗生产有什么区别呢视频讲解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-1-nekoray-node.htm" title="「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-37188.htm" title="TypeScript 与 JavaScript 的区别（TypeScript万字基础入门，了解TS，看这一篇就够了）">TypeScript 与 JavaScript 的区别（TypeScript万字基础入门，了解TS，看这一篇就够了）</a></li>
+                        <li class="py-2"><a href="/news/article-21656.htm" title="@RequestBody接收实体类时，部分字段丢失的问题">@RequestBody接收实体类时，部分字段丢失的问题</a></li>
+                        <li class="py-2"><a href="/news/article-26751.htm" title="治疗仓鼠宠物医院在线咨询（治仓鼠的宠物医院）">治疗仓鼠宠物医院在线咨询（治仓鼠的宠物医院）</a></li>
+                        <li class="py-2"><a href="/news/article-29078.htm" title="十大动物疫苗公司排名前十有哪些 十大动物疫苗公司排名前十有哪些品牌">十大动物疫苗公司排名前十有哪些 十大动物疫苗公司排名前十有哪些品牌</a></li>
+                        <li class="py-2"><a href="/news/article-33839.htm" title="Parquet文件格式介绍和读写流程">Parquet文件格式介绍和读写流程</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-2-share-windows-nekoray.htm" title="「2月2日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享">「2月2日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-6-linux-nekoray-node.htm" title="「12月6日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月6日」最高速度18.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
                     </ul>
     </div>
 </div>
@@ -139,22 +167,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">9</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">31</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-09/" title="2024-09 归档">2024-09</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">13</span> <a href="/date/2024-08/" title="2024-08 归档">2024-08</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>

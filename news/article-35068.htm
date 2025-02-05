@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html xml:lang="zh-CN" lang="zh-CN">
 
 <head>
         <link rel="canonical" href="https://nekoraygithub.github.io/news/article-35068.htm" />
@@ -10,7 +10,35 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta name="description" content="我们可以通过公共仓库拉取镜像使用，但是，有些时候公共仓库拉取的镜像并不符合我们的需求。尽管已经从繁琐的部署工作中解放出来了，但是在实际开发时，我们可能希望镜像包含整个项目的完整环境，在其他机器上拉取打" />
         <!-- Favicon -->
-    <link href="__ADDON__/img/nekoraygithub/favicon.ico" rel="icon">
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-35068.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="Docker镜像构建之docker commit" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/372364ef3a9b9b59d337173004471c51.webp" />
+        <meta property="og:release_date" content="2025-01-03T00:21:20" />
+    <meta property="og:updated_time" content="2025-01-03T00:21:20" />
+        <meta property="og:description" content="我们可以通过公共仓库拉取镜像使用，但是，有些时候公共仓库拉取的镜像并不符合我们的需求。尽管已经从繁琐的部署工作中解放出来了，但是在实际开发时，我们可能希望镜像包含整个项目的完整环境，在其他机器上拉取打" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Docker镜像构建之docker commit">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
     <!-- google-fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- //google-fonts -->
@@ -118,16 +146,16 @@
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2024-11-25-nekoray-node.htm" title="「11月25日」最高速度19.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月25日」最高速度19.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-21657.htm" title="猫咪驱虫应该怎么做,需要注意什么呢?（猫猫驱虫教程）">猫咪驱虫应该怎么做,需要注意什么呢?（猫猫驱虫教程）</a></li>
-                        <li class="py-2"><a href="/news/article-21219.htm" title="动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）">动物疫苗有效期多久不能打（动物疫苗有效期多久不能打疫苗）</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-1-nekoray-node.htm" title="「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月1日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/news/article-28151.htm" title="探索 SocketChannel 的核心原理">探索 SocketChannel 的核心原理</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-18-free-subscribe-node.htm" title="「12月18日」最高速度21.1M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月18日」最高速度21.1M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-11-21-free-nekoray-node.htm" title="「11月21日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接">「11月21日」最高速度19.8M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-19-node-share.htm" title="「10月19日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月19日」最高速度20.4M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-10-14-free-subscribe-node.htm" title="「10月14日」最高速度22.7M/S，2024年Nekoray每天更新免费机场订阅节点链接">「10月14日」最高速度22.7M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
-                        <li class="py-2"><a href="/free-nodes/2024-12-3-linux-nekoray-node.htm" title="「12月3日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接">「12月3日」最高速度21.9M/S，2024年Nekoray每天更新免费机场订阅节点链接</a></li>
+                        <li class="py-2"><a href="/news/article-23049.htm" title="动物疫苗公司排名榜单 动物疫苗公司排名榜单最新">动物疫苗公司排名榜单 动物疫苗公司排名榜单最新</a></li>
+                        <li class="py-2"><a href="/news/article-41639.htm" title="动物防疫工作年终总结（动物防疫工作年终总结怎么写）">动物防疫工作年终总结（动物防疫工作年终总结怎么写）</a></li>
+                        <li class="py-2"><a href="/news/article-32422.htm" title="给动物注射疫苗属于什么免疫 给动物注射疫苗属于什么免疫方式">给动物注射疫苗属于什么免疫 给动物注射疫苗属于什么免疫方式</a></li>
+                        <li class="py-2"><a href="/news/article-44636.htm" title="宠爱国际医院行不行 宠爱国际医院2014年事件">宠爱国际医院行不行 宠爱国际医院2014年事件</a></li>
+                        <li class="py-2"><a href="/news/article-26752.htm" title="致命行动（致命行动电视剧大全）">致命行动（致命行动电视剧大全）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-10-free-node-subscribe-links.htm" title="「1月10日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享">「1月10日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-23971.htm" title="包含动物疫苗接种方法有几种图片及名称的词条">包含动物疫苗接种方法有几种图片及名称的词条</a></li>
+                        <li class="py-2"><a href="/news/article-48067.htm" title="如何在idea上部署tomcat&amp;项目">如何在idea上部署tomcat&amp;项目</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-28-node-share-links.htm" title="「1月28日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享">「1月28日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-free-nekoray.htm" title="「1月8日」最高速度21.5M/S，2025年Nekoray每天更新免费机场订阅分享">「1月8日」最高速度21.5M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
                     </ul>
     </div>
 </div>
@@ -139,16 +167,16 @@
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">15</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+                <h4><span class="badge" style="float: right;">6</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
             </li>
                         <li class="py-2">
                 <h4><span class="badge" style="float: right;">93</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">34</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">25</span> <a href="/date/2024-10/" title="2024-10 归档">2024-10</a></h4>
+                <h4><span class="badge" style="float: right;">30</span> <a href="/date/2024-11/" title="2024-11 归档">2024-11</a></h4>
             </li>
                     </ul>
     </div>
