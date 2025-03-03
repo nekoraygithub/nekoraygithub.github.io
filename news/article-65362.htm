@@ -1,0 +1,479 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-65362.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>K8S+Jenkins自动化构建微服务项目</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="因为之前写过基于K8S部署jenkins master/slave平台，在这个的基础上构建微服务到K8S集群中 Jenkins-slave构建微服务项目到K8S集群 1、微服务项目上传到git仓库 　" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-65362.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="K8S+Jenkins自动化构建微服务项目" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/14b4783a310fcc77238eacf524a0c872.webp" />
+        <meta property="og:release_date" content="2025-03-01T07:00:01" />
+    <meta property="og:updated_time" content="2025-03-01T07:00:01" />
+        <meta property="og:description" content="因为之前写过基于K8S部署jenkins master/slave平台，在这个的基础上构建微服务到K8S集群中 Jenkins-slave构建微服务项目到K8S集群 1、微服务项目上传到git仓库 　" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="K8S+Jenkins自动化构建微服务项目">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">K8S+Jenkins自动化构建微服务项目</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<p>因为之前写过<span style="color: rgba(255, 153, 0, 1)"><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/cfzy/p/15692758.html"  target="_blank" rel="nofollow"><span style="color: rgba(255, 153, 0, 1)">基于K8S部署jenkins master/slave平台</span></a></span>，在这个的基础上构建微服务到K8S集群中</p> <h2>Jenkins-slave构建微服务项目到K8S集群</h2> <h3>1、微服务项目上传到git仓库</h3> <p>　　这个就不多说了</p> <h3>2、更改注册中心eureka的配置文件</h3> <p>进入到项目代码中，更改微服务中eureka-service的配置文件application.yaml<span style="color: rgba(255, 0, 0, 1)">（需要和开发对一下，具体还要加哪些参数）</span></p> <div class="cnblogs_Highlighter"> <pre class="brush:csharp;gutter:true;">server:   port: 8761 spring:    application:      name: eureka-service    eureka:   instance:     prefer-ip-address: false   client:     region: default     service-url:       defaultZone: http://eureka-0.eureka.default:${server.port}/eureka/,http://eureka-1.eureka.default:${server.port}/eureka/     register-with-eureka: true     fetch-registry: true</pre> </div> <p>其他应用程序往eureka注册，需要在各自的application.yaml里添加下面的eureka信息</p> <div class="cnblogs_Highlighter"> <pre class="brush:csharp;gutter:true;">eureka:   instance:     prefer-ip-address: false   client:     region: default     service-url:       defaultZone: http://eureka-0.eureka:8761/eureka/,http://eureka-1.eureka:8761/eureka/     register-with-eureka: true     fetch-registry: true</pre> </div> <h3>3、创建statefulset资源文件部署eureka，ingress做负载均衡</h3> <p>（将所以要创建的资源都合并到一个yaml文件，上传到git仓库 项目代码的eureka目录下）</p> <div class="cnblogs_Highlighter"> <pre class="brush:csharp;gutter:true;">#创建Service为headless apiVersion: v1 kind: Service metadata:   namespace: NS   labels:     app: eureka   name: eureka spec:   clusterIP: None   selector:     app: eureka   ports:   - port: 8761     protocol: TCP     targetPort: 8761 status:   loadBalancer: {}    --- #创建StatefulSet apiVersion: apps/v1 kind: StatefulSet metadata:   name: eureka   namespace: NS spec:   selector:     matchLabels:       app: eureka   serviceName: "eureka"   replicas: RSCOUNT   template:     metadata:       labels:         app: eureka     spec:       imagePullSecrets:       - name: SECRET_NAME       containers:       - name: eureka         image: IMAGE_NAME         ports:         - containerPort: 8761  --- #创建ingress apiVersion: networking.k8s.io/v1 kind: Ingress metadata:   name: eureka-ingress   annotations:     kubernetes.io/ingress.class: "nginx" spec:   rules:   - host: eureka.test.com     http:       paths:       - path: /         pathType: Prefix         backend:           service:             name: eureka             port:                number: 8761</pre> </div> <h3>4、在jenkins创建流水线任务</h3> <p>新建任务——eureka&nbsp; 流水线——然后进入项目配置，Jenkinsfile如下：</p> <div class="cnblogs_Highlighter"> <pre class="brush:csharp;gutter:true;">def registry = "10.48.14.50:8888" def project = "dev" def app_name = "eureka-service" def jar_path = "build/libs" def jar_name = "${app_name}-0.0.1-SNAPSHOT.jar" def jar_port = "8761" def image_name = "${registry}/${project}/${app_name}:${BUILD_NUMBER}" def git_address = "http://10.48.14.100:30080/001/xiangmu.git" // 认证 def secret_name = "registrypullauth" def docker_registry_auth = "b07ed5ba-e191-4688-9ed2-623f4753781c" def git_auth = "a5ec87ae-87a1-418e-aa49-53c4aedcd261" def k8s_auth = "3cd3f414-a0e2-4bc0-8808-78c64e6ad7d2" def JAVA_OPTS = "-Xms128m -Xmx256m -Dfile.encoding=UTF8 -Duser.timezone=GMT+08 -Dspring.profiles.active=test"  pipeline {   agent {     kubernetes {         label "jenkins-slave"         yaml """ kind: Pod metadata:   name: jenkins-slave spec:   containers:   - name: jnlp     image: "${registry}/library/jenkins-slave-jdk:latest"     imagePullPolicy: Always     env:        - name: TZ         value: Asia/Shanghai     volumeMounts:       - name: docker-cmd         mountPath: /usr/bin/docker       - name: docker-sock         mountPath: /var/run/docker.sock       - name: gradle-cache         mountPath: /root/.gradle   volumes:     - name: docker-cmd       hostPath:         path: /usr/bin/docker     - name: docker-sock       hostPath:         path: /var/run/docker.sock     - name: gradle-cache       hostPath:          path: /tmp/gradle """         }       }     parameters {         choice (choices: ['1', '2', '3', '5', '7'], description: '副本数', name: 'ReplicaCount')         choice (choices: ['dev','test','prod','default'], description: '命名空间', name: 'Namespace')     }     stages {         stage('拉取代码'){             steps {                 checkout([$class: 'GitSCM',                  branches: [[name: "${params.Branch}"]],                  doGenerateSubmoduleConfigurations: false,                  extensions: [], submoduleCfg: [],                  userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_address}"]]                 ])             }         }          stage('代码编译'){            steps {              sh """                 java -version                 pwd                	cd ${app_name}                	pwd 　　　　　　　　　　gradle -v 　　　　　　　　　　gradle clean build -x test                 """             }         }          stage('构建镜像'){            steps {                 withCredentials([usernamePassword(credentialsId: "${docker_registry_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {                 sh """                   echo '                     FROM ${registry}/library/java:11                     MAINTAINER liang                     RUN apk add -U tzdata &amp;&amp; \ 	                ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime                     ADD ${jar_path}/${jar_name} /                     EXPOSE ${jar_port}                     CMD java -jar $JAVA_OPTS  /${jar_name}                     '&gt; ${app_name}/Dockerfile                   docker build -t ${image_name} ${app_name}                   docker login -u ${username} -p ${password} ${registry}                   docker push ${image_name}                 """                 }            }          }                  stage('部署到K8S平台'){           steps {             configFileProvider([configFile(fileId: "${k8s_auth}", targetLocation: 'admin.kubeconfig')]) {               sh """                 pwd                 sed -i 's#IMAGE_NAME#${image_name}#' ${app_name}/deploy.yaml                 sed -i 's#SECRET_NAME#${secret_name}#' ${app_name}/deploy.yaml                 sed -i 's#RSCOUNT#${ReplicaCount}#' ${app_name}/deploy.yaml                 sed -i 's#NS#${Namespace}#' ${app_name}/deploy.yaml                 kubectl apply -f ${app_name}/deploy.yaml -n ${Namespace} --kubeconfig=admin.kubeconfig                 sleep 10                 kubectl get pod -n ${Namespace} --kubeconfig=admin.kubeconfig               """            }           }         }     } }</pre> </div> <p>构建项目：可以选择启动的副本数、项目代码分支、k8s命名空间（dev、test、prod：代表开发、测试、生产环境）</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/9e4493149b97817240ddd024e8652c04.jpg" alt="K8S+Jenkins自动化构建微服务项目"></p> <p>查看构建日志：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/15b3b207240c8e2ba7c72905c8c2d8f6.jpg" alt="K8S+Jenkins自动化构建微服务项目"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/f7620bd079da487ed88bde6cad46fa20.jpg" alt="K8S+Jenkins自动化构建微服务项目"></p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 0, 1)">浏览器访问eureka： 　　需要添加dns记录或者host文件(根据自己的实际情况添加)    http:</span><span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)">eureka.test.com<br/></span></pre> <pre></pre> </div> <h3>5、构建其他应用程序部署到K8S</h3> <p>修改微服务网关gateway的配置文件application.yaml：</p> <div class="cnblogs_Highlighter"> <pre class="brush:csharp;gutter:true;">server:   port: 8130 spring:    application:      name: gateway-service  eureka:   instance:     prefer-ip-address: false   client:     region: default     service-url:       defaultZone: http://eureka-0.eureka:8761/eureka/,http://eureka-1.eureka:8761/eureka/     register-with-eureka: true     fetch-registry: true</pre> </div> <p>创建deploy资源 部署gateway，ingress做负载均衡</p> <div class="cnblogs_Highlighter"> <pre class="brush:csharp;gutter:true;">apiVersion: v1 kind: Service metadata:   namespace: NS   labels:     app: gateway   name: gateway spec:   selector:     app: gateway   ports:   - port: 8130     protocol: TCP     targetPort: 8130 status:   loadBalancer: {} --- #创建Deployment apiVersion: apps/v1 kind: Deployment metadata:   name: gateway   namespace: NS spec:   selector:      matchLabels:       app: gateway   replicas: RSCOUNT   template:     metadata:       labels:         app: gateway     spec:       imagePullSecrets:       - name: SECRET_NAME       containers:       - name: gateway         image: IMAGE_NAME         ports:         - containerPort: 8130 --- #创建ingress apiVersion: networking.k8s.io/v1 kind: Ingress metadata:   name: gateway-ingress   annotations:     kubernetes.io/ingress.class: "nginx" spec:   rules:   - host: gateway.test.com     http:       paths:       - path: /         pathType: Prefix         backend:           service:             name: gateway             port:                number: 8130</pre> </div> <p>jenkins中创建gateway项目，使用eureka的Jenkinsfile，只需要修改其中的变量就可以了，这里就不写了</p> <p>......</p> <p>应用程序构建完成后，查看是否注册到eureka：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/5b76b4860455544af2780aeed648ffea.jpg" alt="K8S+Jenkins自动化构建微服务项目"></p> <p>&nbsp; &nbsp; &nbsp;再查看eureka日志，说明成功了</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/1b750d10c12645fa6929579121bf2139.jpg" alt="K8S+Jenkins自动化构建微服务项目"></p> <p>大概就是这样，部署微服务的其他应用程序也是一样。</p> <p>需要注意的是：项目中application.yaml的参数要问开发人员（有些程序需要连数据库）</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-64763.htm">南京领养猫咪的平台（南京猫猫领养中心）</a></p>
+                                        <p>下一个：<a href="/news/article-65363.htm">我所在的城市里有一家宠物医院英文（我所在的城市里有一家宠物医院英文怎么说）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-49574.htm" title="【SpringMVC笔记02】SpringMVC接收请求参数的几种方式">【SpringMVC笔记02】SpringMVC接收请求参数的几种方式</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-10-free-nekoray-node.htm" title="「2月10日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享">「2月10日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-24391.htm" title="领养狗狗会带来好运吗为什么（领养狗狗有什么好处和坏处）">领养狗狗会带来好运吗为什么（领养狗狗有什么好处和坏处）</a></li>
+                        <li class="py-2"><a href="/news/article-38662.htm" title="动物打疫苗在哪打的 动物打疫苗在哪打的啊">动物打疫苗在哪打的 动物打疫苗在哪打的啊</a></li>
+                        <li class="py-2"><a href="/news/article-36703.htm" title="广州宠物猫领养中心地址电话是多少（广州市猫狗免费领养市场在哪里）">广州宠物猫领养中心地址电话是多少（广州市猫狗免费领养市场在哪里）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-11-node-share.htm" title="「2月11日」最高速度19.3M/S，2025年Nekoray每天更新免费机场订阅分享">「2月11日」最高速度19.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2024-12-21-free-high-speed-nodes.htm" title="「12月21日」最高速度18.6M/S，2024年Nekoray每天更新免费机场订阅分享">「12月21日」最高速度18.6M/S，2024年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-57140.htm" title="狗粮颗粒太大怎么办（狗粮颗粒大好还是小好）">狗粮颗粒太大怎么办（狗粮颗粒大好还是小好）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-29-free-nekoray-node.htm" title="「1月29日」最高速度18.8M/S，2025年Nekoray每天更新免费机场订阅分享">「1月29日」最高速度18.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-20-nekoray-node.htm" title="「2月20日」最高速度22.5M/S，2025年Nekoray每天更新免费机场订阅分享">「2月20日」最高速度22.5M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">9</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">93</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">87</span> <a href="/date/2024-12/" title="2024-12 归档">2024-12</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
