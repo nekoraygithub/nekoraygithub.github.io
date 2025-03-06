@@ -1,0 +1,476 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-67882.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="使用中国区的Azure，在获取Token时候，参考了 adal4j的代码，在官方文档中，发现了如下的片段代码：  ExecutorService service = Executors.newFixe" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-67882.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/bf5832f555c851aaa338b5ad2062c0a0.webp" />
+        <meta property="og:release_date" content="2025-03-05T11:12:19" />
+    <meta property="og:updated_time" content="2025-03-05T11:12:19" />
+        <meta property="og:description" content="使用中国区的Azure，在获取Token时候，参考了 adal4j的代码，在官方文档中，发现了如下的片段代码：  ExecutorService service = Executors.newFixe" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				</h1> <p>使用中国区的Azure，在获取Token时候，参考了 adal4j的代码，在官方文档中，发现了如下的片段代码：</p> <div class="cnblogs_code"> <pre>ExecutorService service = Executors.newFixedThreadPool(1<span style="color: rgba(0, 0, 0, 1)">); AuthenticationContext context</span>=<span style="color: rgba(0, 0, 255, 1)">new</span> AuthenticationContext(AUTHORITY,<span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">, service); Future</span>&lt;AuthenticationResult&gt; future =<span style="color: rgba(0, 0, 0, 1)"> context.acquireToken(</span>"https://graph.windows.net"<span style="color: rgba(0, 0, 0, 1)">, YOUR_TENANT_ID, username, password,</span><span style="color: rgba(0, 0, 255, 1)">null</span><span style="color: rgba(0, 0, 0, 1)">); AuthenticationResult result</span>=<span style="color: rgba(0, 0, 0, 1)"> future.get(); System.out.println(</span>"Access Token - " +<span style="color: rgba(0, 0, 0, 1)"> result.getAccessToken()); System.out.println(</span>"Refresh Token - " +<span style="color: rgba(0, 0, 0, 1)"> result.getRefreshToken()); System.out.println(</span>"ID Token - " + result.getIdToken());</pre> </div> <p><span style="color: rgba(0, 51, 0, 1); font-size: 18px"><strong>以上代码中，有一些参数很不明确：</strong></span></p> <p><span style="font-size: 16px; color: rgba(0, 51, 0, 1)">1）AUTHORITY, 是什么意思呢？</span></p> <p><span style="font-size: 16px; color: rgba(0, 51, 0, 1)">2）acquireTokne方法中的 https://graph.windows.net 是指向global azure的资源，如果是中国区azure的资源，那么resource url是多少呢？</span></p> <p><span style="font-size: 16px; color: rgba(0, 51, 0, 1)">3）YOUR_TENANT_ID，它的值是什么呢？</span></p> </h1> <h2><span style="color: rgba(128, 0, 0, 1)">第一个问题：AUTHORITY, 是什么意思，它的值是什么呢？</span></h2> <p>AUTHORITY，表示认证的主体，它是一个URL，表示可以从该主体中获取到认证Token。 它的格式为：https://&lt;authority host&gt;/&lt;tenant id&gt; ，所以在使用Azure的过程中，根据Azure环境的不同，Host 有以下四个值。</p> <ol> <li><strong>AzureChina</strong> :The host of the Azure Active Directory authority for tenants in the Azure China Cloud.&nbsp; AZURE_CHINA<span class="o">=<span class="s2">"login.chinacloudapi.cn"</span></span></li> <li><strong>AzureGermany</strong>:&nbsp;The host of the Azure Active Directory authority for tenants in the Azure German Cloud.&nbsp; AZURE_GERMANY<span class="o">=<span class="s2">"login.microsoftonline.de"</span></span></li> <li><strong>AzureGovernment</strong>:&nbsp;The host of the Azure Active Directory authority for tenants in the Azure US Government Cloud.&nbsp; AZURE_GOVERNMENT<span class="o">=<span class="s2">"login.microsoftonline.us"</span></span></li> <li><strong>AzurePublicCloud</strong>:&nbsp;The host of the Azure Active Directory authority for tenants in the Azure Public Cloud. AZURE_PUBLIC_CLOUD<span class="o">=<span class="s2">"login.microsoftonline.com"</span></span></li> </ol> <p>所以，这里我们需要使用的值为：String AUTHORITY = "<span style="background-color: rgba(255, 255, 0, 1)"><a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://nam02.safelinks.protection.outlook.com/?url=https%3A%2F%2Flogin.chinacloudapi.cn%2F%253ctenant%2520id%2520%253e&amp;data=05%7C01%7CBULU%40microsoftsupport.com%7C4b3551d64ea34cc9051208da29acadbe%7Cb4c546a47dac46a6a7dded822a11efd3%7C0%7C0%7C637868118877495666%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=pa1fa2JEXhZ1rNi1oLjgHhuEi0QT7B0WLmr0cUEJ8oE%3D&amp;reserved=0"  rel="nofollow"><span style="background-color: rgba(255, 255, 0, 1)">https://login.chinacloudapi.cn/&lt;tenant id &gt;</span></a></span>";</p> <h3>那么如何来获取Tenant ID呢？</h3> <p>登录到Azure门户 --&gt; 进入AAD中，在Overview页面查看Tenant ID (<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://portal.azure.cn/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview"  target="_blank" rel="nofollow">https://portal.azure.cn/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview</a>)</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/3093e4d08e8d08bff133cf34206522ca.jpg" alt="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" width="999" height="519" loading="lazy"/></p> <h2><span style="color: rgba(51, 51, 0, 1)">第二个问题：acquireTokne方法中的 https://graph.windows.net 是指向global azure的资源，如果是中国区azure的资源，那么resource url是多少呢？</span></h2> <p>根据中国区Azure的开发文档，并没有查找到对应于 graph.windows.net的中国区Graph 终结点。但是，中国区Graph 的终结点为：microsoftgraph.chinacloudapi.cn，所以，以上示例中应该使用的值应是：</p> <div><strong><em>https://microsoftgraph.chinacloudapi.cn/</em></strong></div> <div><img decoding="async" src="https://img2022.cnblogs.com/blog/2127802/202205/2127802-20220501093145246-143391702.png" alt="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" width="666" height="336" loading="lazy" style="border: 2px solid rgba(0, 0, 139, 1)"/></div> <div>(Source:<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/azure/china/resources-developer-guide#check-endpoints-in-azure"  target="_blank" rel="nofollow">https://docs.microsoft.com/en-us/azure/china/resources-developer-guide#check-endpoints-in-azure</a>)</div> <p><span style="color: rgba(0, 51, 0, 1)"></span></p> <h2><span style="color: rgba(0, 51, 0, 1)">第三个问题：YOUR_TENANT_ID，它的值是什么呢？</span></h2> <p>在对比了adal4j的源代码后，在acquireToken方法定义中，发现YOUR_TENANT_ID所对应的值应该是&nbsp;clientId ()。所以，官网参考文档中的YOUR_TENANT_ID存在误导情景。需要修改为YOUR_CLIENT_ID。</p> <p>ADAL4J中acquireToken源码(acquireToken有多个重载，但此处只列举出代码中使用的这个重载)</p> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 128, 0, 1)">/**</span><span style="color: rgba(0, 128, 0, 1)">      * Acquires a security token from the authority using a Refresh Token      * previously received.      *<span style="background-color: rgba(255, 255, 0, 1)">     *</span></span><span style="color: rgba(128, 128, 128, 1); background-color: rgba(255, 255, 0, 1)">@param</span><span style="color: rgba(0, 128, 0, 1)"><span style="background-color: rgba(255, 255, 0, 1)"> clientId      *            Name or ID of the client requesting the token.</span>      *</span><span style="color: rgba(128, 128, 128, 1)">@param</span><span style="color: rgba(0, 128, 0, 1)"> resource      *            Identifier of the target resource that is the recipient of the      *            requested token. If null, token is requested for the same      *            resource refresh token was originally issued for. If passed,      *            resource should match the original resource used to acquire      *            refresh token unless token service supports refresh token for      *            multiple resources.      *</span><span style="color: rgba(128, 128, 128, 1)">@param</span><span style="color: rgba(0, 128, 0, 1)"> username      *            Username of the managed or federated user.      *</span><span style="color: rgba(128, 128, 128, 1)">@param</span><span style="color: rgba(0, 128, 0, 1)"> password      *            Password of the managed or federated user.      *</span><span style="color: rgba(128, 128, 128, 1)">@param</span><span style="color: rgba(0, 128, 0, 1)"> callback      *            optional callback object for non-blocking execution.      *</span><span style="color: rgba(128, 128, 128, 1)">@return</span><span style="color: rgba(0, 128, 0, 1)"> A {</span><span style="color: rgba(128, 128, 128, 1)">@link</span><span style="color: rgba(0, 128, 0, 1)"> Future} object representing the      *         {</span><span style="color: rgba(128, 128, 128, 1)">@link</span><span style="color: rgba(0, 128, 0, 1)"> AuthenticationResult} of the call. It contains Access      *         Token, Refresh Token and the Access Token's expiration time.</span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 255, 1)">public</span> Future&lt;AuthenticationResult&gt; acquireToken(<span style="color: rgba(0, 0, 255, 1)">final</span><span style="color: rgba(0, 0, 0, 1)"> String resource,</span><span style="background-color: rgba(255, 255, 0, 1)"><span style="color: rgba(0, 0, 255, 1)">final</span> String clientId,</span><span style="color: rgba(0, 0, 255, 1)">final</span><span style="color: rgba(0, 0, 0, 1)"> String username,</span><span style="color: rgba(0, 0, 255, 1)">final</span> String password,<span style="color: rgba(0, 0, 255, 1)">final</span><span style="color: rgba(0, 0, 0, 1)"> AuthenticationCallback callback) {</span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (StringHelper.isBlank(resource)) {</span><span style="color: rgba(0, 0, 255, 1)">throw</span><span style="color: rgba(0, 0, 255, 1)">new</span> IllegalArgumentException("resource is null or empty"<span style="color: rgba(0, 0, 0, 1)">);         }</span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (StringHelper.isBlank(clientId)) {</span><span style="color: rgba(0, 0, 255, 1)">throw</span><span style="color: rgba(0, 0, 255, 1)">new</span> IllegalArgumentException("clientId is null or empty"<span style="color: rgba(0, 0, 0, 1)">);         }</span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (StringHelper.isBlank(username)) {</span><span style="color: rgba(0, 0, 255, 1)">throw</span><span style="color: rgba(0, 0, 255, 1)">new</span> IllegalArgumentException("username is null or empty"<span style="color: rgba(0, 0, 0, 1)">);         }</span><span style="color: rgba(0, 0, 255, 1)">if</span><span style="color: rgba(0, 0, 0, 1)"> (StringHelper.isBlank(password)) {</span><span style="color: rgba(0, 0, 255, 1)">throw</span><span style="color: rgba(0, 0, 255, 1)">new</span> IllegalArgumentException("password is null or empty"<span style="color: rgba(0, 0, 0, 1)">);         }</span><span style="color: rgba(0, 0, 255, 1)">return</span><span style="color: rgba(0, 0, 255, 1)">this</span>.acquireToken(<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> AdalAuthorizatonGrant(</span><span style="color: rgba(0, 0, 255, 1)">new</span> ResourceOwnerPasswordCredentialsGrant(username,<span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> Secret(                         password)), resource),</span><span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> ClientAuthenticationPost(                 ClientAuthenticationMethod.NONE,</span><span style="color: rgba(0, 0, 255, 1)">new</span><span style="color: rgba(0, 0, 0, 1)"> ClientID(clientId)),                 callback);     }</span></pre> </div> <p>所以，这里指定的Client ID 其实是，AAD中所注册的一个应用(服务主体)，而这个主体可以根据需求授予不同的权限，acquireToken就是根据用户验证成功后，生成这个主题所拥有的权限JWT令牌(Token)，获取到Token后，就拥有了访问Azure中资源API的授权.</p> <h3>如何来获取这个Client ID呢？</h3> <ul> <li>进入AAD, 选择注册应用( App Registrations：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://portal.azure.cn/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps"  target="_blank" rel="nofollow">https://portal.azure.cn/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/RegisteredApps</a>)</li> </ul> <ul> <li>并在Onwed Applications 中选择，进入详细页面或就是当前页面，获取Application(Client) ID</li> </ul> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/266fb7cecb6937087f22791b42ee72b8.jpg" alt="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" width="999" height="595" loading="lazy" style="border: 2px solid rgba(0, 0, 139, 1)"/></p> <p><span style="color: rgba(255, 0, 0, 1); font-size: 18px"><strong>特别注意：</strong></span>这个App必须开启 “Allow public client flows“ 才能成功获取到 Token。 默认情况下，这里选择的是No。 如果不开启这一步，将会收到错误消息："error_description":"AADSTS7000218: The request body must contain the following parameter: 'client_assertion' or 'client_secret'.</p> <p>开启方式为：点击这个App的名称，进入详细页面，选择Authentication，滑动到最底部，选择“Allow public client flows”。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/8810c1a19feb774d3649167c0b15a5ed.jpg" alt="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" width="999" height="810" loading="lazy"/></p> </h1> <h3>1:在POM.XML文件中添加adal4j依赖</h3> <div class="cnblogs_code"> <pre>    &lt;dependency&gt;       &lt;groupId&gt;com.microsoft.azure&lt;/groupId&gt;       &lt;artifactId&gt;adal4j&lt;/artifactId&gt;       &lt;version&gt;1.2.0&lt;/version&gt;   &lt;/dependency&gt;</pre> </div> <h3>2：示例代码</h3> <div class="cnblogs_code"> <pre><span style="color: rgba(0, 0, 255, 1)">package</span><span style="color: rgba(0, 0, 0, 1)"> com.example;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> java.net.MalformedURLException;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> java.util.concurrent.ExecutionException;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> java.util.concurrent.ExecutorService;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> java.util.concurrent.Executors;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> java.util.concurrent.Future;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> com.microsoft.aad.adal4j.AuthenticationContext;</span><span style="color: rgba(0, 0, 255, 1)">import</span><span style="color: rgba(0, 0, 0, 1)"> com.microsoft.aad.adal4j.AuthenticationResult;</span><span style="color: rgba(0, 128, 0, 1)">/**</span><span style="color: rgba(0, 128, 0, 1)">  * Hello world!  *</span><span style="color: rgba(0, 128, 0, 1)">*/</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">class</span><span style="color: rgba(0, 0, 0, 1)"> App {</span><span style="color: rgba(0, 0, 255, 1)">public</span><span style="color: rgba(0, 0, 255, 1)">static</span><span style="color: rgba(0, 0, 255, 1)">void</span> main(String[] args)<span style="color: rgba(0, 0, 255, 1)">throws</span><span style="color: rgba(0, 0, 0, 1)"> InterruptedException, ExecutionException, MalformedURLException {         System.out.println(</span>"Hello World!"<span style="color: rgba(0, 0, 0, 1)">);          ExecutorService service</span>= Executors.newFixedThreadPool(1<span style="color: rgba(0, 0, 0, 1)">);         String AUTHORITY</span>= "https://login.chinacloudapi.cn/&lt;tenant id &gt;";<span style="color: rgba(0, 128, 0, 1)">//</span><span style="color: rgba(0, 128, 0, 1)"> AzureAuthority</span><span style="color: rgba(0, 0, 0, 1)">            String YOUR_Client_ID</span>="7b61c392-xxxx-xxxx-xxxx-xxxxxxxxxxx"<span style="color: rgba(0, 0, 0, 1)">;         String username</span>= "xxxx@xxxx.xxx.onmschina.cn"<span style="color: rgba(0, 0, 0, 1)">;         String password</span>= "xxxxxxxxxxx"<span style="color: rgba(0, 0, 0, 1)">;</span>         AuthenticationContext context =<span style="color: rgba(0, 0, 255, 1)">new</span> AuthenticationContext(AUTHORITY,<span style="color: rgba(0, 0, 255, 1)">false</span><span style="color: rgba(0, 0, 0, 1)">, service);         Future</span>&lt;AuthenticationResult&gt; future = context.acquireToken("https://microsoftgraph.chinacloudapi.cn/"<span style="color: rgba(0, 0, 0, 1)">, YOUR_Client_ID,                 username, password,</span><span style="color: rgba(0, 0, 255, 1)">null</span><span style="color: rgba(0, 0, 0, 1)">);         AuthenticationResult result</span>=<span style="color: rgba(0, 0, 0, 1)"> future.get();          System.out.println(</span>"Access Token - " +<span style="color: rgba(0, 0, 0, 1)"> result.getAccessToken());         System.out.println(</span>"Refresh Token - " +<span style="color: rgba(0, 0, 0, 1)"> result.getRefreshToken());         System.out.println(</span>"ID Token - " +<span style="color: rgba(0, 0, 0, 1)"> result.getIdToken());      } }</span></pre> </div> <p>（PS:<em>使用的 username， password就是登录Azure的用户名和密码</em>）</p> <h3>测试结果：</h3> <p><img fetchpriority="high" decoding="async" src="http://img.555519.xyz/uploads3/20220509/62574947e2e195a7ccfd013fa2df6a68.jpg" alt="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" width="999" height="742" style="border: 2px solid rgba(0, 0, 139, 1)"/></p> <p>获取Token成功。</p> <p>可以通过一个公用网站 jwt.io 来解析Token：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://jwt.io/"  target="_blank" rel="nofollow">https://jwt.io/</a>, 它可以解析出Token内容，让我们可读。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220509/58f0622733a21c1fba513b5d70ef272a.jpg" alt="【Azure Developer】使用 adal4j(Azure Active Directory authentication library for Java)如何来获取Token呢 (通过用户名和密码方式获取Access Token)_在线工具" width="666" height="369" loading="lazy" style="border: 2px solid rgba(0, 0, 139, 1)"/></p> <h3>参考资料</h3> <p id="azure-china-developer-guide">Azure China developer guide：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/azure/china/resources-developer-guide#check-endpoints-in-azure"  target="_blank" rel="nofollow">https://docs.microsoft.com/en-us/azure/china/resources-developer-guide#check-endpoints-in-azure</a></p> <div class="display-flex-tablet justify-content-space-between-tablet page-metadata-container">Authority:<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-client-application-configuration#authority"  target="_blank" rel="nofollow">https://docs.microsoft.com/en-us/azure/active-directory/develop/msal-client-application-configuration#authority</a></div> <div class="display-flex-tablet justify-content-space-between-tablet page-metadata-container"></div> <div class="display-flex-tablet justify-content-space-between-tablet page-metadata-container">Authority Value:<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://azuresdkdocs.blob.core.windows.net/%24web/python/azure-identity/1.4.0/_modules/azure/identity/_constants.html#AzureAuthorityHosts"  target="_blank" rel="nofollow">https://azuresdkdocs.blob.core.windows.net/$web/python/azure-identity/1.4.0/_modules/azure/identity/_constants.html#AzureAuthorityHosts</a></div> <p id="azure-active-directory-libraries-for-java">Azure Active Directory libraries for Java：<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://docs.microsoft.com/en-us/java/api/overview/azure/activedirectory?view=azure-java-stable#client-library"  target="_blank" rel="nofollow">https://docs.microsoft.com/en-us/java/api/overview/azure/activedirectory?view=azure-java-stable#client-library</a></p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-67230.htm">动物疫苗生产工艺 动物疫苗生产工艺流程</a></p>
+                                        <p>下一个：<a href="/news/article-67885.htm">天津猫狗救助站（天津猫狗救助站在哪里）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-39647.htm" title="猫咪疫苗三针打完后多久再打（猫咪疫苗三针打完后多久再打第三针）">猫咪疫苗三针打完后多久再打（猫咪疫苗三针打完后多久再打第三针）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-25-free-node-subscribe-links.htm" title="「2月25日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享">「2月25日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-8-free-nekoray.htm" title="「1月8日」最高速度21.5M/S，2025年Nekoray每天更新免费机场订阅分享">「1月8日」最高速度21.5M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-52198.htm" title="国内前十名的兽药厂家排名（国内十大兽药厂排名）">国内前十名的兽药厂家排名（国内十大兽药厂排名）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-30-node-share.htm" title="「1月30日」最高速度20.9M/S，2025年Nekoray每天更新免费机场订阅分享">「1月30日」最高速度20.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-44142.htm" title="如何在idea上部署tomcat&amp;项目">如何在idea上部署tomcat&amp;项目</a></li>
+                        <li class="py-2"><a href="/news/article-59995.htm" title="C ++程序使用Sundaram筛子在给定范围之间生成素数">C ++程序使用Sundaram筛子在给定范围之间生成素数</a></li>
+                        <li class="py-2"><a href="/news/article-39169.htm" title="三种最旺财的猫有蓝猫吗（蓝猫带来好运）">三种最旺财的猫有蓝猫吗（蓝猫带来好运）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-node-subscribe-links.htm" title="「1月16日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享">「1月16日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-66611.htm" title="宠颐生动物中心医院怎么样（宠颐生动物医院方庄店）">宠颐生动物中心医院怎么样（宠颐生动物医院方庄店）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">18</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
