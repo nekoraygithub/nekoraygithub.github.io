@@ -1,0 +1,476 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-70459.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SpringBoot + SpringSecurity + Mybatis-Plus + JWT实现分布式系统认证和授权</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="1. 简介   Spring Security是一个功能强大且易于扩展的安全框架，主要用于为Java程序提供用户认证（Authentication）和用户授权（Authorization）功能。   " />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-70459.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="SpringBoot + SpringSecurity + Mybatis-Plus + JWT实现分布式系统认证和授权" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/564fb6d766196f74947b926d3d982852.webp" />
+        <meta property="og:release_date" content="2025-03-09T09:46:49" />
+    <meta property="og:updated_time" content="2025-03-09T09:46:49" />
+        <meta property="og:description" content="1. 简介   Spring Security是一个功能强大且易于扩展的安全框架，主要用于为Java程序提供用户认证（Authentication）和用户授权（Authorization）功能。   " />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot + SpringSecurity + Mybatis-Plus + JWT实现分布式系统认证和授权">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">SpringBoot + SpringSecurity + Mybatis-Plus + JWT实现分布式系统认证和授权</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div id="cnblogs_post_body"> <p>1. 简介</p> <p>  Spring Security是一个功能强大且易于扩展的安全框架，主要用于为Java程序提供用户认证（Authentication）和用户授权（Authorization）功能。<br />   用户认证指的是验证某个用户是否合法，即验证用户名密码是否正确；用户授权指的是验证用户是否拥有访问资源的权限。在一个系统中，用户认证和授权是分不开的，既要保证用户能合法登录系统，也要保住用户再访问资源时具有足够的权限。<br />   JWT（Json Web Token）是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准。一般用于在身份提供者和服务提供者之间传递被认证成功的用户身份信息，以便于从资源服务器获取资源。基于无状态、结构简单、传输快且不会在服务端保存会话信息等的特点，在分布式系统认证授权场景中发挥重要作用。<br />   本文使用SpringBoot整合SpringSecurity实现JWT Token认证授权。</p> <p>2. 数据库设计</p> <table> <thead> <tr> <th>表名称</th> <th>字段</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>sys_user</td> <td>id（ID，主键）<br /> username（用户名）<br /> password（密码）<br /> status（状态，0-正常，1-删除，2-禁用）</td> <td>系统用户表</td> </tr> <tr> <td>sys_role</td> <td>id（ID，主键）<br /> role_name（角色名称）</td> <td>系统角色表</td> </tr> <tr> <td>sys_auth</td> <td>id（ID，主键）<br /> name（权限名称）<br /> permission（权限标识）</td> <td>系统权限表</td> </tr> <tr> <td>sys_user_role</td> <td>id（ID，主键）<br /> user_id（用户ID）<br /> role_id（角色ID）</td> <td>系统用户角色中间表</td> </tr> <tr> <td>sys_role_auth</td> <td>id（ID，主键）<br /> role_id（角色ID）<br /> auth_id（角色权限ID）</td> <td>系统角色权限中间表</td> </tr> </tbody> </table> <p>3. 搭建环境</p> <ul> <li>创建项目<br /><img decoding="async" alt="" src="http://img.555519.xyz/uploads/20230112/d2a85425197f0039fbd6fdd0ed15436e.jpg"> </li> <li>修改pom.xml</li> </ul> <pre class="has"><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0" 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt; 	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; 	&lt;groupId&gt;com.c3stones&lt;/groupId&gt; 	&lt;artifactId&gt;spring-security-jwt-demo&lt;/artifactId&gt; 	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt; 	&lt;name&gt;spring-security-jwt-demo&lt;/name&gt; 	&lt;description&gt;Spring Boot + Srping Security + Mybatis-Plus + JWT Demo&lt;/description&gt;  	&lt;parent&gt; 		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt; 		&lt;version&gt;2.1.6.RELEASE&lt;/version&gt; 	&lt;/parent&gt;  	&lt;properties&gt; 		&lt;java.version&gt;1.8&lt;/java.version&gt; 		&lt;jjwt.version&gt;0.9.0&lt;/jjwt.version&gt; 		&lt;druid.version&gt;1.1.6&lt;/druid.version&gt; 		&lt;jwt.version&gt;1.0.9.RELEASE&lt;/jwt.version&gt; 		&lt;fastjson.version&gt;1.2.45&lt;/fastjson.version&gt; 		&lt;mybatis-plus.version&gt;3.3.1&lt;/mybatis-plus.version&gt; 	&lt;/properties&gt;  	&lt;dependencies&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt; 		&lt;/dependency&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;mysql&lt;/groupId&gt; 			&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt; 			&lt;scope&gt;runtime&lt;/scope&gt; 		&lt;/dependency&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.projectlombok&lt;/groupId&gt; 			&lt;artifactId&gt;lombok&lt;/artifactId&gt; 			&lt;optional&gt;true&lt;/optional&gt; 		&lt;/dependency&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt; 			&lt;scope&gt;test&lt;/scope&gt; 		&lt;/dependency&gt;  		&lt;!--Spring Security依赖 --&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 			&lt;artifactId&gt;spring-boot-starter-security&lt;/artifactId&gt; 		&lt;/dependency&gt;  		&lt;!-- Mybatis-Plus 依赖 --&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;com.baomidou&lt;/groupId&gt; 			&lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt; 			&lt;version&gt;${mybatis-plus.version}&lt;/version&gt; 		&lt;/dependency&gt;  		&lt;!-- Druid 连接池 --&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;com.alibaba&lt;/groupId&gt; 			&lt;artifactId&gt;druid&lt;/artifactId&gt; 			&lt;version&gt;${druid.version}&lt;/version&gt; 		&lt;/dependency&gt;  		&lt;!-- StringUtils 工具 --&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.apache.commons&lt;/groupId&gt; 			&lt;artifactId&gt;commons-lang3&lt;/artifactId&gt; 		&lt;/dependency&gt;  		&lt;!-- JSON工具 --&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;com.alibaba&lt;/groupId&gt; 			&lt;artifactId&gt;fastjson&lt;/artifactId&gt; 			&lt;version&gt;${fastjson.version}&lt;/version&gt; 		&lt;/dependency&gt;  		&lt;!-- JWT依赖 --&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;org.springframework.security&lt;/groupId&gt; 			&lt;artifactId&gt;spring-security-jwt&lt;/artifactId&gt; 			&lt;version&gt;${jwt.version}&lt;/version&gt; 		&lt;/dependency&gt; 		&lt;dependency&gt; 			&lt;groupId&gt;io.jsonwebtoken&lt;/groupId&gt; 			&lt;artifactId&gt;jjwt&lt;/artifactId&gt; 			&lt;version&gt;${jjwt.version}&lt;/version&gt; 		&lt;/dependency&gt; 	&lt;/dependencies&gt;  	&lt;build&gt; 		&lt;plugins&gt; 			&lt;plugin&gt; 				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt; 				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt; 			&lt;/plugin&gt; 		&lt;/plugins&gt; 	&lt;/build&gt;  &lt;/project&gt;</code></pre> <ul> <li>添加配置文件application.yml</li> </ul> <pre class="has"><code>server:    port: 8080     spring:    datasource:       type: com.alibaba.druid.pool.DruidDataSource       driver-class-name: com.mysql.cj.jdbc.Driver       url: jdbc:mysql://127.0.0.1:3306/security?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull       username: root       password: 123456        # JWT配置 jwt:    # 密匙Key    secret: JWTSecret,C3Stones    # HeaderKey    tokenHeader: Authorization    # Token前缀    tokenPrefix: Bearer    # 过期时间，单位秒    expiration: 86400    # 配置白名单（不需要认证）    antMatchers: /login/**,/register/**,/static/**     # Mybatis-plus配置 mybatis-plus:    mapper-locations: classpath:mapper/*.xml    global-config:       db-config:          id-type: AUTO    configuration:       # 打印sql       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl</code></pre> <ul> <li>添加Entity、Dao、Dao.xml、Serivce<br />   以系统用户SysUser为例，其余请自行添加。<br />   创建实体类：</li> </ul> <pre class="has"><code>import java.io.Serializable;  import com.baomidou.mybatisplus.annotation.TableId; import com.baomidou.mybatisplus.annotation.TableName;  import lombok.Data;  /**  * 系统用户  *   * @author CL  *  */ @Data @TableName("sys_user") public class SysUser implements Serializable { 	private static final long serialVersionUID = 1L;  	/** 	 * 用户ID 	 */ 	@TableId 	private Long id;  	/** 	 * 用户名 	 */ 	private String username;  	/** 	 * 密码 	 */ 	private String password; 	 	/** 	 * 状态（0-正常，1-删除，2-禁用） 	 */ 	private String status; }</code></pre> <p>  创建Dao类：</p> <pre class="has"><code>import com.baomidou.mybatisplus.core.mapper.BaseMapper; import com.c3stones.entity.SysUser;  /**  * 系统用户Dao  *   * @author CL  *  */ @Mapper public interface SysUserDao extends BaseMapper&lt;SysUser&gt; {  }</code></pre> <p>  在rsource目录下创建mapper文件夹，并在文件夹下创建SysUserDao.xml：</p> <pre class="has"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;  &lt;mapper namespace="com.c3stones.dao.SysUserDao"&gt;  &lt;/mapper&gt;</code></pre> <p>  创建Service：</p> <pre class="has"><code>import com.baomidou.mybatisplus.extension.service.IService; import com.c3stones.entity.SysUser;  /**  * 系统用户Service  *   * @author CL  *  */ public interface SysUserService extends IService&lt;SysUser&gt; {  }</code></pre> <p>  创建Service实现类：</p> <pre class="has"><code>import org.springframework.stereotype.Service;  import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl; import com.c3stones.dao.SysUserDao; import com.c3stones.entity.SysUser; import com.c3stones.service.SysUserService;  /**  * 系统用户Service实现  *   * @author CL  *  */ @Service public class SysUserSerivceImpl extends ServiceImpl&lt;SysUserDao, SysUser&gt; implements SysUserService {  }</code></pre> <ul> <li>创建系统用户详情类，必须实现org.springframework.security.core.userdetails.UserDetails：</li> </ul> <pre class="has"><code>import java.io.Serializable; import java.util.Collection;  import org.springframework.security.core.GrantedAuthority; import org.springframework.security.core.userdetails.UserDetails;  import com.c3stones.entity.SysUser;  import lombok.Data; import lombok.EqualsAndHashCode;  /**  * 系统用户详情  *   * @author CL  *  */ @Data @EqualsAndHashCode(callSuper = false) public class SysUserDetails extends SysUser implements UserDetails, Serializable { 	private static final long serialVersionUID = 1L;  	/** 	 * 用户角色 	 */ 	private Collection&lt;GrantedAuthority&gt; authorities;  	/** 	 * 账号是否过期 	 */ 	private boolean isAccountNonExpired = false;  	/** 	 * 账号是否锁定 	 */ 	private boolean isAccountNonLocked = false;  	/** 	 * 证书是否过期 	 */ 	private boolean isCredentialsNonExpired = false;  	/** 	 * 账号是否有效 	 */ 	private boolean isEnabled = true;  	/** 	 * 获得用户权限 	 */ 	@Override 	public Collection&lt;? extends GrantedAuthority&gt; getAuthorities() { 		return authorities; 	}  	/** 	 * 判断账号是否过期 	 */ 	@Override 	public boolean isAccountNonExpired() { 		return isAccountNonExpired; 	}  	/** 	 * 判断账号是否锁定 	 */ 	@Override 	public boolean isAccountNonLocked() { 		return isAccountNonLocked; 	}  	/** 	 * 判断证书是否过期 	 */ 	@Override 	public boolean isCredentialsNonExpired() { 		return isCredentialsNonExpired; 	}  	/** 	 * 判断账号是否有效 	 */ 	@Override 	public boolean isEnabled() { 		return isEnabled; 	}  }</code></pre> <ul> <li>编写JWT配置信息类：</li> </ul> <pre class="has"><code>import org.springframework.boot.context.properties.ConfigurationProperties; import org.springframework.stereotype.Component;  /**  * JWT配置基础类  *   * @author CL  *  */ @Component @ConfigurationProperties(prefix = "jwt") @SuppressWarnings("static-access") public class JWTConfig {  	/** 	 * 密匙Key 	 */ 	public static String secret;  	/** 	 * HeaderKey 	 */ 	public static String tokenHeader;  	/** 	 * Token前缀 	 */ 	public static String tokenPrefix;  	/** 	 * 过期时间 	 */ 	public static Integer expiration;  	/** 	 * 配置白名单 	 */ 	public static String antMatchers;  	/** 	 * 将过期时间单位换算成毫秒 	 *  	 * @param expiration 过期时间，单位秒 	 */ 	public void setExpiration(Integer expiration) { 		this.expiration = expiration * 1000; 	}  	public void setSecret(String secret) { 		this.secret = secret; 	}  	public void setTokenHeader(String tokenHeader) { 		this.tokenHeader = tokenHeader; 	}  	public void setTokenPrefix(String tokenPrefix) { 		this.tokenPrefix = tokenPrefix + " "; 	}  	public void setAntMatchers(String antMatchers) { 		this.antMatchers = antMatchers; 	}  }</code></pre> <p>4. 编写工具类</p> <ul> <li>创建响应工具类</li> </ul> <pre class="has"><code>import java.io.PrintWriter;  import javax.servlet.ServletResponse;  import com.alibaba.fastjson.JSON;  import lombok.AllArgsConstructor; import lombok.Data; import lombok.extern.slf4j.Slf4j;  /**  * 响应结果工具类  *   * @author CL  *  */ @Slf4j @Data @AllArgsConstructor public class ResponseUtils {  	/** 	 * 返回编码 	 */ 	private Integer code;  	/** 	 * 返回消息 	 */ 	private String msg;  	/** 	 * 返回数据 	 */ 	private Object data;  	/** 	 * Response输出Json格式 	 *  	 * @param response 	 * @param data     返回数据 	 */ 	public static void responseJson(ServletResponse response, Object data) { 		PrintWriter out = null; 		try { 			response.setCharacterEncoding("UTF-8"); 			response.setContentType("application/json"); 			out = response.getWriter(); 			out.println(JSON.toJSONString(data)); 			out.flush(); 		} catch (Exception e) { 			log.error("Response输出Json异常：" + e); 		} finally { 			if (out != null) { 				out.close(); 			} 		} 	}  	/** 	 * 返回信息 	 *  	 * @param code 返回编码 	 * @param msg  返回消息 	 * @param data 返回数据 	 * @return 	 */ 	public static ResponseUtils response(Integer code, String msg, Object data) { 		return new ResponseUtils(code, msg, data); 	}  	/** 	 * 返回成功 	 *  	 * @param data 返回数据 	 * @return 	 */ 	public static ResponseUtils success(Object data) { 		return ResponseUtils.response(200, "成功", data); 	}  	/** 	 * 返回失败 	 *  	 * @param data 返回数据 	 * @return 	 */ 	public static ResponseUtils fail(Object data) { 		return ResponseUtils.response(500, "失败", data); 	}  }</code></pre> <ul> <li>编写JWTToken工具类：</li> </ul> <pre class="has"><code>/**  * JWT生产Token工具类  *   * @author CL  *  */ @Slf4j public class JWTTokenUtil {  	/** 	 * 创建Token 	 *  	 * @param sysUserDetails 用户信息 	 * @return 	 */ 	public static String createAccessToken(SysUserDetails sysUserDetails) { 		String token = Jwts.builder().setId(// 设置JWT 				sysUserDetails.getId().toString()) // 用户Id 				.setSubject(sysUserDetails.getUsername()) // 主题 				.setIssuedAt(new Date()) // 签发时间 				.setIssuer("C3Stones") // 签发者 				.setExpiration(new Date(System.currentTimeMillis() + JWTConfig.expiration)) // 过期时间 				.signWith(SignatureAlgorithm.HS512, JWTConfig.secret) // 签名算法、密钥 				.claim("authorities", JSON.toJSONString(sysUserDetails.getAuthorities())).compact(); // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等 		return JWTConfig.tokenPrefix + token; 	}  	/** 	 * 解析Token 	 *  	 * @param token Token信息 	 * @return 	 */ 	public static SysUserDetails parseAccessToken(String token) { 		SysUserDetails sysUserDetails = null; 		if (StringUtils.isNotEmpty(token)) { 			try { 				// 去除JWT前缀 				token = token.substring(JWTConfig.tokenPrefix.length());  				// 解析Token 				Claims claims = Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token).getBody();  				// 获取用户信息 				sysUserDetails = new SysUserDetails(); 				sysUserDetails.setId(Long.parseLong(claims.getId())); 				sysUserDetails.setUsername(claims.getSubject()); 				// 获取角色 				Set&lt;GrantedAuthority&gt; authorities = new HashSet&lt;GrantedAuthority&gt;(); 				String authority = claims.get("authorities").toString(); 				if (StringUtils.isNotEmpty(authority)) { 					List&lt;Map&lt;String, String&gt;&gt; authorityList = JSON.parseObject(authority, 							new TypeReference&lt;List&lt;Map&lt;String, String&gt;&gt;&gt;() { 							}); 					for (Map&lt;String, String&gt; role : authorityList) { 						if (!role.isEmpty()) { 							authorities.add(new SimpleGrantedAuthority(role.get("authority"))); 						} 					} 				} 				sysUserDetails.setAuthorities(authorities); 			} catch (Exception e) { 				log.error("解析Token异常：" + e); 			} 		} 		return sysUserDetails; 	}  }</code></pre> <p>5. 编写Spring Security核心实现类</p> <ul> <li>编写无权限处理类</li> </ul> <pre class="has"><code>import java.io.IOException;  import javax.servlet.ServletException; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.security.access.AccessDeniedException; import org.springframework.security.web.access.AccessDeniedHandler; import org.springframework.stereotype.Component;  import com.c3stones.utils.ResponseUtils;  /**  * 无权限处理类  *   * @author CL  *  */ @Component public class UserAccessDeniedHandler implements AccessDeniedHandler {  	@Override 	public void handle(HttpServletRequest request, HttpServletResponse response, 			AccessDeniedException accessDeniedException) throws IOException, ServletException { 		ResponseUtils.responseJson(response, ResponseUtils.response(403, "拒绝访问", accessDeniedException.getMessage())); 	}  }</code></pre> <ul> <li>编写未登录处理类</li> </ul> <pre class="has"><code>import java.io.IOException;  import javax.servlet.ServletException; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.security.core.AuthenticationException; import org.springframework.security.web.AuthenticationEntryPoint; import org.springframework.stereotype.Component;  import com.c3stones.utils.ResponseUtils;  /**  * 未登录处理类  *   * @author CL  *  */ @Component public class UserNotLoginHandler implements AuthenticationEntryPoint {  	@Override 	public void commence(HttpServletRequest request, HttpServletResponse response, 			AuthenticationException authException) throws IOException, ServletException { 		ResponseUtils.responseJson(response, ResponseUtils.response(401, "未登录", authException.getMessage())); 	} }</code></pre> <ul> <li>编写登录成功处理类</li> </ul> <pre class="has"><code>import java.util.HashMap; import java.util.Map;  import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.security.core.Authentication; import org.springframework.security.web.authentication.AuthenticationSuccessHandler; import org.springframework.stereotype.Component;  import com.c3stones.security.entity.SysUserDetails; import com.c3stones.security.utils.JWTTokenUtil; import com.c3stones.utils.ResponseUtils;  /**  * 登录成功处理类  *   * @author CL  *  */ @Component public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {  	@Override 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, 			Authentication authentication) { 		SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal(); 		String token = JWTTokenUtil.createAccessToken(sysUserDetails); 		Map&lt;String, String&gt; tokenMap = new HashMap&lt;&gt;(); 		tokenMap.put("token", token); 		ResponseUtils.responseJson(response, ResponseUtils.response(200, "登录成功", tokenMap)); 	} }</code></pre> <ul> <li>编写登录失败处理类</li> </ul> <pre class="has"><code>import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.security.core.AuthenticationException; import org.springframework.security.web.authentication.AuthenticationFailureHandler; import org.springframework.stereotype.Component;  import com.c3stones.utils.ResponseUtils;  /**  * 登录失败处理类  *   * @author CL  *  */ @Component public class UserLoginFailureHandler implements AuthenticationFailureHandler {  	@Override 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, 			AuthenticationException exception) { 		ResponseUtils.responseJson(response, ResponseUtils.response(500, "登录失败", exception.getMessage())); 	} }</code></pre> <ul> <li>编写登出成功处理类</li> </ul> <pre class="has"><code>import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.security.core.Authentication; import org.springframework.security.core.context.SecurityContextHolder; import org.springframework.security.web.authentication.logout.LogoutSuccessHandler; import org.springframework.stereotype.Component;  import com.c3stones.utils.ResponseUtils;  /**  * 登出成功处理类  *   * @author CL  *  */ @Component public class UserLogoutSuccessHandler implements LogoutSuccessHandler {  	@Override 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, 			Authentication authentication) { 		SecurityContextHolder.clearContext(); 		ResponseUtils.responseJson(response, ResponseUtils.response(200, "登出成功", null)); 	} }</code></pre> <ul> <li>用户Service、Dao中添加认证和授权时需要的方法</li> </ul> <pre class="has"><code>import java.util.List;  import com.baomidou.mybatisplus.extension.service.IService; import com.c3stones.entity.SysAuth; import com.c3stones.entity.SysRole; import com.c3stones.entity.SysUser;  /**  * 系统用户Service  *   * @author CL  *  */ public interface SysUserService extends IService&lt;SysUser&gt; {  	/** 	 * 根据用户名称查询用户信息 	 *  	 * @param username 用户名称 	 * @return 	 */ 	SysUser findUserByUserName(String username);  	/** 	 * 根据用户ID查询角色 	 *  	 * @param userId 用户ID 	 * @return 	 */ 	List&lt;SysRole&gt; findRoleByUserId(Long userId);  	/** 	 * 根据用户ID查询权限 	 *  	 * @param userId 用户ID 	 * @return 	 */ 	List&lt;SysAuth&gt; findAuthByUserId(Long userId);  }</code></pre> <pre class="has"><code>import java.util.List;  import org.springframework.stereotype.Service;  import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper; import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl; import com.c3stones.dao.SysUserDao; import com.c3stones.entity.SysAuth; import com.c3stones.entity.SysRole; import com.c3stones.entity.SysUser; import com.c3stones.service.SysUserService;  /**  * 系统用户Service实现  *   * @author CL  *  */ @Service public class SysUserSerivceImpl extends ServiceImpl&lt;SysUserDao, SysUser&gt; implements SysUserService {  	/** 	 * 根据用户名称查询用户信息 	 *  	 * @param username 用户名称 	 * @return 	 */ 	@Override 	public SysUser findUserByUserName(String username) { 		return this.baseMapper.selectOne( 				new QueryWrapper&lt;SysUser&gt;().lambda().eq(SysUser::getUsername, username).ne(SysUser::getStatus, "1")); 	}  	/** 	 * 根据用户ID查询角色 	 *  	 * @param userId 用户ID 	 * @return 	 */ 	@Override 	public List&lt;SysRole&gt; findRoleByUserId(Long userId) { 		return this.baseMapper.findRoleByUserId(userId); 	}  	/** 	 * 根据用户ID查询权限 	 *  	 * @param userId 用户ID 	 * @return 	 */ 	@Override 	public List&lt;SysAuth&gt; findAuthByUserId(Long userId) { 		return this.baseMapper.findAuthByUserId(userId); 	}  }</code></pre> <pre class="has"><code>import java.util.List;  import org.apache.ibatis.annotations.Mapper;  import com.baomidou.mybatisplus.core.mapper.BaseMapper; import com.c3stones.entity.SysAuth; import com.c3stones.entity.SysRole; import com.c3stones.entity.SysUser;  /**  * 系统用户Dao  *   * @author CL  *  */ @Mapper public interface SysUserDao extends BaseMapper&lt;SysUser&gt; {  	/** 	 * 根据用户ID查询角色 	 *  	 * @param userId 用户ID 	 * @return 	 */ 	List&lt;SysRole&gt; findRoleByUserId(Long userId);  	/** 	 * 根据用户ID查询权限 	 *  	 * @param userId 用户ID 	 * @return 	 */ 	List&lt;SysAuth&gt; findAuthByUserId(Long userId); }</code></pre> <pre class="has"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;  &lt;mapper namespace="com.c3stones.dao.SysUserDao"&gt;  	&lt;!-- 根据用户ID查询角色 --&gt; 	&lt;select id="findRoleByUserId" resultType="com.c3stones.entity.SysRole" parameterType="long"&gt; 		SELECT 			r.* 		FROM 			sys_role r 		LEFT JOIN sys_user_role ur ON ur.role_id = r.id 		WHERE 			ur.user_id = #{userId} 	&lt;/select&gt; 	 	&lt;!-- 根据用户ID查询权限 --&gt; 	&lt;select id="findAuthByUserId" resultType="com.c3stones.entity.SysAuth" parameterType="long"&gt; 		SELECT 			a.* 		FROM 			sys_auth a 		LEFT JOIN sys_role_auth ra ON ra.auth_id = a.id 		LEFT JOIN sys_user_role ur ON ur.role_id = ra.role_id 		WHERE 			ur.user_id = #{userId} 	&lt;/select&gt; 	 &lt;/mapper&gt;</code></pre> <ul> <li>编写用户认证Service，必须实现org.springframework.security.core.userdetails.UserDetailsService</li> </ul> <pre class="has"><code>import java.util.HashSet; import java.util.List; import java.util.Set;  import org.springframework.beans.BeanUtils; import org.springframework.beans.factory.annotation.Autowired; import org.springframework.security.core.GrantedAuthority; import org.springframework.security.core.authority.SimpleGrantedAuthority; import org.springframework.security.core.userdetails.UserDetails; import org.springframework.security.core.userdetails.UserDetailsService; import org.springframework.security.core.userdetails.UsernameNotFoundException; import org.springframework.stereotype.Service;  import com.c3stones.entity.SysRole; import com.c3stones.entity.SysUser; import com.c3stones.security.entity.SysUserDetails; import com.c3stones.service.SysUserService;  /**  * 用户登录Service  *   * @author CL  *  */ @Service public class SysUserDetailsService implements UserDetailsService {  	@Autowired 	private SysUserService sysUserService;  	/** 	 * 根据用户名查用户信息 	 *  	 * @param username 用户名 	 * @return 用户详细信息 	 */ 	@Override 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 		SysUser sysUser = sysUserService.findUserByUserName(username); 		if (sysUser != null) { 			SysUserDetails sysUserDetails = new SysUserDetails(); 			BeanUtils.copyProperties(sysUser, sysUserDetails);  			Set&lt;GrantedAuthority&gt; authorities = new HashSet&lt;&gt;(); // 角色集合  			List&lt;SysRole&gt; roleList = sysUserService.findRoleByUserId(sysUserDetails.getId()); 			roleList.forEach(role -&gt; { 				authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName())); 			});  			sysUserDetails.setAuthorities(authorities);  			return sysUserDetails; 		} 		return null; 	}  }</code></pre> <ul> <li>编写用户登录验证处理类</li> </ul> <pre class="has"><code>import org.springframework.beans.factory.annotation.Autowired; import org.springframework.security.authentication.AuthenticationProvider; import org.springframework.security.authentication.BadCredentialsException; import org.springframework.security.authentication.LockedException; import org.springframework.security.authentication.UsernamePasswordAuthenticationToken; import org.springframework.security.core.Authentication; import org.springframework.security.core.AuthenticationException; import org.springframework.security.core.userdetails.UsernameNotFoundException; import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; import org.springframework.stereotype.Component;  import com.c3stones.security.entity.SysUserDetails; import com.c3stones.security.service.SysUserDetailsService;  /**  * 用户登录验证处理类  *   * @author CL  *  */ @Component public class UserAuthenticationProvider implements AuthenticationProvider {  	@Autowired 	private SysUserDetailsService userDetailsService;  	/** 	 * 身份验证 	 */ 	@Override 	public Authentication authenticate(Authentication authentication) throws AuthenticationException { 		String username = (String) authentication.getPrincipal(); // 获取用户名 		String password = (String) authentication.getCredentials(); // 获取密码  		SysUserDetails sysUserDetails = (SysUserDetails) userDetailsService.loadUserByUsername(username); 		if (sysUserDetails == null) { 			throw new UsernameNotFoundException("用户名不存在"); 		}  		if (!new BCryptPasswordEncoder().matches(password, sysUserDetails.getPassword())) { 			throw new BadCredentialsException("用户名或密码错误"); 		}  		if (sysUserDetails.getStatus().equals("2")) { 			throw new LockedException("用户已禁用"); 		}  		return new UsernamePasswordAuthenticationToken(sysUserDetails, password, sysUserDetails.getAuthorities()); 	}  	/** 	 * 支持指定的身份验证 	 */ 	@Override 	public boolean supports(Class&lt;?&gt; authentication) { 		return true; 	}  }</code></pre> <ul> <li>编写用户权限注解处理类</li> </ul> <pre class="has"><code>import java.io.Serializable; import java.util.HashSet; import java.util.List; import java.util.Set;  import org.springframework.beans.factory.annotation.Autowired; import org.springframework.security.access.PermissionEvaluator; import org.springframework.security.core.Authentication; import org.springframework.stereotype.Component;  import com.c3stones.entity.SysAuth; import com.c3stones.security.entity.SysUserDetails; import com.c3stones.service.SysUserService;  /**  * 用户权限注解处理类  *   * @author CL  *  */ @Component public class UserPermissionEvaluator implements PermissionEvaluator {  	@Autowired 	private SysUserService sysUserService;  	/** 	 * 判断是否拥有权限 	 *  	 * @param authentication 用户身份 	 * @param targetUrl      目标路径 	 * @param permission     路径权限 	 *  	 * @return 是否拥有权限 	 */ 	@Override 	public boolean hasPermission(Authentication authentication, Object targetUrl, Object permission) { 		SysUserDetails sysUserDetails = (SysUserDetails) authentication.getPrincipal();  		Set&lt;String&gt; permissions = new HashSet&lt;String&gt;(); // 用户权限  		List&lt;SysAuth&gt; authList = sysUserService.findAuthByUserId(sysUserDetails.getId()); 		authList.forEach(auth -&gt; { 			permissions.add(auth.getPermission()); 		});  		// 判断是否拥有权限 		if (permissions.contains(permission.toString())) { 			return true; 		} 		return false; 	}  	@Override 	public boolean hasPermission(Authentication authentication, Serializable targetId, String targetType, 			Object permission) { 		return false; 	}  }</code></pre> <p>6. 编写JWT过滤器</p> <pre class="has"><code>import java.io.IOException;  import javax.servlet.FilterChain; import javax.servlet.ServletException; import javax.servlet.http.HttpServletRequest; import javax.servlet.http.HttpServletResponse;  import org.springframework.security.authentication.AuthenticationManager; import org.springframework.security.authentication.UsernamePasswordAuthenticationToken; import org.springframework.security.core.context.SecurityContextHolder; import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;  import com.c3stones.security.config.JWTConfig; import com.c3stones.security.entity.SysUserDetails; import com.c3stones.security.utils.JWTTokenUtil;  /**  * JWT权限过滤器，用于验证Token是否合法  *   * @author CL  *  */ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {  	public JWTAuthenticationFilter(AuthenticationManager authenticationManager) { 		super(authenticationManager); 	}  	@Override 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) 			throws IOException, ServletException { 		// 取出Token 		String token = request.getHeader(JWTConfig.tokenHeader);  		if (token != null &amp;&amp; token.startsWith(JWTConfig.tokenPrefix)) { 			SysUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(token);  			if (sysUserDetails != null) { 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken( 						sysUserDetails, sysUserDetails.getId(), sysUserDetails.getAuthorities()); 				SecurityContextHolder.getContext().setAuthentication(authentication); 			} 		} 		filterChain.doFilter(request, response); 	}  }</code></pre> <p>7. 编写Spring Security核心配置类</p> <pre class="has"><code>import org.springframework.beans.factory.annotation.Autowired; import org.springframework.context.annotation.Bean; import org.springframework.context.annotation.Configuration; import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder; import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity; import org.springframework.security.config.annotation.web.builders.HttpSecurity; import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter; import org.springframework.security.config.http.SessionCreationPolicy; import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;  import com.c3stones.security.UserAuthenticationProvider; import com.c3stones.security.UserPermissionEvaluator; import com.c3stones.security.filter.JWTAuthenticationFilter; import com.c3stones.security.handler.UserAccessDeniedHandler; import com.c3stones.security.handler.UserLoginFailureHandler; import com.c3stones.security.handler.UserLoginSuccessHandler; import com.c3stones.security.handler.UserLogoutSuccessHandler; import com.c3stones.security.handler.UserNotLoginHandler;  /**  * 系统安全核心配置  *   * @author CL  *  */ @Configuration @EnableWebSecurity @EnableGlobalMethodSecurity(prePostEnabled = true) // 开启方法权限注解 public class SysSecurityConfig extends WebSecurityConfigurerAdapter {  	/** 	 * 无权限处理类 	 */ 	@Autowired 	private UserAccessDeniedHandler userAccessDeniedHandler;  	/** 	 * 用户未登录处理类 	 */ 	@Autowired 	private UserNotLoginHandler userNotLoginHandler;  	/** 	 * 用户登录成功处理类 	 */ 	@Autowired 	private UserLoginSuccessHandler userLoginSuccessHandler;  	/** 	 * 用户登录失败处理类 	 */ 	@Autowired 	private UserLoginFailureHandler userLoginFailureHandler;  	/** 	 * 用户登出成功处理类 	 */ 	@Autowired 	private UserLogoutSuccessHandler userLogoutSuccessHandler;  	/** 	 * 用户登录验证 	 */ 	@Autowired 	private UserAuthenticationProvider userAuthenticationProvider;  	/** 	 * 用户权限注解 	 */ 	@Autowired 	private UserPermissionEvaluator userPermissionEvaluator;  	/** 	 * 加密方式 	 *  	 * @return 	 */ 	@Bean 	public BCryptPasswordEncoder bCryptPasswordEncoder() { 		return new BCryptPasswordEncoder(); 	}  	/** 	 * 注入自定义PermissionEvaluator 	 *  	 * @return 	 */ 	@Bean 	public DefaultWebSecurityExpressionHandler userSecurityExpressionHandler() { 		DefaultWebSecurityExpressionHandler handler = new DefaultWebSecurityExpressionHandler(); 		handler.setPermissionEvaluator(userPermissionEvaluator); 		return handler; 	}  	/** 	 * 用户登录验证 	 */ 	@Override 	protected void configure(AuthenticationManagerBuilder auth) { 		auth.authenticationProvider(userAuthenticationProvider); 	}  	/** 	 * 安全权限配置 	 */ 	@Override 	protected void configure(HttpSecurity http) throws Exception { 		http.authorizeRequests() // 权限配置 				.antMatchers(JWTConfig.antMatchers.split(",")).permitAll()// 获取白名单（不进行权限验证） 				.anyRequest().authenticated() // 其他的需要登陆后才能访问 				.and().httpBasic().authenticationEntryPoint(userNotLoginHandler) // 配置未登录处理类 				.and().formLogin().loginProcessingUrl("/login/submit")// 配置登录URL 				.successHandler(userLoginSuccessHandler) // 配置登录成功处理类 				.failureHandler(userLoginFailureHandler) // 配置登录失败处理类 				.and().logout().logoutUrl("/logout/submit")// 配置登出地址 				.logoutSuccessHandler(userLogoutSuccessHandler) // 配置用户登出处理类 				.and().exceptionHandling().accessDeniedHandler(userAccessDeniedHandler)// 配置没有权限处理类 				.and().cors()// 开启跨域 				.and().csrf().disable(); // 禁用跨站请求伪造防护 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // 禁用session（使用Token认证） 		http.headers().cacheControl(); // 禁用缓存 		http.addFilter(new JWTAuthenticationFilter(authenticationManager()));  添加JWT过滤器 	}  }</code></pre> <p>8. 编写测试Controller</p> <ul> <li>编写注册用户Controller</li> </ul> <pre class="has"><code>import org.springframework.beans.factory.annotation.Autowired; import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  import com.c3stones.entity.SysUser; import com.c3stones.entity.SysUserRole; import com.c3stones.service.SysUserRoleService; import com.c3stones.service.SysUserService; import com.c3stones.utils.ResponseUtils;  /**  * 注册用户实例Contrller  *   * @author CL  *  */ @RestController @RequestMapping(value = "/register") public class RegisterController {  	@Autowired 	private BCryptPasswordEncoder bCryptPasswordEncoder;  	@Autowired 	private SysUserService sysUserService;  	@Autowired 	private SysUserRoleService sysUserRoleService;  	/** 	 * 注册普通用户 	 *  	 * @param username 用户名 	 * @param password 密码 	 * @return 	 */ 	@RequestMapping(value = "/user") 	public ResponseUtils user(String username, String password) { 		SysUser sysUser = new SysUser(); 		sysUser.setUsername(username); 		sysUser.setPassword(bCryptPasswordEncoder.encode(password)); 		sysUser.setStatus("0"); 		sysUserService.save(sysUser);  		// 注册普通用户 		SysUserRole sysUserRole = new SysUserRole(); 		sysUserRole.setUserId(sysUser.getId()); 		sysUserRole.setRoleId(2L); 		sysUserRoleService.save(sysUserRole);  		return ResponseUtils.success(sysUser); 	} }</code></pre> <ul> <li>编写普通用户Controller</li> </ul> <pre><code class="language-java">import org.springframework.beans.factory.annotation.Autowired; import org.springframework.security.access.prepost.PreAuthorize; import org.springframework.security.core.context.SecurityContextHolder; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  import com.c3stones.entity.SysUser; import com.c3stones.security.entity.SysUserDetails; import com.c3stones.service.SysUserService; import com.c3stones.utils.ResponseUtils;  /**  * 普通用户Contrller  *   * @author CL  *  */ @RestController @RequestMapping(value = "/user") public class UserController {  	@Autowired 	private SysUserService sysUserSerivce;  	/** 	 * 查询用户信息 	 *  	 * @return 	 */ 	@PreAuthorize(value = "hasPermission('/user/info', 'sys:user:info')") 	@RequestMapping(value = "/info") 	public ResponseUtils info() { 		SysUserDetails sysUserDetails = (SysUserDetails) SecurityContextHolder.getContext().getAuthentication() 				.getPrincipal(); 		SysUser sysUser = sysUserSerivce.getById(sysUserDetails.getId()); 		return ResponseUtils.success(sysUser); 	}  }</code></pre> <ul> <li>编写管理员Controller</li> </ul> <pre><code class="language-java">import java.util.List;  import org.springframework.beans.factory.annotation.Autowired; import org.springframework.security.access.prepost.PreAuthorize; import org.springframework.web.bind.annotation.RequestMapping; import org.springframework.web.bind.annotation.RestController;  import com.c3stones.entity.SysAuth; import com.c3stones.entity.SysRole; import com.c3stones.entity.SysUser; import com.c3stones.service.SysUserService; import com.c3stones.utils.ResponseUtils;  /**  * 管理员Contrller  *   * @author CL  *  */ @RestController @RequestMapping(value = "/admin") public class AdminController {  	@Autowired 	private SysUserService sysUserSerivce;  	/** 	 * 查询用户信息 	 *  	 * @return 	 */ 	@PreAuthorize(value = "hasRole('ADMIN')") 	@RequestMapping(value = "/list") 	public ResponseUtils list() { 		List&lt;SysUser&gt; userList = sysUserSerivce.list(); 		return ResponseUtils.success(userList); 	}  	/** 	 * 查询用户角色 	 *  	 * @return 	 */ 	@PreAuthorize(value = "hasRole('ADMIN') or hasPermission('/user/role', 'sys:role:info')") 	@RequestMapping(value = "/role") 	public ResponseUtils role(Long id) { 		List&lt;SysRole&gt; roleList = sysUserSerivce.findRoleByUserId(id); 		return ResponseUtils.success(roleList); 	}  	/** 	 * 查询用户权限 	 *  	 * @return 	 */ 	@PreAuthorize(value = "hasAnyRole('ADMIN', 'USER') and hasPermission('/user/auth', 'sys:auth:info')") 	@RequestMapping(value = "/auth") 	public ResponseUtils auth(Long id) { 		List&lt;SysAuth&gt; authList = sysUserSerivce.findAuthByUserId(id); 		return ResponseUtils.success(authList); 	}  }</code></pre> <p>9. 测试</p> <p>  使用curl插件进行测试，建议使用Postman测试。</p> <pre class="has"><code># 注册用户：  curl "http://127.0.0.1:8080/register/user?username=C3Stones&amp;password=123456"  # 结果： {"code":200,"msg":"成功","data":{"id":3,"username":"C3Stones","password":"$2a$10$Z6a7DSehk58ypqyWzfFAbOR0gaqpwVzY9aNXKqf4UhDCSJxsbDqDK","status":"0"}}  # 查询用户信息： curl "http://127.0.0.1:8080/user/info"  # 结果： {"code":401,"data":"Full authentication is required to access this resource","msg":"未登录"}  # 不存在用户登录： curl -X POST "http://127.0.0.1:8080/login/submit?username=guest&amp;password=123456"  # 结果： {"code":500,"data":"用户名不存在","msg":"登录失败"}  # 密码错误用户登录： curl -X POST "http://127.0.0.1:8080/login/submit?username=user&amp;password=123"  # 结果： {"code":500,"data":"用户名或密码错误","msg":"登录失败"}  # 将刚刚注册的人的状态在数据库中改成2（禁用状态），登录： curl -X POST "http://127.0.0.1:8080/login/submit?username=C3Stones&amp;password=123456"  # 结果： {"code":500,"data":"用户已禁用","msg":"登录失败"}  # 普通用户登录： curl -X POST "http://127.0.0.1:8080/login/submit?username=user&amp;password=123456"  # 结果： {"code":200,"data":{"token":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyIiwic3ViIjoidXNlciIsImlhdCI6MTU5NDcwNzA0OSwiaXNzIjoiQzNTdG9uZXMiLCJleHAiOjE1OTQ3OTM0NDksImF1dGhvcml0aWVzIjoiW3tcImF1dGhvcml0eVwiOlwiUk9MRV9VU0VSXCJ9XSJ9.PSwPsO-ECc6EHz84-nM881pMcMfbjOpzr5N2gpXj9ku-Z5YrjEP-_c08anrBalV2F4-MSA-oy8qQNM71b_QPSA"},"msg":"登录成功"}  # 查询用户信息：  curl -H "Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyIiwic3ViIjoidXNlciIsImlhdCI6MTU5NDcwNzA0OSwiaXNzIjoiQzNTdG9uZXMiLCJleHAiOjE1OTQ3OTM0NDksImF1dGhvcml0aWVzIjoiW3tcImF1dGhvcml0eVwiOlwiUk9MRV9VU0VSXCJ9XSJ9.PSwPsO-ECc6EHz84-nM881pMcMfbjOpzr5N2gpXj9ku-Z5YrjEP-_c08anrBalV2F4-MSA-oy8qQNM71b_QPSA" "http://127.0.0.1:8080/user/info"  # 结果： {"code":200,"msg":"成功","data":{"id":2,"username":"user","password":"$2a$10$szHoqQ64g66PymVJkip98.Fap21Csy8w.RD8v5Dhq08BMEZ9KaSmS","status":"0"}}  # 查询用户列表： curl -H "Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIyIiwic3ViIjoidXNlciIsImlhdCI6MTU5NDcwNzA0OSwiaXNzIjoiQzNTdG9uZXMiLCJleHAiOjE1OTQ3OTM0NDksImF1dGhvcml0aWVzIjoiW3tcImF1dGhvcml0eVwiOlwiUk9MRV9VU0VSXCJ9XSJ9.PSwPsO-ECc6EHz84-nM881pMcMfbjOpzr5N2gpXj9ku-Z5YrjEP-_c08anrBalV2F4-MSA-oy8qQNM71b_QPSA" "http://127.0.0.1:8080/admin/list"  # 结果： {"code":403,"data":"不允许访问","msg":"拒绝访问"}  # 管理员登录： curl -X POST "http://127.0.0.1:8080/login/submit?username=admin&amp;password=123456"  # 结果： {"code":200,"data":{"token":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiYWRtaW4iLCJpYXQiOjE1OTQ3MDc1MDAsImlzcyI6IkMzU3RvbmVzIiwiZXhwIjoxNTk0NzkzOTAwLCJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIn0.3yL2Lpbmau5X6PA1OmnE4FFwOzrqwRaFcRa8OfRAgHY45VVJfGfm5kp8qfk96HvigaPQvzf8HmMC_Xx75Lwr8Q"},"msg":"登录成功"}  # 查询用户列表：  curl -H "Authorization:Bearer eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxIiwic3ViIjoiYWRtaW4iLCJpYXQiOjE1OTQ3MDc1MDAsImlzcyI6IkMzU3RvbmVzIiwiZXhwIjoxNTk0NzkzOTAwLCJhdXRob3JpdGllcyI6Ilt7XCJhdXRob3JpdHlcIjpcIlJPTEVfQURNSU5cIn1dIn0.3yL2Lpbmau5X6PA1OmnE4FFwOzrqwRaFcRa8OfRAgHY45VVJfGfm5kp8qfk96HvigaPQvzf8HmMC_Xx75Lwr8Q" "http://127.0.0.1:8080/admin/list"  # 结果： {"code":200,"msg":"成功","data":[{"id":1,"username":"admin","password":"$2a$10$5T851lZ7bc2U87zjt/9S6OkwmLW62tLeGLB2aCmq3XRZHA7OI7Dqa","status":"0"},{"id":2,"username":" user","password":"$2a$10$szHoqQ64g66PymVJkip98.Fap21Csy8w.RD8v5Dhq08BMEZ9KaSmS","status":"0"},{"id":3,"username":"C3Stones","password":"$2a$10$O.1ynDeJtlaG9roOJoUZzukc6aGfqFo/YW5ErRERQD2eC5r5cV9dC","status":"0"}]}</code></pre> <p>10. 权限注解示例</p> <table> <thead> <tr> <th>权限注解</th> <th>说明</th> </tr> </thead> <tbody> <tr> <td>hasRole('ADMIN')</td> <td>拥有ADMIN角色才可访问</td> </tr> <tr> <td>hasPermission('/user/list', 'sys:role:info')</td> <td>拥有sys:role:info权限才可访问/user/list接口</td> </tr> <tr> <td>hasAnyRole('ADMIN', 'USER')</td> <td>拥有ADMIN角色或者USER角色均可访问</td> </tr> <tr> <td>hasRole('ADMIN') and hasRole('USER')</td> <td>拥有ADMIN角色和USER角色才可访问</td> </tr> <tr> <td>hasRole('ADMIN') or hasPermission('/user/list', 'sys:role:info')</td> <td>拥有ADMIN角色或者拥有sys:role:info权限均可访问</td> </tr> </tbody> </table> <p>  其他权限注解请自行查找。</p> <p>11. 项目地址</p> <p>  <a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://github.com/C3Stones/blog"  rel="nofollow">spring-security-jwt-demo</a></p> </div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-69823.htm">三国杀武将卡牌资料库（三国杀武将卡牌资料库纸质版）</a></p>
+                                        <p>下一个：<a href="/news/article-70462.htm">动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-1-share-windows-nekoray.htm" title="「2月1日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享">「2月1日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-69822.htm" title="全国兽药30强企业 全国兽药30强企业排名">全国兽药30强企业 全国兽药30强企业排名</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-16-free-high-speed-nodes.htm" title="「2月16日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享">「2月16日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-30-node-share.htm" title="「1月30日」最高速度20.9M/S，2025年Nekoray每天更新免费机场订阅分享">「1月30日」最高速度20.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-42140.htm" title="CEPH-3：cephfs功能详解">CEPH-3：cephfs功能详解</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-21-free-high-speed-nodes.htm" title="「2月21日」最高速度18.4M/S，2025年Nekoray每天更新免费机场订阅分享">「2月21日」最高速度18.4M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-48433.htm" title="Typescript和 Javascript 区别">Typescript和 Javascript 区别</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-12-free-node-subscribe-links.htm" title="「2月12日」最高速度20.6M/S，2025年Nekoray每天更新免费机场订阅分享">「2月12日」最高速度20.6M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-18-node-share-links.htm" title="「2月18日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享">「2月18日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-70462.htm" title="动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）">动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
