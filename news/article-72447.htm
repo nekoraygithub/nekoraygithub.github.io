@@ -1,0 +1,476 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-72447.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>.Net中字符串不变性与相等判断的特殊场景</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="今天写bug的时候帮同事解决了一个有趣的问题，可能很多人都会答错。分享给大家。  请看以下例子，并回答问题。 var s1 = "12"; var s2 = "12";  //序列化方式1 var o" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-72447.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content=".Net中字符串不变性与相等判断的特殊场景" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/cdbc07adc6ffd3ded35ff413d8c41901.webp" />
+        <meta property="og:release_date" content="2025-03-12T06:09:17" />
+    <meta property="og:updated_time" content="2025-03-12T06:09:17" />
+        <meta property="og:description" content="今天写bug的时候帮同事解决了一个有趣的问题，可能很多人都会答错。分享给大家。  请看以下例子，并回答问题。 var s1 = "12"; var s2 = "12";  //序列化方式1 var o" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content=".Net中字符串不变性与相等判断的特殊场景">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">.Net中字符串不变性与相等判断的特殊场景</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<p>今天写bug的时候帮同事解决了一个有趣的问题，可能很多人都会答错。分享给大家。</p> </h1> <p>请看以下例子，并回答问题。</p> <pre><code class="language-c#">var s1 = "12"; var s2 = "12";  //序列化方式1 var o3 = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;string&gt;(Newtonsoft.Json.JsonConvert.SerializeObject(s1)); //序列化方式2 MemoryStream stream = new MemoryStream(); System.Runtime.Serialization.Formatters.Binary.BinaryFormatter bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter(); bf.Serialize(stream, s1); stream.Seek(0, SeekOrigin.Begin); var o4 = bf.Deserialize(stream);  //====分割线===================================================  var e1 = object.ReferenceEquals(s1, s2);  var e2 = o4 == s1;  var e3 = s1.Equals(o4);  var e4 = o3 == o4;  Console.ReadKey();</code></pre> <p>请回答分割线后e1, e2, e3, e4 值为true还是false。</p> <p>人人都知道在.Net中字符串是享元模式的经典范例。字符串具有不变性。（至少在托管层，事实上可以在非托管层修改字符串的值），但你真的能回答对上面的问题么？</p> <hr/> </h1> <pre><code class="language-c#"> e1 = true; e2 = false; e3 = true; e4 = false;</code></pre> <p>要了解这个问题首先可以看下字符串在内存中的布局。</p> <h2 id="如何在visual-studio中查看变量的内存布局">如何在visual studio中查看变量的内存布局</h2> <p>在VS中可以非常方便的查看托管或非托管变量的内存值。方法如下。</p> <ul> <li>依次在调试模式下打开 调试 -&gt; 窗口 -&gt; 内存 -&gt; 内存1（1~4均可） 打开内存对话框。</li> <li>在地址栏中输入引用类型的变量名即可。</li> <li><strong>如果你的数据是struct类型则需要加&amp;取地址符。</strong></li> </ul> <h2 id="字符串变量在内存中的布局">字符串变量在内存中的布局</h2> <p>在.Net中字符串是以UTF-16格式在内存中保存的。在本例中s1的内存如下。</p> <p><code>00 00 00 00 00 00 00 00 98 d6 fc e5 fb 7f 00 00 02 00 00 00 31 00 32 00</code></p> <p>这里可能与你拿到的结果不一样。你可能并没有前8位<code>0x00</code>，因为我把对象头带上了。下面依次解释各段含义。</p> <ul> <li><code>00 00 00 00 00 00 00 00</code> 最开始的8比特是对象头。其中，在64位下，高4位为0，低4位为一个不为0的数（这里由于并没有执行lock或Gethashcode操作，所以这里为0，感兴趣的自行实验.）</li> <li><code>98 d6 fc e5 fb 7f 00 00</code>对象的<code>MethodTable</code>，根据类型而不同,对象的引用指向的位置。</li> <li><code>02 00 00 00</code> 字符串长度，这里是2。</li> <li><code>31 00 32 00</code> 字符串数组<code>* char</code>，注意都是小端模式。</li> </ul> <p>拿以上<code>s1 s2 o3 o4</code>分别实验可以发现<strong>他们的内存一模一样</strong>，其中<code>s1 s2</code>直接就是同一块内存地址，<strong>但剩下的内存地址都不一样</strong>。</p> <h2 id="比较与解答">比较与解答</h2> <ol> <li> <p><code>e1 = true;</code> 通过内存看合情合理，毕竟都同一块内存了。</p> </li> <li> <p><code>e2 = false;</code> 这里如果用的VS的版本比较高的话，也能看出来。因为这里VS会提示：</p> <blockquote> <p>可能非有意的引用比较。</p> </blockquote> <p>既然是引用比较，内存地址都不一样，肯定是false了。但是如果vs版本不高的话则迷惑性就较大了，其实这里做的是<code>ReferenceEquals</code>的比较。</p> </li> <li> <p><code>e3 = true;</code> 这里问题出在.Net代码里。字符串类型<code>Equals</code>方法被重载了。</p> </li> </ol> <pre><code class="language-c#">        // Determines whether two strings match.         public override bool Equals([NotNullWhen(true)] object? obj)         {             if (object.ReferenceEquals(this, obj))                 return true;              if (!(obj is string str))                 return false;              if (this.Length != str.Length)                 return false;              return EqualsHelper(this, str);         }</code></pre> <p><code>EqualsHelper</code>方法最终则调用如下。（在.Net 6下）</p> <pre><code class="language-c#">        // Optimized byte-based SequenceEquals. The "length" parameter for this one is declared a nuint rather than int as we also use it for types other than byte         // where the length can exceed 2Gb once scaled by sizeof(T).         public static unsafe bool SequenceEqual(ref byte first, ref byte second, nuint length)</code></pre> <p>由于实现过于复杂（.Net framework 4.5.2下则较简单，直接按长度比较char，有兴趣的自行查阅），这里就不贴具体实现了。我们很容易看出这里比较的目的是比较两段内存是否相等，显然为<code>true</code>。</p> <ol start="4"> <li><code>e4 = false;</code>这里是为了比较不同序列化方式的影响，和<code>e2</code>类似，结果显然是<code>false</code>。</li> </ol> </h1> <p>虽然.Net中字符串是享元模式创建的，但并不能保证同一字符串在内存里只有一份。比如序列化情况等例外情况。如果读者知道其他情况也可以告诉我，提前说声感谢</p> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-71790.htm">丹阳流浪猫救助站（丹阳流浪猫救助站在哪里）</a></p>
+                                        <p>下一个：<a href="/news/article-72449.htm">宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-66609.htm" title="卖宠物粮食的公司叫什么名字好听一点（宠物粮食店铺）">卖宠物粮食的公司叫什么名字好听一点（宠物粮食店铺）</a></li>
+                        <li class="py-2"><a href="/news/article-35595.htm" title="Java带返回值的方法的定义和调用详解_java_">Java带返回值的方法的定义和调用详解_java_</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-16-free-node-subscribe-links.htm" title="「1月16日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享">「1月16日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-16-free-high-speed-nodes.htm" title="「2月16日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享">「2月16日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-48434.htm" title="动物医院公示栏图片大全集（动物医院诊疗管理系统）">动物医院公示栏图片大全集（动物医院诊疗管理系统）</a></li>
+                        <li class="py-2"><a href="/news/article-50602.htm" title="JavaScript如何使用过滤器从数组中删除元素">JavaScript如何使用过滤器从数组中删除元素</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-11-windows-nekoray.htm" title="「1月11日」最高速度19.6M/S，2025年Nekoray每天更新免费机场订阅分享">「1月11日」最高速度19.6M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-61747.htm" title="@DateTimeFormat 和 @JsonFormat 注解">@DateTimeFormat 和 @JsonFormat 注解</a></li>
+                        <li class="py-2"><a href="/news/article-52723.htm" title="vue CLI3.0自己实现一个轮播组件，并设置自定义属性">vue CLI3.0自己实现一个轮播组件，并设置自定义属性</a></li>
+                        <li class="py-2"><a href="/news/article-50093.htm" title="领养宠物协议书范本图片模板高清（领养宠物协议有法律效力吗）">领养宠物协议书范本图片模板高清（领养宠物协议有法律效力吗）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">36</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
