@@ -1,0 +1,476 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-73118.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SpringBoot 注解 + 反射优雅的实现Excel导入导出，通用加强版！</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Excel 导入与导出是项目中经常用到的功能，在 Java 中常用 poi 实现 Excel 的导入与导出。由于 poi 占用内存较大，在高并发下很容易发生 OOM 或者频繁 fullgc，阿里基于 " />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-73118.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="SpringBoot 注解 + 反射优雅的实现Excel导入导出，通用加强版！" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/d16f06347dabc8cc49410f442888c354.webp" />
+        <meta property="og:release_date" content="2025-03-13T09:22:44" />
+    <meta property="og:updated_time" content="2025-03-13T09:22:44" />
+        <meta property="og:description" content="Excel 导入与导出是项目中经常用到的功能，在 Java 中常用 poi 实现 Excel 的导入与导出。由于 poi 占用内存较大，在高并发下很容易发生 OOM 或者频繁 fullgc，阿里基于 " />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="SpringBoot 注解 + 反射优雅的实现Excel导入导出，通用加强版！">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">SpringBoot 注解 + 反射优雅的实现Excel导入导出，通用加强版！</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="htmledit_views"> <div id="js_content"> <p>Excel 导入与导出是项目中经常用到的功能，在 Java 中常用 poi 实现 Excel 的导入与导出。由于 poi 占用内存较大，在高并发下很容易发生 OOM 或者频繁 fullgc，阿里基于 poi 开源了 EasyExcel 项目。</p> <p>除了节约内存，EasyExcel 还简化了 API，通过注解映射 Excel 单元格与对象字段之间的关系，简单的几行代码就能搞定复杂的导入导出功能了。</p> <h2><a href="" rel="nofollow">EasyExcel 问题</a></h2> <p>看似一切美好，不过经常做 Excel 导入与导出就会发现，EasyExcel 还是没那么完美的。</p> <p>首先，导入与导出 Excel 本质是上将 Excel 文件内容与 Java 对象之间做一个映射，EasyExcel 做的只是在这两者之间转换。如果项目中的 Excel 导入与导出功能比较多，会产生大量的样板式代码，使用体验类似于 JDBC。</p> <p>另外，导入往往还伴随着校验，这是 EasyExcel 没有支持的功能。如果需要校验，要么写代码手动判断，要么调用Java Validation 规范 定义的 API 判断，这又会产生大量样板式代码。</p> <p>而且，当前 spring boot 已经成了必备的 Java 开发框架，easyexcel 也没有进行整合。</p> <h2><a href="" rel="nofollow">分析与解决</a></h2> <p>导入与导出通常发生在 Web 环境，对于 Spring MVC 来说，可以将请求信息转换为任意类型的 contoller 方法参数，将 controller 方法返回值转换为客户端支持的内容。</p> <p>如果能够使用自定义的 controller 方法参数接收 Excel 文件内容，将 controller 方法返回值转换为 Excel 文件响应，可以直接消除 Excel 导入与导出时的样板式代码。</p> <p>另外在将请求内容转换为 controller 方法参数时还可以加入自定义的校验逻辑。公众 号Java精选，回复java面试，获取面试资料，支持在线刷题。</p> <p>由于 Excel 导入与导出样板式代码、校验问题与具体的业务逻辑无关，可以单独抽象出来，我这里在 EasyExcel 的基础上封装了一个 easyexcel-spring-boot-starter 的项目，大大降低了 EasyExcel 上手的门槛，对用户来说只需要使用 EasyExcel 定义的注解提供映射关系就可以了，适用于简单场景的导入导出。</p> <p>项目代码已上传 github easyexcel-spring-boot-starter 仓库&nbsp;，点击链接即可查阅。下面就来看看怎样使用吧。</p> <h2><a href="" rel="nofollow">Spring Boot Excel 导入与导出</a></h2> <h2>依赖引入</h2> <p>首先需要引入依赖，坐标如下。</p> <pre class="has"><code class="language-go">&lt;dependency&gt;     &lt;groupId&gt;com.zzuhkp&lt;/groupId&gt;     &lt;artifactId&gt;easyexcel-spring-boot-starter&lt;/artifactId&gt;     &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt; &lt;/dependency&gt;</code></pre> <p>不过很不幸的是目前还没传至中央仓库，需要的小伙伴可自行上传到私有仓库或直接把代码嵌入自己的项目。</p> <h2>Excel 导入</h2> <p>首先看下要导入的 Excel 内容吧。</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/62fb49a0ebae1e6610ef4c6e8234650f.jpg" alt="SpringBoot 注解 + 反射优雅的实现Excel导入导出，通用加强版！"></p> <p>为了接收 Excel 文件内容，我们需要定义一个对应的 Model 类。</p> <pre class="has"><code class="language-go">@Datapublic class DemoData {       @ExcelProperty(index = 0)     private Integer integer;      @ExcelProperty(index = 1)     private String string;      @ExcelProperty(index = 2)     private Date date;}</code></pre> <h3>基本导入功能</h3> <p>然后使用&nbsp;<code>List&lt;T&gt;</code>&nbsp;参数接收即可。</p> <pre class="has"><code class="language-go">@PostMapping("/list/obj")public List&lt;DemoData&gt; listObj(@ExcelParam List&lt;DemoData&gt; list) {     return list; }</code></pre> <p>注意参数前添加了&nbsp;<code>@ExcelParam</code>&nbsp;注解，用来标识 Excel 文件参数。这样，一个导入功能实现了，是不是很简单呢？</p> <p>默认情况下接收名称为&nbsp;<code>file</code>&nbsp;的表单字段作为 Excel 文件，如果不满足还可以修改。</p> <pre class="has"><code class="language-go">@ExcelParam(value = "file", required = true)</code></pre> <h3>进阶导入功能</h3> <p>有时候，我们可能比较关心对象对应 Excel 的元数据，例如这个对象是第几行记录产生的，这个对象的字段对应 Excel 第几列，这个时候我们可以使用&nbsp;<code>ReadRows&lt;T&gt;</code>&nbsp;参数接收 Excel。</p> <pre class="has"><code class="language-go">@PostMapping("/list/rows")public ReadRows&lt;DemoData&gt; readRows(@ExcelParam ReadRows&lt;DemoData&gt; readRows) {     return readRows; }</code></pre> <p><code>ReadRows</code>&nbsp;使用两个字段记录行映射关系与列映射关系。面试宝典：https://www.yoodb.com</p> <pre class="has"><code class="language-go">public class ReadRows&lt;T&gt; {       private ExcelReadHeadProperty excelReadHeadProperty;     private List&lt;ReadRow&lt;T&gt;&gt; rows; }</code></pre> <p><code>ExcelReadHeadProperty</code>&nbsp;是 EasyExcel 自带的类，表示列映射关系的元数据。&nbsp;<code>ReadRow</code>&nbsp;是框架自定义的类，表示行映射关系的元数据。</p> <p>看下&nbsp;<code>ReadRow</code>&nbsp;定义吧。</p> <pre class="has"><code class="language-go">public class ReadRow&lt;T&gt; {       // 行索引，从 0 开始     private final Integer rowIndex;      // 行记录对应对象 private final T data; }</code></pre> <p>使用&nbsp;<code>ExcelReadHeadProperty</code>&nbsp;获取字段对应列索引的示例代码如下。</p> <pre class="has"><code class="language-go">// 对象字段名称 -&gt; 从 0 开始的列索引Map&lt;String, Integer&gt; fieldColumnIndexMap = readRows.getExcelReadHeadProperty().getHeadMap().values()         .stream().collect(Collectors.toMap(Head::getFieldName, Head::getColumnIndex));</code></pre> <h2>Excel 导出</h2> <p>这里对 Excel 的导出进行了简单的支持。将&nbsp;<code>List&lt;T&gt;</code>&nbsp;定义为 controller 方法返回值即可。</p> <pre class="has"><code class="language-go">@ExcelResponse@GetMapping("/list/download")public List&lt;DemoData&gt; downloadList() { return Arrays.asList(new DemoData(1, "hello", new Date()), new DemoData(2, "excel", new Date())); }</code></pre> <p>需要注意的是使用&nbsp;<code>@ExcelResponse</code>&nbsp;注解表示响应内容为 Excel 文件。默认情况，下载的文件名称为&nbsp;<code>default.xlxs</code>&nbsp;，写入到名称为&nbsp;<code>Sheet1</code>&nbsp;的工作表中。如果不满足需求可以修改。</p> <pre class="has"><code class="language-go">@ExcelResponse(fileName = "测试文件", sheetName = "工作表1")</code></pre> <h2><a href="" rel="nofollow">Excel 导入参数校验</a></h2> <p>参数校验是 Excel 导入常用的功能，这里进行了强有力的支持，使用体验如原生 spring boot 校验般顺滑。</p> <h2>开启校验</h2> <p>与 spring boot 原生使用方式一样，将&nbsp;<code>@Validated</code>&nbsp;或&nbsp;<code>@Valid</code>&nbsp;注解添加到&nbsp;<code>@ExcelParam</code>&nbsp;参数上即可。</p> <pre class="has"><code class="language-go">@PostMapping("/list/obj")public List&lt;DemoData&gt; listObj(@ExcelParam @Validated List&lt;DemoData&gt; list) { return list; }</code></pre> <h2>校验规则定义</h2> <h3>Bean Validation 定义校验规则</h3> <p>默认情况下框架使用 JSR-303 Bean Validation 规范定义的校验注解校验，需要手动引入&nbsp;<code>spring-boot-starter-validation</code>&nbsp;，可通过设置环境变量&nbsp;<code>easyexcel.validator.default.enable=false</code>&nbsp;关闭。</p> <pre class="has"><code class="language-go">@Datapublic class DemoData {       @NotNull(message = "参数不能为空")     private Integer integer;     private String string;     private Date date; }</code></pre> <p>另外还可以自定义注解对对象校验。</p> <pre class="has"><code class="language-go">... 省略其他元注解@Constraint(validatedBy = { DemoDataValid.DemoDataValidator.class})public @interface DemoDataValid {  		... 省略注解属性		     class DemoDataValidator implements ConstraintValidator&lt;DemoDataValid, DemoData&gt; {           @Override         public boolean isValid(DemoData value, ConstraintValidatorContext context) {              context.disableDefaultConstraintViolation();             context.buildConstraintViolationWithTemplate("测试对象校验").addConstraintViolation();             return false;         }     }}</code></pre> <pre class="has"><code class="language-go">@DemoDataValidpublic class DemoData {      ... 省略属性}</code></pre> <h3>ExcelValidator 接口定义校验规则</h3> <p>Bean Validation 注解只能校验单个字段或对象，如果需要对所有的对象进行校验，可以实现框架定义的&nbsp;<code>ExcelValidator</code>&nbsp;接口，然后将实现定义为 Spring Bean。</p> <p>这个接口定义如下。</p> <pre class="has"><code class="language-go">public interface ExcelValidator&lt;T&gt; {      ExcelValidErrors validate(ReadRows&lt;T&gt; readRows); }</code></pre> <p><code>ExcelValidErrors</code>&nbsp;用于接收校验的错误信息，分别使用接口&nbsp;<code>ExcelValidObjectError</code>&nbsp;和&nbsp;<code>ExcelValidFieldError</code>&nbsp;接口定义行错误信息和单元格错误信息。</p> <pre class="has"><code class="language-go">public class ExcelValidErrors {  	// 行错误信息或单元格错误信息列表     private final List&lt;ExcelValidObjectError&gt; errors;}public interface ExcelValidObjectError {       // 获取行号，从 1 开始     Integer getRow();      // 获取错误消息，公众 号Java精选，有惊喜！     String getMessage();}public interface ExcelValidFieldError extends ExcelValidObjectError {       // 获取列，从 1 开始     Integer getColumn(); }</code></pre> <p>例如，如果需要对所有的&nbsp;<code>DemoData</code>&nbsp;校验&nbsp;<code>integer</code>&nbsp;字段的值不能重复，可以使用如下的代码。</p> <pre class="has"><code class="language-go">@Componentpublic class CustomExcelValidator implements ExcelValidator&lt;DemoData&gt; {      @Override     public ExcelValidErrors validate(ReadRows&lt;DemoData&gt; readRows) {          ExcelValidErrors errors = new ExcelValidErrors();          Map&lt;Integer, List&lt;ReadRow&lt;DemoData&gt;&gt;&gt; group = readRows.getRows().stream()                 .collect(Collectors.groupingBy(item -&gt; item.getData().getInteger()));          for (Map.Entry&lt;Integer, List&lt;ReadRow&lt;DemoData&gt;&gt;&gt; entry : group.entrySet()) {              if (entry.getValue().size() &gt; 1) {                  for (ReadRow&lt;DemoData&gt; readRow : entry.getValue()) {                      errors.addError(new DefaultExcelObjectError(readRow.getRowIndex() + 1, "参数重复"));                 }             }         }         return errors;     }}</code></pre> <h2>校验结果接收</h2> <p>与 Spring MVC 设计类似，这里也提供了两种接收校验结果的方式。</p> <h3>异常捕获接收校验结果</h3> <p>开启校验后，如果校验结果中包含错误，会将错误信息封装到&nbsp;<code>ExcelValidException</code>&nbsp;，并抛出异常，可以通过全局异常捕获的方式收集错误信息。</p> <pre class="has"><code class="language-go">@RestControllerAdvicepublic class GlobalExceptionControllerAdvice {       @ExceptionHandler(ExcelValidException.class)     public String handleException(ExcelValidException e) {          ExcelValidErrors errors = e.getErrors();         return JSON.toJSONString(errors);     }}</code></pre> <h3>controller 方法参数接收校验结果</h3> <p>如果不想通过异常捕获的方式接收校验的错误信息，还可以将错误信息添加到&nbsp;<code>@ExcelParam</code>&nbsp;参数的后面，示例代码如下。</p> <pre class="has"><code class="language-go">@PostMapping("/list/obj")public List&lt;DemoData&gt; listObj(@ExcelParam @Validated List&lt;DemoData&gt; list, ExcelValidErrors errors) {      if (errors.hasErrors()) {          String messages = errors.getAllErrors().stream().map(ExcelValidObjectError::getMessage).collect(Collectors.joining(" | "));         throw new RuntimeException("发现异常:" + messages);     }     return list; }</code></pre> <p>easyexcel-spring-boot-starter 综合应用了前面文章介绍的各种 Spring 知识，代码量并不大，对实现感兴趣的小伙伴可自行查阅代码。由于这个框架是把 Excel 中所有的行数据收集到内存，因此只适合一些比较简单的场景。</p> <blockquote> <p>作者：大鹏cool</p> <p>  https://zzuhkp.blog.csdn.net/article/details/125097026</p> </blockquote> <pre class="has"><code class="language-go">公众号“Java精选”所发表内容注明来源的，版权归原出处所有（无法查证版权的或者未注明出处的均来自网络，系转载，转载的目的在于传递更多信息，版权属于原作者。如有侵权，请联系，笔者会第一时间删除处理！ 最近有很多人问，有没有读者交流群！加入方式很简单，公众号Java精选，回复“加群”，即可入群！  Java精选面试题（微信小程序）：3000+道面试题，包含Java基础、并发、JVM、线程、MQ系列、Redis、Spring系列、Elasticsearch、Docker、K8s、Flink、Spark、架构设计等，在线随时刷题！ ------ 特别推荐 ------ 特别推荐：专注分享最前沿的技术与资讯，为弯道超车做好准备及各种开源项目与高效率软件的公众号，「大咖笔记」，专注挖掘好东西，非常值得大家关注。点击下方公众号卡片关注。  点击“阅读原文”，了解更多精彩内容！文章有帮助的话，点在看，转发吧！</code></pre> </div></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-72449.htm">宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元</a></p>
+                                        <p>下一个：<a href="/news/article-73119.htm">动物疫苗价格一览表图片高清大图及价格 动物疫苗价格一览表图片高清大图及价格</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-57704.htm" title="炒素三丝的做法大全窍门(炒素三丝的做法大全)">炒素三丝的做法大全窍门(炒素三丝的做法大全)</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-26-free-node-subscribe-links.htm" title="「2月26日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享">「2月26日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-38665.htm" title="宠物猫疫苗多少钱打一次（宠物猫疫苗多少钱打一次啊）">宠物猫疫苗多少钱打一次（宠物猫疫苗多少钱打一次啊）</a></li>
+                        <li class="py-2"><a href="/news/article-70462.htm" title="动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）">动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-38173.htm" title="梦里抱着别的女人什么意思啊（梦到抱着别的女人睡觉什么意思）">梦里抱着别的女人什么意思啊（梦到抱着别的女人睡觉什么意思）</a></li>
+                        <li class="py-2"><a href="/news/article-42141.htm" title="宠物粮食品牌前十名排名榜最新名单（宠物粮食品牌排行榜）">宠物粮食品牌前十名排名榜最新名单（宠物粮食品牌排行榜）</a></li>
+                        <li class="py-2"><a href="/news/article-51148.htm" title="动物疫苗的作用是什么呢图片 动物疫苗的作用是什么呢图片大全">动物疫苗的作用是什么呢图片 动物疫苗的作用是什么呢图片大全</a></li>
+                        <li class="py-2"><a href="/news/article-47573.htm" title="动物疫苗打几次有效 动物疫苗打几次有效果">动物疫苗打几次有效 动物疫苗打几次有效果</a></li>
+                        <li class="py-2"><a href="/news/article-44141.htm" title="实现 ResponseBodyAdvice 定制化JSON 返回字段">实现 ResponseBodyAdvice 定制化JSON 返回字段</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-10-free-nekoray.htm" title="「3月10日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享">「3月10日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">45</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
