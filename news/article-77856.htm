@@ -1,0 +1,476 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-77856.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Android项目封装一个登录页隐私协议弹窗工具包(一)</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="Android项目封装一个登录页隐私协议弹窗工具包(一)  在写andorid原生时, 登录页面一般会显示用户注册服务协议和隐私政策协议. 直接硬编码的话, 感觉不太优雅, 也不利于组件的移植. 例如" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-77856.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="Android项目封装一个登录页隐私协议弹窗工具包(一)" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/fadfa3a62bab3dbe25670dba03f0f624.webp" />
+        <meta property="og:release_date" content="2025-03-20T10:02:35" />
+    <meta property="og:updated_time" content="2025-03-20T10:02:35" />
+        <meta property="og:description" content="Android项目封装一个登录页隐私协议弹窗工具包(一)  在写andorid原生时, 登录页面一般会显示用户注册服务协议和隐私政策协议. 直接硬编码的话, 感觉不太优雅, 也不利于组件的移植. 例如" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Android项目封装一个登录页隐私协议弹窗工具包(一)">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">Android项目封装一个登录页隐私协议弹窗工具包(一)</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-dracula"> <h2> <a id="Android_0" rel="nofollow"></a>Android项目封装一个登录页隐私协议弹窗工具包(一)</h2> <blockquote> <p>在写andorid原生时, 登录页面一般会显示用户注册服务协议和隐私政策协议. 直接硬编码的话, 感觉不太优雅, 也不利于组件的移植.<br /> 例如:<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/e837f6d0368a892d168d9c68afd5c1f8.jpg" alt="Android项目封装一个登录页隐私协议弹窗工具包(一)"><br /> 所以想封装一个支持无限添加的各种协议的工具包. 代码如下:</p> </blockquote> <pre><code class="prism language-java"><span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>content<span class="token punctuation">.</span></span><span class="token class-name">Context</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>graphics<span class="token punctuation">.</span></span><span class="token class-name">Color</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>text<span class="token punctuation">.</span></span><span class="token class-name">Spannable</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>text<span class="token punctuation">.</span></span><span class="token class-name">SpannableStringBuilder</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>text<span class="token punctuation">.</span></span><span class="token class-name">TextPaint</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>text<span class="token punctuation">.</span>method<span class="token punctuation">.</span></span><span class="token class-name">LinkMovementMethod</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>text<span class="token punctuation">.</span>style<span class="token punctuation">.</span></span><span class="token class-name">ClickableSpan</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>text<span class="token punctuation">.</span>style<span class="token punctuation">.</span></span><span class="token class-name">ForegroundColorSpan</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>view<span class="token punctuation">.</span></span><span class="token class-name">View</span><span class="token punctuation">;</span> <span class="token keyword">import</span> <span class="token namespace">android<span class="token punctuation">.</span>widget<span class="token punctuation">.</span></span><span class="token class-name">TextView</span><span class="token punctuation">;</span>  <span class="token keyword">import</span> <span class="token namespace">androidx<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span></span><span class="token class-name">NonNull</span><span class="token punctuation">;</span>  <span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">LinkedList</span><span class="token punctuation">;</span>  <span class="token comment">/**  * 首页隐私政策信息弹窗工具包  */</span> <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PrivateProtocolUtil</span> <span class="token punctuation">{<!-- --></span>       <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">showDialog</span><span class="token punctuation">(</span><span class="token class-name">Context</span> context<span class="token punctuation">,</span> <span class="token class-name">TextView</span> textView<span class="token punctuation">,</span> <span class="token class-name">String</span> baseText<span class="token punctuation">,</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">PrivateProtocolInfo</span><span class="token punctuation">&gt;</span></span> protocolInfos<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token comment">// 要求必须大于0</span>         <span class="token keyword">if</span> <span class="token punctuation">(</span>protocolInfos <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">||</span> protocolInfos<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IndexOutOfBoundsException</span><span class="token punctuation">(</span><span class="token string">"协议关键字列表不能为空"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>         <span class="token comment">// 对显示的文案进行组装，支持无限拼接，未注册手机登录将自动生成账号，且代表您已阅读并同意《xxx注册服务协议》和《xxx隐私政策》</span>         <span class="token class-name">StringBuilder</span> valueTextBuilder <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">StringBuilder</span><span class="token punctuation">(</span>baseText<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> protocolInfos<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             valueTextBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getValueText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> protocolInfos<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 valueTextBuilder<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token string">"和"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span>         <span class="token punctuation">}</span>         <span class="token comment">// 设置指定位置的文字为可点击的，并修改文字颜色</span>         <span class="token class-name">String</span> valueText <span class="token operator">=</span> valueTextBuilder<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token class-name">SpannableStringBuilder</span> style <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SpannableStringBuilder</span><span class="token punctuation">(</span>valueText<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">int</span> baseTextLength <span class="token operator">=</span> baseText<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         style<span class="token punctuation">.</span><span class="token function">setSpan</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ForegroundColorSpan</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>BLACK<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> baseTextLength <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token class-name">Spannable</span><span class="token punctuation">.</span>SPAN_EXCLUSIVE_EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> protocolInfos<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">int</span> itemLength <span class="token operator">=</span> protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getValueText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token keyword">int</span> temLength <span class="token operator">=</span> baseTextLength <span class="token operator">+</span> itemLength<span class="token punctuation">;</span>             <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 style<span class="token punctuation">.</span><span class="token function">setSpan</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CliclSpan</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token class-name">Color</span><span class="token punctuation">.</span><span class="token function">parseColor</span><span class="token punctuation">(</span>protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getOnTipItemClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> baseTextLength<span class="token punctuation">,</span> temLength<span class="token punctuation">,</span> <span class="token class-name">Spannable</span><span class="token punctuation">.</span>SPAN_EXCLUSIVE_EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{<!-- --></span>                 temLength<span class="token operator">++</span><span class="token punctuation">;</span>                 style<span class="token punctuation">.</span><span class="token function">setSpan</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CliclSpan</span><span class="token punctuation">(</span>context<span class="token punctuation">,</span> <span class="token class-name">Color</span><span class="token punctuation">.</span><span class="token function">parseColor</span><span class="token punctuation">(</span>protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> protocolInfos<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getOnTipItemClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">++</span>baseTextLength<span class="token punctuation">,</span> temLength<span class="token punctuation">,</span> <span class="token class-name">Spannable</span><span class="token punctuation">.</span>SPAN_EXCLUSIVE_EXCLUSIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span>             baseTextLength <span class="token operator">=</span> temLength<span class="token punctuation">;</span>         <span class="token punctuation">}</span>         textView<span class="token punctuation">.</span><span class="token function">setText</span><span class="token punctuation">(</span>style<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// 设置点击后的背景颜色为透明色</span>         textView<span class="token punctuation">.</span><span class="token function">setHighlightColor</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>TRANSPARENT<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token comment">// 为指定字符设置链接属性，并激活链接</span>         textView<span class="token punctuation">.</span><span class="token function">setMovementMethod</span><span class="token punctuation">(</span><span class="token class-name">LinkMovementMethod</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      <span class="token punctuation">}</span>       <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">PrivateProtocolInfo</span> <span class="token punctuation">{<!-- --></span>         <span class="token comment">// 文案内容</span>         <span class="token keyword">private</span> <span class="token class-name">String</span> valueText<span class="token punctuation">;</span>         <span class="token comment">// 标识符，在回调中区分，会返回</span>         <span class="token keyword">private</span> <span class="token class-name">ProtocolEnum</span> flag<span class="token punctuation">;</span>         <span class="token comment">// 文案内容的颜色</span>         <span class="token keyword">private</span> <span class="token class-name">String</span> color<span class="token punctuation">;</span>         <span class="token comment">// 回调监听</span>         <span class="token keyword">private</span> <span class="token class-name">OnTipItemClickListener</span> onTipItemClickListener<span class="token punctuation">;</span>          <span class="token keyword">public</span> <span class="token class-name">PrivateProtocolInfo</span><span class="token punctuation">(</span><span class="token class-name">String</span> valueText<span class="token punctuation">,</span> <span class="token class-name">ProtocolEnum</span> flag<span class="token punctuation">,</span> <span class="token class-name">String</span> color<span class="token punctuation">,</span> <span class="token class-name">OnTipItemClickListener</span> onTipItemClickListener<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>valueText <span class="token operator">=</span> valueText<span class="token punctuation">;</span>             <span class="token keyword">this</span><span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>             <span class="token keyword">this</span><span class="token punctuation">.</span>color <span class="token operator">=</span> color<span class="token punctuation">;</span>             <span class="token keyword">this</span><span class="token punctuation">.</span>onTipItemClickListener <span class="token operator">=</span> onTipItemClickListener<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getValueText</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> valueText<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setValueText</span><span class="token punctuation">(</span><span class="token class-name">String</span> valueText<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>valueText <span class="token operator">=</span> valueText<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token class-name">ProtocolEnum</span> <span class="token function">getFlag</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> flag<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setFlag</span><span class="token punctuation">(</span><span class="token class-name">ProtocolEnum</span> flag<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>flag <span class="token operator">=</span> flag<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getColor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> color<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setColor</span><span class="token punctuation">(</span><span class="token class-name">String</span> color<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>color <span class="token operator">=</span> color<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token class-name">OnTipItemClickListener</span> <span class="token function">getOnTipItemClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">return</span> onTipItemClickListener<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setOnTipItemClickListener</span><span class="token punctuation">(</span><span class="token class-name">OnTipItemClickListener</span> onTipItemClickListener<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>onTipItemClickListener <span class="token operator">=</span> onTipItemClickListener<span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span>      <span class="token keyword">public</span> <span class="token keyword">enum</span> <span class="token class-name">ProtocolEnum</span> <span class="token punctuation">{<!-- --></span>         USER_PROTOCOL<span class="token punctuation">,</span>         PRIVATE_PROTOCOL<span class="token punctuation">;</span>     <span class="token punctuation">}</span>      <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">OnTipItemClickListener</span> <span class="token punctuation">{<!-- --></span>          <span class="token comment">// 协议点击事件</span>         <span class="token keyword">void</span> <span class="token function">itemClick</span><span class="token punctuation">(</span><span class="token class-name">ProtocolEnum</span> protocolEnum<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span>       <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">class</span> <span class="token class-name">CliclSpan</span> <span class="token keyword">extends</span> <span class="token class-name">ClickableSpan</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">private</span> <span class="token class-name">ProtocolEnum</span> protocolEnum<span class="token punctuation">;</span>         <span class="token keyword">private</span> <span class="token class-name">OnTipItemClickListener</span> onTipItemClickListener<span class="token punctuation">;</span>         <span class="token keyword">private</span> <span class="token keyword">int</span> color<span class="token punctuation">;</span>         <span class="token keyword">private</span> <span class="token class-name">Context</span> context<span class="token punctuation">;</span>          <span class="token keyword">public</span> <span class="token class-name">CliclSpan</span><span class="token punctuation">(</span><span class="token class-name">Context</span> context<span class="token punctuation">,</span> <span class="token keyword">int</span> color<span class="token punctuation">,</span> <span class="token class-name">ProtocolEnum</span> protocolEnum<span class="token punctuation">,</span> <span class="token class-name">OnTipItemClickListener</span> onTipItemClickListener<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">this</span><span class="token punctuation">.</span>context <span class="token operator">=</span> context<span class="token punctuation">;</span>             <span class="token keyword">this</span><span class="token punctuation">.</span>color <span class="token operator">=</span> color<span class="token punctuation">;</span>             <span class="token keyword">this</span><span class="token punctuation">.</span>protocolEnum <span class="token operator">=</span> protocolEnum<span class="token punctuation">;</span>             <span class="token keyword">this</span><span class="token punctuation">.</span>onTipItemClickListener <span class="token operator">=</span> onTipItemClickListener<span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token annotation punctuation">@Override</span>         <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">onClick</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">View</span> widget<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token keyword">if</span> <span class="token punctuation">(</span>onTipItemClickListener <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>                 <span class="token keyword">return</span><span class="token punctuation">;</span>             <span class="token punctuation">}</span>             onTipItemClickListener<span class="token punctuation">.</span><span class="token function">itemClick</span><span class="token punctuation">(</span>protocolEnum<span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>          <span class="token annotation punctuation">@Override</span>         <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateDrawState</span><span class="token punctuation">(</span><span class="token annotation punctuation">@NonNull</span> <span class="token class-name">TextPaint</span> ds<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             ds<span class="token punctuation">.</span><span class="token function">setColor</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">;</span>             ds<span class="token punctuation">.</span><span class="token function">setUnderlineText</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span> </code></pre> <blockquote> <p>上面封装的就是一个util包, 它支持理论上支持设置无限多个协议标签. 具体的逻辑请看代码中的注释.</p> </blockquote> <p>下面展示如何使用, 代码如下:</p> <pre><code class="prism language-java"><span class="token comment">// 用户注册协议</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>PrivateProtocolInfo</span> userProtocolInfo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>PrivateProtocolInfo</span><span class="token punctuation">(</span><span class="token string">"《xxx注册服务协议》"</span><span class="token punctuation">,</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>ProtocolEnum</span><span class="token punctuation">.</span>USER_PROTOCOL<span class="token punctuation">,</span> <span class="token string">"#00be32"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>OnTipItemClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">itemClick</span><span class="token punctuation">(</span><span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>ProtocolEnum</span> protocolEnum<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>ProtocolEnum</span><span class="token punctuation">.</span>USER_PROTOCOL<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>protocolEnum<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token comment">// 进行用户注册的协议弹出</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 隐私政策协议</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>PrivateProtocolInfo</span> privateProtocolInfo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>PrivateProtocolInfo</span><span class="token punctuation">(</span><span class="token string">"《xxx隐私政策》"</span><span class="token punctuation">,</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>ProtocolEnum</span><span class="token punctuation">.</span>PRIVATE_PROTOCOL<span class="token punctuation">,</span> <span class="token string">"#00be32"</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>OnTipItemClickListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token annotation punctuation">@Override</span>     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">itemClick</span><span class="token punctuation">(</span><span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>ProtocolEnum</span> protocolEnum<span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>         <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>ProtocolEnum</span><span class="token punctuation">.</span>PRIVATE_PROTOCOL<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>protocolEnum<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>             <span class="token comment">// 进行隐私政策的协议弹出</span>         <span class="token punctuation">}</span>     <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">PrivateProtocolUtil<span class="token punctuation">.</span>PrivateProtocolInfo</span><span class="token punctuation">&gt;</span></span> linkedList <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LinkedList</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> linkedList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>userProtocolInfo<span class="token punctuation">)</span><span class="token punctuation">;</span> linkedList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>privateProtocolInfo<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token class-name">PrivateProtocolUtil</span><span class="token punctuation">.</span><span class="token function">showDialog</span><span class="token punctuation">(</span><span class="token class-name">LoginActivity</span><span class="token punctuation">.</span><span class="token keyword">this</span><span class="token punctuation">,</span> tvAgreement<span class="token punctuation">,</span> <span class="token string">"未注册手机登录将自动生成账号，且代表您已阅读并同意"</span><span class="token punctuation">,</span> linkedList<span class="token punctuation">)</span><span class="token punctuation">;</span> </code></pre> <blockquote> <p>以上就是工具包的使用方法, 可以看到,传入的是一个list, 所以可以设置n多个标签.例如下面的:<br /><img decoding="async" src="http://img.555519.xyz/uploads/20230205/d0407c861c9073dcede7b8e47fad4fd7.jpg" alt="Android项目封装一个登录页隐私协议弹窗工具包(一)"></p> </blockquote> <h4> <a id="__186" rel="nofollow"></a>以上就是该工具包的所有代码, 以及如何使用.</h4> <blockquote> <p>可以修改<code>ProtocolEnum</code> 类, 添加自己相应的枚举, 使其支持更多的标签</p> </blockquote></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-77179.htm">Mac下配置Maven以及IDEA Maven配置</a></p>
+                                        <p>下一个：<a href="/news/article-77857.htm">猫咪疫苗可以自己打不（猫疫苗可以自己打么）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-2-26-free-node-subscribe-links.htm" title="「2月26日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享">「2月26日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-37758.htm" title="上海宠物中心领养地址 上海宠物中心领养地址电话">上海宠物中心领养地址 上海宠物中心领养地址电话</a></li>
+                        <li class="py-2"><a href="/news/article-64160.htm" title="宠物粮食品牌都有什么名字呢女生（宠物粮食品牌起名大全）">宠物粮食品牌都有什么名字呢女生（宠物粮食品牌起名大全）</a></li>
+                        <li class="py-2"><a href="/news/article-59414.htm" title="被猫抓伤了怎么判断没事儿呢（被猫抓伤后怎么判断感没感染）">被猫抓伤了怎么判断没事儿呢（被猫抓伤后怎么判断感没感染）</a></li>
+                        <li class="py-2"><a href="/news/article-71790.htm" title="丹阳流浪猫救助站（丹阳流浪猫救助站在哪里）">丹阳流浪猫救助站（丹阳流浪猫救助站在哪里）</a></li>
+                        <li class="py-2"><a href="/news/article-69172.htm" title="设计模式学习笔记装饰器模式及其应用详解">设计模式学习笔记装饰器模式及其应用详解</a></li>
+                        <li class="py-2"><a href="/news/article-44142.htm" title="如何在idea上部署tomcat&amp;项目">如何在idea上部署tomcat&amp;项目</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-1-5-windows-nekoray.htm" title="「1月5日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享">「1月5日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-50602.htm" title="JavaScript如何使用过滤器从数组中删除元素">JavaScript如何使用过滤器从数组中删除元素</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-2-27-share-windows-nekoray.htm" title="「2月27日」最高速度22.1M/S，2025年Nekoray每天更新免费机场订阅分享">「2月27日」最高速度22.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">63</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-02/" title="2025-02 归档">2025-02</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">84</span> <a href="/date/2025-01/" title="2025-01 归档">2025-01</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
