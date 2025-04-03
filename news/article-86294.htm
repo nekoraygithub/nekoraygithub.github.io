@@ -1,0 +1,473 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-86294.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Python3通过字符串访问与修改局部变量</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="在Python中定义一个函数时，就会把变量空间划分为全局变量(global)与局部变量(local)，如果是定义在一个类的成员函数中，那么就还有额外的成员变量(self)空间。那么，如果在实际操作中，" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-86294.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="Python3通过字符串访问与修改局部变量" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/2026b598e70bb92c3ab39b931d099067.webp" />
+        <meta property="og:release_date" content="2025-04-01T09:49:58" />
+    <meta property="og:updated_time" content="2025-04-01T09:49:58" />
+        <meta property="og:description" content="在Python中定义一个函数时，就会把变量空间划分为全局变量(global)与局部变量(local)，如果是定义在一个类的成员函数中，那么就还有额外的成员变量(self)空间。那么，如果在实际操作中，" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Python3通过字符串访问与修改局部变量">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">Python3通过字符串访问与修改局部变量</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				</h1> <p>在Python中定义一个函数时，就会把变量空间划分为全局变量(global)与局部变量(local)，如果是定义在一个类的成员函数中，那么就还有额外的成员变量(self)空间。那么，如果在实际操作中，想把这几种不同的变量空间做一个分离的话，有没有办法呢？</p> </h1> <p>首先来看一下局部变量的读取，一般有<code>locals()</code>、<code>vars()</code>和<code>sys._getframe(0).f_code.co_varnames</code>这几种方法，另外有一种<code>sys._getframe(0).f_locals</code>的方法，其实等价于<code>locals()</code>，相关的实现代码如下：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self,y):         self.func(y)              def func(y, z=1):         m = 2         print (locals())         print (vars())         print (__import__('sys')._getframe(0).f_code.co_varnames)  if __name__ == '__main__':     Obj(2)</code></pre> <p>该代码的运行结果如下：</p> <pre><code class="language-bash">{'self': &lt;__main__.Obj object at 0x7f5cf5e74e50&gt;, 'y': 2, 'z': 1, 'm': 2} {'self': &lt;__main__.Obj object at 0x7f5cf5e74e50&gt;, 'y': 2, 'z': 1, 'm': 2} ('self', 'y', 'z', 'm')</code></pre> <p>在vars方法不加具体变量名的时候，就是等价于locals方法，两者返回的结果都是字典格式。如果是一个类中的成员函数下执行locals或者vars，会附带一个<code>__main__.Obj object</code>的变量，相当于所有self的成员变量，其实也是局部变量的一部分。而如果使用<code>co_varnames</code>的方法，那么得到的就是所有局部变量的名称，我们也可以在例子中额外定义一个self的成员变量：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self, y):         self.p = 5         self.func(y)      def func(self, y, z=1):         m = 2         print(locals())         print(vars())         print(__import__('sys')._getframe(0).f_code.co_varnames)  if __name__ == '__main__':     Obj(2)     # {'self': &lt;__main__.Obj object at 0x7fe9aac0ce50&gt;, 'y': 2, 'z': 1, 'm': 2}     # {'self': &lt;__main__.Obj object at 0x7fe9aac0ce50&gt;, 'y': 2, 'z': 1, 'm': 2}     # ('self', 'y', 'z', 'm')</code></pre> <p>可以发现，所有的成员变量都被放在了self中。并且需要注意的是，<strong>全局变量<code>x</code>自始至终都没有在局部变量中出现</strong>。那么既然我们可以通过这种方式分离出局部变量，或者是局部变量的名称，那我们如何去调整或者修改这些局部变量呢？首先我们需要知道，<code>locals()</code>方法返回的变量是一个copy，也就是说即使修改了locals方法返回的结果，也不能真正的改变局部变量本身的值，这样描述可能有点抽象，我们直接看下这个案例：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self,y):         self.func(y)      def func(self, y, z=1):         m = 2         vars()['z']=2         locals()['n']=3         print (locals())         print (z)  if __name__ == '__main__':     Obj(2)</code></pre> <p>在这个案例中分别通过vars方法和locals方法去修改局部变量的值，最终的输出结果如下：</p> <pre><code class="language-bash">{'self': &lt;__main__.Obj object at 0x7f74d9470e50&gt;, 'y': 2, 'z': 1, 'm': 2, 'n': 3} 1</code></pre> <p>首先要解释一下为什么这个案例中没有打印<code>n</code>这个变量，前面提到vars和locals的返回值都是真实变量的一个copy，因此我们不管是修改也好，新增也好，内容不会同步到变量空间中去，也就是说，此时的局部变量n还是处于一个没有定义的状态，只是在locals或者vars的字典中存在，此时打印只会报错NameError。而z的最终打印输出是1，这表明z的值确实没有受到对vars的变量修改的影响。那到底有没有办法可以通过字符串去修改局部变量呢（不同步到全局变量）？答案是有的，但是这个方案非常的hacky，请看如下示例：</p> <pre><code class="language-python">import ctypes  x = 0  class Obj:     def __init__(self,y):         self.func(y)      def func(self, y, z=1):         m = 2         __import__('sys')._getframe(0).f_locals.update({             'z': 2,'n': 3         })         ctypes.pythonapi.PyFrame_LocalsToFast(             ctypes.py_object(__import__('sys')._getframe(0)), ctypes.c_int(0))         print (locals())         print (z)  if __name__ == '__main__':     Obj(2)</code></pre> <p>这个案例是使用了Cython的方案直接去修改了数据帧的内容，而这里所使用的f_locals其实本质上就是locals。经过一番运行，输出结果如下：</p> <pre><code class="language-bash">{'self': &lt;__main__.Obj object at 0x7fea2e2 a1e80&gt;, 'y': 2, 'z': 2, 'm': 2, 'n': 3} 2</code></pre> <p>此时局部变量z是被成功修改了的，但是在前面提到的，即使我们通过这种方法修改了局部变量的值，但是依然不能通过这个方案去创建一个新的局部变量，此时去执行<code>print (n)</code>的话，依然会有报错提示。</p> </h1> <p>相比于修改局部变量，其实查看修改全局变量要显的更加容易。首先我们用一个示例演示一下如何查看所有的全局变量：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self,y):         self.func(y)      def func(self, y, z=1):         m = 2         print (globals())  if __name__ == '__main__':     Obj(2)</code></pre> <p>获取局部变量的方式有很多，但是获取全局变量一般就是globals或者等价的f_globals。上述代码执行输出如下：</p> <pre><code class="language-bash">{'__name__': '__main__', '__doc__': None, '__package__': None,  '__loader__': &lt;_frozen_importlib_external.SourceFileLoader object at 0x7f202632ac40&gt;,  '__spec__': None, '__annotations__': {}, '__builtins__': &lt;module 'builtins' (built-in)&gt;,  '__file__': 'xxx.py', '__cached__': None, 'x': 0, 'Obj': &lt;class '__main__.Obj'&gt;}</code></pre> <p>用这种方法我们发现了全局变量x，而在同一个函数内的几个局部变量，就没有显示在globals的key中。而不同于locals变量的是，globals函数返回的是一个真实的数据，是可以直接修改，并且在全局生效的。比如我们在函数内定义或者修改全局变量：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self,y):         self.func(y)      def func(self, y, z=1):         global m         m = 2         globals()['x']=3  if __name__ == '__main__':     Obj(2)     print(globals()['x'])     print(globals()['m'])     # 3     # 2</code></pre> <p>在这个例子中我们就可以发现，不仅仅是修改的x值生效了，新建的m也同步到了全局变量中，这样就可以比较容易的划分全局变量和局部变量再进行统一赋值或者修改。</p> </h1> <p>在python中每一个定义的object都有一个隐藏属性<code>__dict__</code>，这是一个字典，其中包含了所有的成员变量名和成员变量值。在前一篇<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/dechinphy/p/dict-class.html"  target="_blank" rel="nofollow">博客</a>中，我们就介绍了通过__dict__去给类中的成员变量进行赋值，非常的方便。我们可以通过一个示例来看看__dict__中所包含的内容：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self,y):         self.m = 2         self.func(y)      def func(self, y, z=1):         print (self.__dict__)  if __name__ == '__main__':     Obj(2)     # {'m': 2}</code></pre> <p>从输出结果中我们就可以看到，__dict__输出的内容非常的纯净，就是所有的成员变量名和变量值。而成员变量虽然是一个对象的属性，但是其操作方式跟全局变量globals是非常接近的，不像locals一样只读，具体示例如下：</p> <pre><code class="language-python">x = 0  class Obj:     def __init__(self,y):         self.m = 2         self.func(y)      def func(self, y, z=1):         self.m = 5         self.__dict__['n'] = 6         print (self.__dict__)         print (self.m, self.n)  if __name__ == '__main__':     Obj(2)     # {'m': 5, 'n': 6}     # 5     # 6</code></pre> <p>在这个案例中，我们修改了成员变量的值，也使用__dict__新建了一个成员变量的值，可以看到最终都有同步到变量空间中，这样就完成了成员变量的修改。</p> </h1> <p>Python本身是一门比较灵活便捷的编程语言，但是便捷往往有可能伴随着一些风险，比如exec和eval等内置函数的实现，有可能导致sandbox escaping的问题。而有时候我们又需要一些批量化的操作，比如批量化的创建或者修改局部、全局或者是成员变量，这样就需要我们首先要把所有的变量名存成字符串，在需要的时候再作为变量名去调用。在这篇文章中，我们介绍了一系列非exec和eval的操作（并不是说没有风险，也引用了ctype和sys定义的数据帧），来查看和定义、修改所需的各种变量。</p> <ol></ol> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-86293.htm">kotlin增加静态扩展函数</a></p>
+                                        <p>下一个：<a href="/news/article-87000.htm">我们如何卸载MySQL中的时间/日期处理？</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-73119.htm" title="动物疫苗价格一览表图片高清大图及价格 动物疫苗价格一览表图片高清大图及价格">动物疫苗价格一览表图片高清大图及价格 动物疫苗价格一览表图片高清大图及价格</a></li>
+                        <li class="py-2"><a href="/news/article-71145.htm" title="土司披萨（吐司披萨的做法）">土司披萨（吐司披萨的做法）</a></li>
+                        <li class="py-2"><a href="/news/article-75804.htm" title="动物疫苗行业排名榜最新（国内动物疫苗龙头企业）">动物疫苗行业排名榜最新（国内动物疫苗龙头企业）</a></li>
+                        <li class="py-2"><a href="/news/article-83443.htm" title="dao层和serivce层的作用和区别">dao层和serivce层的作用和区别</a></li>
+                        <li class="py-2"><a href="/news/article-87000.htm" title="我们如何卸载MySQL中的时间/日期处理？">我们如何卸载MySQL中的时间/日期处理？</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-8-free-nekoray-node.htm" title="「3月8日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享">「3月8日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-84840.htm" title="写给老婆的保证书挽回离婚（写给老婆的保证书挽回离婚模板）">写给老婆的保证书挽回离婚（写给老婆的保证书挽回离婚模板）</a></li>
+                        <li class="py-2"><a href="/news/article-73779.htm" title="聊城市宠物店有哪些（聊城市宠物店位置）">聊城市宠物店有哪些（聊城市宠物店位置）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-linux-nekoray.htm" title="「3月5日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享">「3月5日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-10-free-nekoray.htm" title="「3月10日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享">「3月10日」最高速度21.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">9</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                            <p>
+                                <a href="/">首页</a> | 
+                                <a href="/free-node/">免费节点</a> | 
+                                <a href="/news/">新闻资讯</a> |
+                                <a href="/about-us.htm">关于我们</a> |
+                                <a href="/disclaimer.htm">免责申明</a> |
+                                <a href="/privacy.htm">隐私申明</a> |
+                                <a href="/sitemap.xml">网站地图</a>
+                            </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
