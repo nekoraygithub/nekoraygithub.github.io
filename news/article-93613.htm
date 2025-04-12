@@ -1,0 +1,475 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-93613.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="定义function类型  fn() {     console.log(this)   }  使用function类型   render() {     return (       &lt;div" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-93613.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/ca35c0fc5f1f773a9b206eda2583de11.webp" />
+        <meta property="og:release_date" content="2025-04-11T08:58:17" />
+    <meta property="og:updated_time" content="2025-04-11T08:58:17" />
+        <meta property="og:description" content="定义function类型  fn() {     console.log(this)   }  使用function类型   render() {     return (       &lt;div" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<div id="content_views" class="markdown_views prism-atom-one-light"> </h1> <p>定义<code>function</code>类型</p> <pre><code class="prism language-javascript"> <span class="token function">fn</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>   <span class="token punctuation">}</span> </code></pre> <p>使用<code>function</code>类型</p> <pre><code class="prism language-javascript">  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{<!-- --></span>     <span class="token keyword">return</span> <span class="token punctuation">(</span>       <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>           <span class="token operator">&lt;</span>Button onClick<span class="token operator">=</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span>fn<span class="token punctuation">}</span><span class="token operator">&gt;</span>请点击<span class="token operator">&lt;</span><span class="token operator">/</span>Button<span class="token operator">&gt;</span>       <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span><span class="token punctuation">)</span>     <span class="token punctuation">}</span> </code></pre> <h4> <a id="_19" rel="nofollow"></a>会引发什么样子的问题呢？</h4> <p><code>this</code>指向的问题<br /> 接下来当页面加载完毕的时候我打印一次<code>this</code>和点击以后的<code>this</code>做一次对比</p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/9765949a450d79146d32c1d60f2c712f.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><strong>页面初始化完毕以后this的参数</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/8645c59f6b68a5eeb5d15a78f1129fa7.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <p><strong>fn函数内部的this</strong>(这里的this指向的就是函数自己)<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/77e5a8720058706703c3b510ce56d078.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <h2> <a id="functionthis_32" rel="nofollow"></a>如何解决function函数的this指向的问题呢？</h2> <p><code>call</code>、<code>aplay</code> 和 <code>bind</code>这里就不一一列举了，最常用的就是bind</p> <p><strong>bind:</strong> 方法会创建一个新的函数，当被调用的时候，将其this关键字设置为提供的值，我们必须手动去调用</p> <pre><code class="prism language-html"> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span> <span class="token special-attr"><span class="token attr-name">onClick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token value javascript language-javascript"><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">}</span></span></span></span><span class="token punctuation">&gt;</span></span>请点击<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Button</span><span class="token punctuation">&gt;</span></span> </code></pre> <p>看看效果吧 !<br /> 这里的代码没有改变<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/177f61b7fab726a3f04424e5d079c8d9.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><strong>使用bind以后的结果:</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/f560aba9a11c5ff89a7bd760916bc801.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <h2> <a id="_45" rel="nofollow"></a>箭头函数类型的定义和使用</h2> <p><strong>定义</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/19af4872289e673c92a44d23e8a59c3c.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><strong>使用方式和function一样的区别在于箭头函数没有自己的<code>this</code>指向，只会向上继承父级的<code>this</code>指向，如果父级没有<code>this</code>指向还会继续向上检索</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/860e6df2739fa1e67d8e85e7dec85610.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/0abcf7c4e6b422ef3179c0dacaf49d38.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /> 执行后的效果<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/cb71c62dcea55901b943e036cf0ee4e5.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/2a7a075331b50d32912689575b88e832.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <h2> <a id="_54" rel="nofollow"></a>如何进行事件传参呢？</h2> <p>1.使用bind，call，aplay<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/a66ed175d0592975d79137591f289197.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/8fa4c8cb8945a56128a6f2dd13b8f599.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/be1efa4c0cdea07c65bf97984ce0983c.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /> 2.使用箭头函数的方式传参<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/646b1fb583b2fb0223683f35d4f10921.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><img decoding="async" src="http://img.555519.xyz/uploads/20221230/b43f3a4983659379002268f8ccae3be6.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <h2> <a id="event_63" rel="nofollow"></a>重点来了，如何使用事件对象event？</h2> <h4> <a id="_64" rel="nofollow"></a>不传参的情况下</h4> <p>不传参的情况下默认值就是event<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/5e634b9ad952fe206de4d5e198f102be.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><img decoding="async" src="http://img.555519.xyz/uploads/20221230/39ac59e0938cf1bab8597c2972fc31d1.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/6a78b5a2a9bfa18f1a9a3bcfe003077a.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <h4> <a id="event_70" rel="nofollow"></a>如果我需要传参还需要获取事件对象event呢？</h4> <h5> <a id="1bindcallaplay_72" rel="nofollow"></a>1.使用bind，call，aplay</h5> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/15d64ca6d4ec2fb7892dd6d90ad330ab.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <pre><code class="prism language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Button</span> <span class="token special-attr"><span class="token attr-name">onClick</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token value javascript language-javascript"><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span></span></span></span> <span class="token attr-name">'我是传递进去的参数')}</span><span class="token punctuation">&gt;</span></span>请点击<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Button</span><span class="token punctuation">&gt;</span></span> </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/c0c02b93ddd67c113fd241d9dc910fc3.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><strong>结果</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/c877b0b500b49d14be7a87f8e4fae39a.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><strong>这是为什么呢？</strong><br /> 当你使用bind，call，aplay着三个函数的时候，默认他最后一位的参数就是event事件对象<br /><strong>如果我传递三个参数呢？</strong><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/6836eac4907867df2e03479a64b0e15c.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <p>第二个参数是没有值的<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/b830f30723c4db82cf66191a1e5ee508.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /> 就会发现最后一个怎么没有值呢？<br /> 通过推算的出来的结果是赋值的event的公式应该是<br /><code>传递进去参数的长度 + 1 = 就是event事件对象最后所在的位置</code></p> <h5> <a id="2_93" rel="nofollow"></a>2.使用箭头函数(使用较多)</h5> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/b04e79ddbc304d71d92fc6085ef23179.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <pre><code class="prism language-javascript"> <span class="token operator">&lt;</span>Button onClick<span class="token operator">=</span><span class="token punctuation">{<!-- --></span><span class="token punctuation">(</span><span class="token parameter">e</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span>e<span class="token punctuation">,</span><span class="token string">'我是传递进去的参数'</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>请点击<span class="token operator">&lt;</span><span class="token operator">/</span>Button<span class="token operator">&gt;</span> </code></pre> <p><img decoding="async" src="http://img.555519.xyz/uploads/20221230/4bb2a7e70a64914aeaecf45094b68a2f.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/302fbe9f7bd49c86cf72ca41fec6786d.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <p>这里的运行机制就相当于，我先拿到事件对象赋值给原先的函数，因为函数如果不传参的情况下，默认值，就是事件对象。<br /><code>()=&gt;</code>这种写法相当于直接返回结果</p> </h1> <p>这种写法是万万不可的!!!<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/0a2ac8903798c9ea19edbcb1b6d30121.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"><br /> 像这种方法就相当于这个button按钮好了以后就加载这个函数<br /> render树刷新一次，这个事件都会执行一次，会增加计算机的负担。<br /><img decoding="async" src="http://img.555519.xyz/uploads/20221230/09c9a5f90d64c53cc0e8b8cc4bc0e510.jpg" alt="在react中使用event(事件对象)，如何使用，注意事项和react中如何定义和使用函数？"></p> <pre><code class="prism language-javascript">    <span class="token operator">&lt;</span>Button onClick<span class="token operator">=</span><span class="token punctuation">{<!-- --></span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fn</span><span class="token punctuation">(</span><span class="token string">'e'</span><span class="token punctuation">,</span> <span class="token string">'我是传递进去的参数'</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token operator">&gt;</span>请点击<span class="token operator">&lt;</span><span class="token operator">/</span>Button<span class="token operator">&gt;</span> </code></pre> <p>万万不能这样写!!!</p> </p></div> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-92875.htm">河南省动物疫苗招标公告公示名单（河南省动物疫苗招标公告公示名单最新）</a></p>
+                                        <p>下一个：<a href="/news/article-93614.htm">宠物粮食市场分析图表（宠物粮食市场前景）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-5-linux-nekoray.htm" title="「3月5日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享">「3月5日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-84150.htm" title="仓鼠后背脱毛,看见红色的肉了怎么办（仓鼠后背脱毛,看见红色的肉了怎么办呢）">仓鼠后背脱毛,看见红色的肉了怎么办（仓鼠后背脱毛,看见红色的肉了怎么办呢）</a></li>
+                        <li class="py-2"><a href="/news/article-89915.htm" title="【南京宠物寄养|南京宠物寄养信息】 南京宠物寄养一般怎么收费">【南京宠物寄养|南京宠物寄养信息】 南京宠物寄养一般怎么收费</a></li>
+                        <li class="py-2"><a href="/news/article-94050.htm" title="正规动物医院的处方包括哪些内容（正规动物医院的处方包括哪些内容呢）">正规动物医院的处方包括哪些内容（正规动物医院的处方包括哪些内容呢）</a></li>
+                        <li class="py-2"><a href="/news/article-72449.htm" title="宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元">宠物零食加工厂要投资多少亿 宠物零食加工厂要投资多少亿元</a></li>
+                        <li class="py-2"><a href="/news/article-88455.htm" title="猫咪三针疫苗需要多久打完呢（猫咪三针疫苗需要多久打完呢图片）">猫咪三针疫苗需要多久打完呢（猫咪三针疫苗需要多久打完呢图片）</a></li>
+                        <li class="py-2"><a href="/news/article-69822.htm" title="全国兽药30强企业 全国兽药30强企业排名">全国兽药30强企业 全国兽药30强企业排名</a></li>
+                        <li class="py-2"><a href="/news/article-75138.htm" title="SpringBoot 基本原理">SpringBoot 基本原理</a></li>
+                        <li class="py-2"><a href="/news/article-81978.htm" title="动物疫苗生产厂家排名前十名有哪些（动物疫苗企业名单）">动物疫苗生产厂家排名前十名有哪些（动物疫苗企业名单）</a></li>
+                        <li class="py-2"><a href="/news/article-84840.htm" title="写给老婆的保证书挽回离婚（写给老婆的保证书挽回离婚模板）">写给老婆的保证书挽回离婚（写给老婆的保证书挽回离婚模板）</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">36</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
