@@ -1,0 +1,475 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-96632.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>python+pytest接口自动化(13)-token关联登录</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="在PC端登录公司的后台管理系统或在手机上登录某个APP时，经常会发现登录成功后，返回参数中会包含token，它的值为一段较长的字符串，而后续去请求的请求头中都需要带上这个token作为参数，否则就提示" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-96632.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="python+pytest接口自动化(13)-token关联登录" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/560b4723b91b35135ded5a7bdfec6110.webp" />
+        <meta property="og:release_date" content="2025-04-15T06:01:53" />
+    <meta property="og:updated_time" content="2025-04-15T06:01:53" />
+        <meta property="og:description" content="在PC端登录公司的后台管理系统或在手机上登录某个APP时，经常会发现登录成功后，返回参数中会包含token，它的值为一段较长的字符串，而后续去请求的请求头中都需要带上这个token作为参数，否则就提示" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="python+pytest接口自动化(13)-token关联登录">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">python+pytest接口自动化(13)-token关联登录</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                  				  				  				<p>在PC端登录公司的后台管理系统或在手机上登录某个APP时，经常会发现登录成功后，返回参数中会包含token，它的值为一段较长的字符串，而后续去请求的请求头中都需要带上这个token作为参数，否则就提示需要先登录。</p> <p>这其实就是状态或会话保持的第三种方式<code>token</code>。</p> <h2 id="一-什么是token">一. 什么是token</h2> <p>token 由服务端产生，是客户端用于请求的身份令牌。第一次登录成功时，服务端会生成一个包含用户信息的加密字符串token，返回给客户端并保存在本地，后续客户端只需要带上token进行请求即可，无需带上用户名密码。</p> <p>token原理简单概括如下：</p> <ol> <li> <p>用户首次登录成功后，服务端会生成一个token值，服务端会将它保存保存在数据库中，同时也会将它返回给客户端；</p> </li> <li> <p>客户端拿到token值后，保存在本地；</p> </li> <li> <p>后续客户端再次发送除登录外的其他请求时，会把保存在本地的token值作为参数一起发送给服务端；</p> </li> <li> <p>服务端收到客户端的请求后，会拿发送过来的token值与保存在数据库中的token值进行比较；</p> </li> <li> <p>如果两个token值相同， 则说明当前用户处于登录状态；</p> </li> <li> <p>如果数据库中没有这个token值或者token值已经生效，则需用户重新登录。</p> </li> </ol> <h2 id="二-token场景处理">二. token场景处理</h2> <p>公司某管理后台系统，登录后返回token，接着去请求其他接口时请求头中都需要加上这个token，否则提示请先登录。</p> <p>请求该系统的登录接口如下：</p> <pre><code class="language-python"># @author: 给你一页白纸 # 微信公众号：测试上分之路  import requests import json  headers = {"Content-Type": "application/json;charset=utf8"} url = "http://127.0.0.1:5000/login" _data = {     "username": "刘德华",     "password": "123456" } res = requests.post(url=url, headers=headers, json=_data).text print(res)</code></pre> <p>结果如下：</p> <pre><code class="language-json">{   "code": 1000,    "msg": "登录成功！",    "token": "sh34ljjl08s32730djsh34ljjl08s32730djsh34ljjl08s32730djsh34ljjl08s32730djsh34ljjl08s32730djsh34ljjl08s32730dj" }</code></pre> <p>在对扎样的项目做接口自动化测试时，需要先请求登录接口拿到token，再去请求别的接口。每次请求其他接口时先请求一次登录接口，这样做虽然可行，但这样不仅会降低自动化的执行效率，而且每次都请求登录也会对服务器资源造成浪费。</p> <p>这里介绍如下两种处理思路。</p> <h3 id="1-思路一">1. 思路一</h3> <p>在执行用例之前，先请求登录接口，并将返回的token值存储在文件中(如yaml文件)，后续请求需要用到token值则从该文件。</p> <p>python中yaml文件的读写请参考我之前的文章<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/lfr0123/p/13652243.html"  target="_blank" rel="nofollow">Python读写yaml文件（使用PyYAML库）</a>。</p> <p>1，运行接口自动化测试框架，初始化时先请求登录接口，获取token值，并写入指定的yaml文件中。</p> <pre><code class="language-python"># @author: 给你一页白纸 # 微信公众号：测试上分之路  import requests import json import yaml  def get_token():     '''     请求登录接口，获取token     :return:     '''     headers = {"Content-Type": "application/json;charset=utf8"}     url = "http://127.0.0.1:5000/login"     _data = {         "username": "刘德华",         "password": "123456"     }     res = requests.post(url=url, headers=headers, json=_data).text     res = json.loads(res)     token = res["token"]     return token   def write_yaml(token):     '''     写入yaml文件     :return:     '''     t_data = {         "token": token     }     with open("yaml文件路径", "w", encoding="utf-8") as f:         yaml.dump(data=t_data,  stream=f, allow_unicode=True)   if __name__ == '__main__':     token = get_token() # 获取token     write_yaml(token)   # 将token值写入yaml文件</code></pre> <p>2，执行测试用例时先读取yaml文件中token值，并将token加入headers中(也有些是将token放在请求参数中，视被测试项目具体情况而定)，再发送请求。</p> <pre><code class="language-python"># @author: 给你一页白纸 # 微信公众号：测试上分之路  import requests import yaml import pytest import json  def read_yaml():     '''     读yaml文件     :return:     '''     with open('yaml文件路径', 'r', encoding='utf-8') as f:         result = yaml.load(f.read(), Loader=yaml.FullLoader)     token = result["token"]     return token   def test_check_user():     '''     查询个人信息（需要先登录系统）     :return:     '''     # 先从yaml文件中读取token     token = read_yaml()     # 再将token添加到请求头中     headers = {         "Content-Type": "application/json;charset=utf8",         "token": token     }      url = "http://127.0.0.1:5000/users/3"     res = requests.get(url=url, headers=headers).text     # 返回结果为json格式，转换为字典     res = json.loads(res)     # 断言code是否为1000     assert res["code"] == 1000   if __name__ == '__main__':     pytest.main()</code></pre> <p>这里仅仅只是举例说明，而在实际的框架中，我们需要把这些诸如yaml文件的读写这样的函数单独封装在某个模块中，供其他模块调用，这样会代码会更加清晰简洁。</p> <h3 id="2-思路二">2. 思路二</h3> <p>利用pytest中的Fixture函数，作用域设置为session，并返回token值，后续测试方法/函数调用该Fixture函数。</p> <p>pytest中Fixture的使用请参考我之前的文章<a href="http://www.m6000.cn/wp-content/themes/begin%20lts/inc/go.php?url=https://www.cnblogs.com/lfr0123/p/15894978.html"  target="_blank" rel="nofollow">pytest(6)-Fixture(固件)</a>。</p> <p>1，首先，在conftest中定义一个作用域为session的Fixture函数，用于请求登录接口返回token。</p> <pre><code class="language-python"># @author: 给你一页白纸 # 微信公众号：测试上分之路  import pytest import requests import json  @pytest.fixture(scope="session") def get_token_fixture():     '''     作用域为session的fixture函数，返回token     :return:     '''     headers = {"Content-Type": "application/json;charset=utf8"}     url = "http://127.0.0.1:5000/login"     _data = {         "username": "刘德华",         "password": "123456"     }     res = requests.post(url=url, headers=headers, json=_data).text     res = json.loads(res)     token = res["token"]     return token</code></pre> <p>2，接着，测试用例调用该Fixture。</p> <pre><code class="language-python">def test_check_user(get_token_fixture):     '''     查询个人信息（需要先登录系统）     :return:     '''     # 通过Fixture函数g获取et_token_fixture值，即token，再将token添加到请求头中     headers = {         "Content-Type": "application/json;charset=utf8",         "token": get_token_fixture     }      url = "http://127.0.0.1:5000/users/3"     res = requests.get(url=url, headers=headers).text     res = json.loads(res)     print(res)     print(headers)     assert res["code"] == 1000   if __name__ == '__main__':     pytest.main()</code></pre> <p>执行测试用例结果如下：</p> <p><img decoding="async" src="http://img.555519.xyz/uploads3/20220510/8efdc6a246a9a0a9c7c8cf766bd6bf02.jpg" alt="python+pytest接口自动化(13)-token关联登录"></p> <p>说明思路二也是可行的，当然这里只执行了一条测试用例，如果执行很多的用例，效果会是怎样还没去验证，大家可以试试看。</p> <h2 id="三-总结">三. 总结</h2> <ol> <li>相对于Session/Cookies来说，请求量较大或者涉及第三方接口的系统，使用token更适合。</li> <li>有些项目token是放在请求头中发送的，而有一些项目则是放在请求参数里发送的，做接口自动化时要明确是哪种方式。</li> <li>接口自动化处理token时这两种思路可任选一种，如果使用pytest框架的话建议尝试思路二。</li> </ol> 			                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-96631.htm">@DateTimeFormat和@JsonFormat浅解</a></p>
+                                        <p>下一个：<a href="/news/article-97321.htm">宠物猫疫苗接种时间表格（宠物猫疫苗接种时间表格图片）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/free-nodes/2025-3-3-share-windows-nekoray.htm" title="「3月3日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享">「3月3日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-78554.htm" title="宠物领养协议法律效力怎么写才有效（宠物领养协议范本）">宠物领养协议法律效力怎么写才有效（宠物领养协议范本）</a></li>
+                        <li class="py-2"><a href="/news/article-90654.htm" title="同安猫咪领养 同安猫咪领养中心">同安猫咪领养 同安猫咪领养中心</a></li>
+                        <li class="py-2"><a href="/news/article-75803.htm" title="C#过滤DataTable中空数据和重复数据的示例代码">C#过滤DataTable中空数据和重复数据的示例代码</a></li>
+                        <li class="py-2"><a href="/news/article-86293.htm" title="kotlin增加静态扩展函数">kotlin增加静态扩展函数</a></li>
+                        <li class="py-2"><a href="/news/article-70462.htm" title="动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）">动物疫苗的使用方法视频（动物疫苗的使用方法及注意事项）</a></li>
+                        <li class="py-2"><a href="/news/article-95906.htm" title="动物医院介绍资料 动物医院介绍资料大全">动物医院介绍资料 动物医院介绍资料大全</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-2-free-node-subscribe.htm" title="「4月2日」最高速度19.8M/S，2025年Nekoray每天更新免费机场订阅分享">「4月2日」最高速度19.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-2-free-node-subscribe-links.htm" title="「3月2日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享">「3月2日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-73778.htm" title="Vue.Draggable 文档总结">Vue.Draggable 文档总结</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">48</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
