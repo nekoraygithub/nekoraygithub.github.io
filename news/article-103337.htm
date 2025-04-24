@@ -1,0 +1,478 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-103337.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Pytorch版本yolov3部分代码语句分析</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="这里只针对代码中出现的具体函数。使用pytorch版本的yolov3代码。 Pytorch版本的yolov3代码可见github连接：https://github.com/eriklindernore" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-103337.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="Pytorch版本yolov3部分代码语句分析" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/564fb6d766196f74947b926d3d982852.webp" />
+        <meta property="og:release_date" content="2025-04-24T09:18:00" />
+    <meta property="og:updated_time" content="2025-04-24T09:18:00" />
+        <meta property="og:description" content="这里只针对代码中出现的具体函数。使用pytorch版本的yolov3代码。 Pytorch版本的yolov3代码可见github连接：https://github.com/eriklindernore" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Pytorch版本yolov3部分代码语句分析">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/free-nodes/">免费节点</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">Pytorch版本yolov3部分代码语句分析</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                <div class="xcblog-blog-detail">
+                      				  				  				<div id="content_views" class="htmledit_views"> <p>这里只针对代码中出现的具体函数。使用pytorch版本的yolov3代码。</p> <p>Pytorch版本的yolov3代码可见github连接：https://github.com/eriklindernoren/PyTorch-YOLOv3</p> <p>只针对函数，不针对原理。</p> <p>具体实现原理，可自行查阅其它文档。</p> <p>附原论文链接：</p> <p>https://pjreddie.com/media/files/papers/YOLOv3.pdf</p> <p>&nbsp;</p> </h1> <pre><code class="language-python">Tensor=torch.cuda.FloatTensor if torch.cuda.is_available() else torch.FloatTensor</code></pre> <p style="margin-left:0in;">这个语句用于决定计算时GPU或是CPU的选定。</p> <pre><code class="language-python">torch.cuda.is_available()</code></pre> <p style="margin-left:0in;">该语句返回的是一个bool值，在于展示CUDA当前是否可用</p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">torch.cuda是一个CUDA张量类型的支持包。</p> <p style="margin-left:0in;">该包增加了对CUDA张量类型的支持，实现了张量的定义及相关功能，但使用GPU进行计算。</p> <p style="margin-left:0in;">它的初始化方式很便捷，所以可以随时导入它，并使用is_available()来确定系统是否支持CUDA。</p> <p style="margin-left:0in;">torch中文文档中有更多相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch-cn.readthedocs.io/zh/latest/package_references/torch-cuda/</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <p style="margin-left:0in;">torch.Tensor是一种包含单一数据类型元素的多维矩阵。该类型一定会出现在Pytorch的使用过程中。</p> <p style="margin-left:0in;">具体来讲，Torch定义了七种CPU tensor类型和八种GPU tensor类型：</p> <div> <table cellspacing="0"> <tbody> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:5.7513in;"> <div> <table cellspacing="0" style="width:552px;"> <tbody> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;"><strong>Data tyoe</strong></p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;"><strong>CPU tensor</strong></p> </td> <td style="vertical-align:top;width:1.85in;"> <p style="margin-left:0in;"><strong>GPU tensor</strong></p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">32-bit floating point</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">torch.FloatTensor</p> </td> <td style="vertical-align:top;width:1.8777in;"> <p style="margin-left:0in;">torch.cuda.FloatTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">64-bit floating point</p> </td> <td style="vertical-align:top;width:1.6756in;"> <p style="margin-left:0in;">torch.DoubleTensor</p> </td> <td style="vertical-align:top;width:1.9819in;"> <p style="margin-left:0in;">torch.cuda.DoubleTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">16-bit floating point</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">N/A</p> </td> <td style="vertical-align:top;width:1.8777in;"> <p style="margin-left:0in;">torch.cuda.HalfTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9687in;"> <p style="margin-left:0in;">8-bit integer (unsigned)</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">torch.ByteTensor</p> </td> <td style="vertical-align:top;width:1.8777in;"> <p style="margin-left:0in;">torch.cuda.ByteTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">8-bit integer (signed)</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">torch.CharTensor</p> </td> <td style="vertical-align:top;width:1.8777in;"> <p style="margin-left:0in;">torch.cuda.CharTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">16-bit integer (signed)</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">torch.ShortTensor</p> </td> <td style="vertical-align:top;width:1.8777in;"> <p style="margin-left:0in;">torch.cuda.ShortTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">32-bit integer (signed)</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">torch.IntTensor</p> </td> <td style="vertical-align:top;width:1.8777in;"> <p style="margin-left:0in;">torch.cuda.IntTensor</p> </td> </tr> <tr> <td style="vertical-align:top;width:1.9493in;"> <p style="margin-left:0in;">64-bit integer (signed)</p> </td> <td style="vertical-align:top;width:1.6562in;"> <p style="margin-left:0in;">torch.LongTensor</p> </td> <td style="vertical-align:top;width:2px;"> <p style="margin-left:0in;">torch.cuda.LongTensor</p> </td> </tr> </tbody> </table> </div> </td> </tr> </tbody> </table> </div> <p style="margin-left:0in;">不指定tensor类型的话，使用默认torch.FlaotTensor类型。</p> <p style="margin-left:0in;"><strong>torch.Tensor是默认的tensor类型（torch.FlaotTensor）的简称。</strong></p> <p style="margin-left:0in;">torch中文文档中有更多Tensor的相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch-cn.readthedocs.io/zh/latest/package_references/Tensor/&gt;</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python">input_imgs=Variable(input_imgs.type(Tensor))</code></pre> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">Variable 属于Pytorch中Autograd的方法。用于将tensor转化为Variable，形成计算图。</p> <p style="margin-left:0in;">Variable是对Tensor的一个封装，操作和Tensor是一样的，但是每个Variable都有三个属性。</p> <ol> <li style="margin-left:0in;">Varibale的Tensor本身的.data</li> <li style="margin-left:0in;">对应Tensor的梯度.grad</li> <li style="margin-left:0in;">以及这个Variable是通过什么方式得到的.grad_fn</li> </ol> <p style="margin-left:0in;">Variable API 几乎和 Tensor API一致 (除了一些in-place方法，这些in-place方法会修改 required_grad=True的 input 的值)。</p> <p style="margin-left:0in;">多数情况下，将Tensor替换为Variable，代码一样会正常的工作。</p> <p style="margin-left:0in;">torch中文文档中有更多的Variable相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch-cn.readthedocs.io/zh/latest/package_references/torch-autograd/#variable</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python">d=ImageFolder(opt.image_folder,img_size=opt.img_size)  print(d[0])   dataloader=DataLoader(      ImageFolder(opt.image_folder,img_size=opt.img_size),      batch_size=opt.batch_size,      shuffle=False,      num_workers=opt.n_cpu,  )   </code></pre> <p style="margin-left:0in;"><span style="color:#d2d9e1;">&nbsp;</span></p> <p style="margin-left:0in;">Dataloader 属于 Torchvision中的数据集构造函数。</p> <p style="margin-left:0in;">从相关路径下，读取数据集，构造数据集函数。同时设置batchsize等参数。</p> <p style="margin-left:0in;"><strong>torchvision.datasets</strong></p> <p style="margin-left:0in;">torchvision.datasets中包含了以下数据集</p> <ul style="margin-left:.375in;"> <li>MNIST</li> <li>COCO（用于图像标注和目标检测）(Captioning and Detection)</li> <li>LSUN Classification</li> <li>ImageFolder</li> <li>Imagenet-12</li> <li>CIFAR10 and CIFAR100</li> <li>STL10</li> </ul> <p style="margin-left:0in;">由于以上Datasets都是 torch.utils.data.Dataset的子类，所以，他们也可以通过torch.utils.data.DataLoader使用多线程（python的多进程）。</p> <p style="margin-left:0in;">举例说明： torch.utils.data.DataLoader(coco_cap, batch_size=args.batchSize, shuffle=True, num_workers=args.nThreads)</p> <p style="margin-left:0in;">使用多线程的好处暂时不提，可自行查阅。显而易见，多线程可以在在数据加载阶段，填补CPU和GPU读写速度差，提高GPU利用率。</p> <p style="margin-left:0in;">torch中文文档中有更多的Datasets相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch-cn.readthedocs.io/zh/latest/torchvision/torchvision-datasets/</span></p> <p>&nbsp;</p> <p>&nbsp;</p> </h1> <p>返回一个包含当前模型所有模块的迭代器。</p> <pre><code class="language-python">With torch.no_grad():  Detections = model(input_imgs)  Detections = non_max_suppression(detections,opt.conf_thres,opt.nms_thres)</code></pre> <p style="margin-left:0in;">这段代码的实际执行的操作是，使用yolov3模型处理输入图片。</p> <p style="margin-left:0in;">接着再用非极大值抑制算法（NMS, non_max_supperssion）来进行二次处理。</p> <p style="margin-left:0in;">具体的NMS算法原理和实现暂时不提。</p> <p style="margin-left:0in;">YoloV3中Mode，是来自类DarkNet 的实例。</p> <p style="margin-left:0in;">DarkNet是一个比较小众的深度学习框架，没有社区主要靠作者团队自行维护。所以推广较弱。</p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">nn.model在Pytorch中，是所有网络（net）层的父类。</p> <p style="margin-left:0in;">如果要自己实现相应的网络层的话，需要继承该类。</p> <p style="margin-left:0in;">比如：</p> <pre><code class="language-python">import torch.nn as nn class Model(nn.Module):     def __init__(self):         super(Model, self).__init__()         self.add_module("conv", nn.Conv2d(10, 20, 4))         self.add_module("conv1", nn.Conv2d(20 ,10, 4)) model = Model()  for module in model.modules():     print(module)</code></pre> <div> <p>&nbsp;</p> <p><strong>Output:</strong></p> </div> <div>  <em>Model (<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (conv): Conv2d(10, 20, kernel_size=(4, 4), stride=(1, 1))<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (conv1): Conv2d(20, 10, kernel_size=(4, 4), stride=(1, 1))<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; )<br /> Conv2d(10, 20, kernel_size=(4, 4), stride=(1, 1))<br /> Conv2d(20, 10, kernel_size=(4, 4), stride=(1, 1))</em> </div> <p style="margin-left:0in;">可以看出，modules()返回的内容不止我们输入的子模块。还包括Model()中的内容。这是和children()的不同。</p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">torch中文文档中有更多的modules相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch-cn.readthedocs.io/zh/latest/package_references/torch-nn/#modules</span></p> </h1> </h1> <pre><code class="language-python">model.eval()  # Setinevaluationmode</code></pre> <p style="margin-left:0in;"><span style="color:#d8d8d8;">&nbsp;</span>eval( )属于torch.nn 中的元素。torch.nn用于构建pytorch模型的处理等操作。</p> <p style="margin-left:0in;">该函数将模型设置成evaluation模式。</p> <p style="margin-left:0in;">torch中文文档中有更多eval的相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch-cn.readthedocs.io/zh/latest/package_references/torch-nn/#eval</span></p> </h1> </h1> <pre><code class="language-python">X = F.interpolate(x, scale_factor = self.scale_factor, mode=self.mode)</code></pre> <p style="margin-left:0in;"><strong>interpolate</strong>属于torch.nn的方法，在YoloV3代码中用于实现上下采样，辅助模型的训练过程。</p> <p style="margin-left:0in;"><span style="color:#333333;">向下/向上采样输入到给定的大小或给定的scale_factor。</span></p> <p style="margin-left:0in;"><span style="color:#333333;">输入维度以以下形式解释: 迷你批处理 x 通道 x [可选深度] x [可选高度] x 宽。</span></p> <p style="margin-left:0in;"><span style="color:#333333;">目前支持时间、空间和体积采样，即期望输入为3-D、4-D或5-D的形状。</span></p> <p style="margin-left:0in;"><span style="color:#333333;">可以调整大小的模式有:Nearst、Linear(仅3d)、双线性的、双三次的(仅4d)、三线性的(仅4d)、are。</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">torch中文文档中有更多的interpolate相关细节。</p> <p style="margin-left:0in;">连接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://pytorch.org/docs/stable/nn.functional.html?highlight=interpolate</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python">For batch_i,(img_paths,input_imgs) in enumerate(dataloader):</code></pre> <p style="margin-left:0in;">enumerate（） 函数属于Python内置函数。</p> <p style="margin-left:0in;">目的是将dataloader中的数据加载出来。</p> <p style="margin-left:0in;">enumerate() 函数用于将一个可遍历的数据对象(如列表、元组或字符串)组合为一个索引序列，同时列出数据和数据下标。</p> <p style="margin-left:0in;">一般用在 for 循环当中。</p> <p style="margin-left:0in;">返回 enumerate(枚举) 对象。</p> <p style="margin-left:0in;">更多参考链接如下：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://www.runoob.com/python/python-func-enumerate.html</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <h2>get_cmp（）</h2> <pre><code class="language-python">cmap=plt.get_cmap("tab20b")</code></pre> <p style="margin-left:0in;">get_cmp（）实际上就是一种获取图片色阶的方式。</p> <p style="margin-left:0in;">在YoloV3的代码中，用来设定后边boudingbox的颜色。</p> <p style="margin-left:0in;">&nbsp;</p> <h2 style="margin-left:0in;">figure（）</h2> <pre><code class="language-python">plt.figure()</code></pre> <p style="margin-left:0in;">figure说明：The Figure instance returned will also be passed to new_figure_manager in the backends, which allows to hook custom Figure classes into the pylab interface. Additional kwargs will be passed to the figure init function</p> <p style="margin-left:0in;">含义猜测：通过new_figure_manager（新图形管理器）返回一个figure图形实例。定制的figure类将与pylab接口进行关联，同时将相关参数传递给figure的初始化函数。 &nbsp;&nbsp;&nbsp;</p> <p style="margin-left:0in;">实际可以理解为返回一个图像实例，在YoloV3中用于对图像的显示和保存。</p> <pre><code class="language-python">Cmap = plt.get_cmap("tab20b")  Colors = [cmap(i) for I in np.linspace(0,1,20)]</code></pre> <p style="margin-left:0in;">获取一种colormap的颜色值。Colormap 的颜色值为 “tab20b”。</p> <p style="margin-left:0in;">之后从cmap 中获取20种颜色。</p> <p style="margin-left:0in;">def get_cmap(name=None, lut=None):</p> <p style="margin-left:0in;"><span style="color:#333333;">"""</span></p> <p style="margin-left:0in;"><span style="color:#333333;">获取一个colormap实例，如果*name*为None，则默认为rc值。</span></p> <p style="margin-left:0in;"><span style="color:#333333;">添加:func: ' register_cmap '的Colormaps优先于</span></p> <p style="margin-left:0in;"><span style="color:#333333;">内置colormaps。</span></p> <p style="margin-left:0in;"><span style="color:#333333;">如果*name*是一个:class: ' matplotlib.colors。Colormap的实例，它会</span></p> <p style="margin-left:0in;"><span style="color:#333333;">返回。</span></p> <p style="margin-left:0in;"><span style="color:#333333;">如果*lut*不是None，那么它必须是一个整数</span></p> <p style="margin-left:0in;"><span style="color:#333333;">查找表中需要的条目和*name*必须是标准的</span></p> <p style="margin-left:0in;"><span style="color:#333333;">mpl colormap名字。</span></p> <p style="margin-left:0in;">&nbsp;</p> <pre><code class="language-python">bbox_colors=random.sample(colors,n_cls_preds)</code></pre> <p style="margin-left:0in;">对于random.sample的用法，多用于截取列表的指定长度的随机数，但是不会改变列表本身的排序</p> <p style="margin-left:0in;">参考自：<span style="color:#595959;">https://www.cnblogs.com/fish-101/p/11339909.html</span></p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python">image_pred=image_pred[(-score).argsort()]</code></pre> <p style="margin-left:0in;">numpy.argsort() 函数返回的是数组值从小到大的索引值。</p> <p style="margin-left:0in;">Argsort() 函数是Numpy排序，条件刷选函数中的一种。Numpy提供了多种排序算法。</p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">更多信息参见下面的连接：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://www.runoob.com/numpy/numpy-sort-search.html</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python"> inference_time=datetime.timedelta(seconds=current_time-prev_time)</code></pre> <p style="margin-left:0in;">timedalte 是datetime中的一个对象，该对象表示两个时间的差值。</p> <p style="margin-left:0in;">构造函数：datetime.timedelta(days=0, seconds=0, microseconds=0, milliseconds=0, minutes=0, hours=0, weeks=0)</p> <p style="margin-left:0in;">其中参数都是可选，默认值为0</p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">更多信息参见下面的连接：</p> <p style="margin-left:0in;"><span style="color:#595959;">https://www.cnblogs.com/yoyo008/p/9076116.html</span></p> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python">color=bbox_colors[int(np.where(unique_labels==int(cls_pred))[0])]</code></pre> <p style="margin-left:0in;">这句话的目的在于，返回检测到的图像框的数量，用来作为下次的随机取值。</p> <p style="margin-left:0in;">where（）返回元素，可以是x或y，具体取决于条件(condition)</p> <p style="margin-left:0in;">对于不同的输入，where返回的值是不同的。</p> <div> <table cellspacing="0"> <tbody> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:.7937in;"> <p style="margin-left:0in;">参数：</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">condition：array_llike，bool</p> </td> </tr> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:.7937in;"> <p style="margin-left:0in;">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">如果为True，则产生x，否则产生y。</p> </td> </tr> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:.7937in;"> <p style="margin-left:0in;">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">x，y：array_like，可选</p> </td> </tr> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:.7937in;"> <p style="margin-left:0in;">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">要从中选择的值。x，y和条件需要可以播放到某种形状。</p> </td> </tr> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:.8131in;"> <p style="margin-left:0in;">返回值：</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">&nbsp;out：ndarray或ndarray元组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p> </td> </tr> <tr> <td style="border-color:#a3a3a3;vertical-align:top;width:.7937in;"> <p style="margin-left:0in;">&nbsp;</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">如果同时指定了x和y，则输出数组包含x的元素，其中condition为True，其他元素来自y。如果只给出条件，则返回元组condition.nanzero()，条件为True的索引。</p> </td> </tr> </tbody> </table> </div> <p style="margin-left:0in;">&nbsp;</p> <p style="margin-left:0in;">&nbsp;</p> </h1> <pre><code class="language-python">boxes[:,0]=((boxes[:,0]-pad_x//2)/unpad_w)*orig_w</code></pre> <p style="margin-left:0in;">符号 //， 在 python 中意为 整除 。</p> <p style="margin-left:0in;">&nbsp;</p> <pre><code class="language-python"> unique_labels=detections[:,-1].cpu().unique()</code></pre> <p style="margin-left:0in;">应该是 一种数据转换， 其中：</p> <div> <table cellspacing="0"> <tbody> <tr> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">defunique(self): # real signature unknown;restored from__doc__</p> <p style="margin-left:0in;"><em>"""unique(self:torch._C.Value)-&gt;int"""</em></p> <p style="margin-left:0in;">return0</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;width:.5354in;"> <p style="margin-left:0in;">&nbsp;</p> </td> </tr> <tr> <td style="border-color:#a3a3a3;vertical-align:top;"> <p style="margin-left:0in;">defcpu(self)-&gt;Tensor:...</p> </td> <td style="border-color:#a3a3a3;vertical-align:top;width:.5548in;"> <p style="margin-left:0in;">&nbsp;</p> </td> </tr> </tbody> </table> </div> <p>&nbsp; </p> <pre><code class="language-python">unique_labels=value[:,-1].cpu().unique()</code></pre> <p style="margin-left:0in;">.cpu()的含义是，把程序放到cpu上跑，因为这个代码默认是在GPU上运行的。</p> <p style="margin-left:0in;">Unique的意思是，把list中的数据从大到小排序。</p> <p style="margin-left:0in;">Value[ : , -1]的意思是，取所有行的最后一个数据。</p> <p style="margin-left:0in;">&nbsp;</p> </p></div> 			                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-102513.htm">动物医院医疗设备清单表格（动物医院的设计,接诊流程,仪器设备）</a></p>
+                                        <p>下一个：<a href="/news/article-103338.htm">宠物粮食供应商名单（宠物粮食供应商真的赚钱吗）</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-77178.htm" title="RequestBody多个参数Map实现以及前端json传参方式">RequestBody多个参数Map实现以及前端json传参方式</a></li>
+                        <li class="py-2"><a href="/news/article-101721.htm" title="动物疫苗上市公司有哪些企业名称和地址（动物疫苗的上市公司有哪些）">动物疫苗上市公司有哪些企业名称和地址（动物疫苗的上市公司有哪些）</a></li>
+                        <li class="py-2"><a href="/news/article-86293.htm" title="kotlin增加静态扩展函数">kotlin增加静态扩展函数</a></li>
+                        <li class="py-2"><a href="/news/article-87701.htm" title="24小时动物诊所（24小时营业的动物医院）">24小时动物诊所（24小时营业的动物医院）</a></li>
+                        <li class="py-2"><a href="/news/article-92874.htm" title="中北镇天宠宠物医院电话（天津市天宠宠物医院）">中北镇天宠宠物医院电话（天津市天宠宠物医院）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-4-20-nekoray-node.htm" title="「4月20日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享">「4月20日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-84150.htm" title="仓鼠后背脱毛,看见红色的肉了怎么办（仓鼠后背脱毛,看见红色的肉了怎么办呢）">仓鼠后背脱毛,看见红色的肉了怎么办（仓鼠后背脱毛,看见红色的肉了怎么办呢）</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-22-linux-nekoray-node.htm" title="「3月22日」最高速度22.3M/S，2025年Nekoray每天更新免费机场订阅分享">「3月22日」最高速度22.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-3-19-windows-nekoray.htm" title="「3月19日」最高速度22.7M/S，2025年Nekoray每天更新免费机场订阅分享">「3月19日」最高速度22.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-96632.htm" title="python+pytest接口自动化(13)-token关联登录">python+pytest接口自动化(13)-token关联登录</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">72</span> <a href="/date/2025-04/" title="2025-04 归档">2025-04</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">90</span> <a href="/date/2025-03/" title="2025-03 归档">2025-03</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/free-nodes/">免费节点</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
