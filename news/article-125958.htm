@@ -1,0 +1,474 @@
+<!doctype html>
+<html xml:lang="zh-CN" lang="zh-CN">
+
+<head>
+        <link rel="canonical" href="https://nekoraygithub.github.io/news/article-125958.htm" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>深入解析V2Ray源码：从架构设计到实战应用</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta name="description" content="引言：网络自由的新选择  在当今互联网环境中，隐私保护和网络自由已成为全球网民的基本需求。V2Ray作为新一代网络代理工具的代表，凭借其高度模块化的设计和强大的可扩展性，正在技术社区中掀起一股研究热潮" />
+        <!-- Favicon -->
+    <link href="/assets/website/img/nekoraygithub/favicon.ico" rel="icon">
+
+    <meta name="author" content="Nekoray Github节点订阅官网">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://nekoraygithub.github.io/news/article-125958.htm" />
+    <meta property="og:site_name" content="Nekoray Github节点订阅官网" />
+    <meta property="og:title" content="深入解析V2Ray源码：从架构设计到实战应用" />
+    <meta property="og:image" content="https://nekoraygithub.github.io/uploads/20240819/c91efc1f7c2113cc2e7f289023f7bb70.webp" />
+        <meta property="og:release_date" content="2025-06-18T08:57:08" />
+    <meta property="og:updated_time" content="2025-06-18T08:57:08" />
+        <meta property="og:description" content="引言：网络自由的新选择  在当今互联网环境中，隐私保护和网络自由已成为全球网民的基本需求。V2Ray作为新一代网络代理工具的代表，凭借其高度模块化的设计和强大的可扩展性，正在技术社区中掀起一股研究热潮" />
+    
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="深入解析V2Ray源码：从架构设计到实战应用">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="dns-prefetch" href="https:/www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googleadservices.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    <link rel="dns-prefetch" href="https://cm.g.doubleclick.net">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- google-fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- //google-fonts -->
+    <!-- Font-Awesome-Icons-CSS -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/fontawesome-all.min.css">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/website/css/nekoraygithub/style-starter.css">
+    <link rel="stylesheet" href="/assets/website/css/G.css" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PLCXEZFQTC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PLCXEZFQTC');
+</script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3332997411212854"
+     crossorigin="anonymous"></script>
+</head>
+
+<body data-page="detail">
+        <!--header-->
+    <header id="site-header" class="fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg stroke px-0">
+                <a class="navbar-brand" href="/">
+                                <span>Nekoray Github</span>
+                                </a>
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/">首页</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/paid-subscribe/">推荐机场</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/client.htm">客户端</a>
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link" href="/news/">新闻资讯</a>
+                        </li>
+                                            </ul>
+                </div>
+                <!-- //search button -->
+                <!-- toggle switch for light and dark theme -->
+                <div class="cont-ser-position">
+                    <nav class="navigation">
+                        <div class="theme-switch-wrapper">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <div class="mode-container">
+                                    <i class="gg-sun"></i>
+                                    <i class="gg-moon"></i>
+                                </div>
+                            </label>
+                        </div>
+                    </nav>
+                </div>
+                <!-- //toggle switch for light and dark theme -->
+            </nav>
+        </div>
+    </header>
+    <!--//header-->
+    <!-- inner banner -->
+    <div class="inner-banner">
+        <section class="w3l-breadcrumb">
+            <div class="container">
+                <h1 class="inner-text-title font-weight-bold mb-2">深入解析V2Ray源码：从架构设计到实战应用</h1>
+                <ul class="breadcrumbs-custom-path">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/news/"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>新闻资讯</a></li>
+                    <li class="active"><span class="fa fa-chevron-right mx-2" aria-hidden="true"></span>正文</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- //inner banner -->
+    <!-- about section -->
+    <div class="w3l-content-photo-5 py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                                    <input type="hidden" id="share-website-info" data-name="NekoRayNode节点订阅站" data-url="https://nekoraynode.github.io">
+                <div class="xcblog-blog-detail xcblog-blog-detail-defined">
+                      <h2>引言：网络自由的新选择</h2>  <p>在当今互联网环境中，隐私保护和网络自由已成为全球网民的基本需求。V2Ray作为新一代网络代理工具的代表，凭借其高度模块化的设计和强大的可扩展性，正在技术社区中掀起一股研究热潮。与传统的Shadowsocks相比，V2Ray提供了更为丰富的协议支持和更灵活的配置方式，使其成为网络先锋和技术开发者的首选工具。</p>  <p>本文将带领读者深入V2Ray的源码世界，剖析其架构设计的精妙之处，解读核心功能模块的实现原理，并分享从编译到运行的完整实践指南。通过这篇超过2000字的深度分析，您将获得对V2Ray技术本质的全面认识。</p>  <h2>一、V2Ray源码架构全景解析</h2>  <h3>1.1 源码目录结构设计哲学</h3>  <p>V2Ray的源码组织体现了清晰的模块化思想，每个目录都有明确的职责边界：</p>  <ul> <li><p><strong>cmd/</strong>：这个目录包含了所有命令行工具的源代码，是用户与V2Ray交互的直接入口。值得注意的是，V2Ray采用了"单一可执行文件"的设计理念，通过不同的命令行参数来实现多样化的功能。</p></li> <li><p><strong>core/</strong>：作为整个项目的"大脑"，这里包含了V2Ray最核心的逻辑组件。路由规则设置、流量处理管道、组件生命周期管理等关键功能都在此实现。特别值得一提的是，core模块采用了"插件式架构"，为功能扩展提供了坚实基础。</p></li> <li><p><strong>transport/</strong>：数据传输是代理工具的核心功能，这个模块实现了TCP、WebSocket、QUIC等多种传输协议的支持。其设计亮点在于统一的协议接口，使得新增协议支持变得异常简单。</p></li> <li><p><strong>config/</strong>：配置文件处理是V2Ray灵活性的重要保障。这个模块不仅负责JSON配置文件的解析，还实现了配置的热加载功能，使得V2Ray可以在不重启的情况下更新配置。</p></li> </ul>  <h3>1.2 模块交互关系与设计模式</h3>  <p>V2Ray的架构采用了经典的"依赖倒置"原则，高层模块不直接依赖低层模块，而是通过抽象接口进行交互。这种设计带来了几个显著优势：</p>  <ol> <li><strong>可测试性</strong>：各模块可以独立测试，mock实现非常容易</li> <li><strong>可扩展性</strong>：新增功能只需实现既定接口，无需修改核心代码</li> <li><strong>可维护性</strong>：模块间耦合度低，修改一个模块不会波及其他部分</li> </ol>  <p>特别值得关注的是V2Ray中广泛使用的"管道过滤器"模式。数据从入口到出口的整个处理流程被分解为多个独立的处理阶段，每个阶段都可以自由组合，这种设计极大地增强了系统的灵活性。</p>  <h2>二、核心功能模块深度剖析</h2>  <h3>2.1 传输模块：多协议支持的艺术</h3>  <p>传输模块是V2Ray最具技术含量的部分之一，它实现了多种协议的封装和转换：</p>  <ul> <li><strong>TCP基础传输</strong>：虽然是最基础的协议，但V2Ray对其进行了深度优化，包括连接池管理、拥塞控制算法调优等</li> <li><strong>WebSocket伪装</strong>：将代理流量伪装成普通的WebSocket通信，有效绕过深度包检测</li> <li><strong>QUIC实验性支持</strong>：基于UDP的QUIC协议提供了更快的连接建立速度和更好的移动网络适应性</li> </ul>  <p>技术亮点在于协议自动选择机制。V2Ray可以根据网络环境自动选择最优传输协议，这种"协议自适应"能力使其在不同网络条件下都能保持良好性能。</p>  <h3>2.2 路由模块：智能流量分发的核心</h3>  <p>路由模块是V2Ray区别于传统代理工具的关键所在，它实现了精细化的流量控制：</p>  <ul> <li><strong>基于域名的分流</strong>：支持通配符和正则表达式匹配，可以精确控制特定域名的走向</li> <li><strong>IP地理位置识别</strong>：内置GeoIP数据库，可实现国内外流量的自动分流</li> <li><strong>负载均衡策略</strong>：支持轮询、最少连接等多种负载均衡算法</li> </ul>  <p>路由模块最巧妙的设计是其"规则链"机制。每条规则可以设置多个匹配条件和动作，规则按优先级排序形成处理链，这种设计既保证了灵活性又保持了高效性。</p>  <h3>2.3 伪装模块：对抗审查的利器</h3>  <p>伪装模块是V2Ray在审查严格环境中仍能保持可用的关键：</p>  <ul> <li><strong>TLS全流量加密</strong>：将整个代理流量封装在TLS加密通道中，使其看起来像普通的HTTPS流量</li> <li><strong>HTTP伪装</strong>：模拟常见的HTTP请求和响应，有效避开简单协议识别</li> <li><strong>动态端口跳变</strong>：定期更换通信端口，增加追踪难度</li> </ul>  <p>伪装模块的技术创新在于其"深度伪装"能力。不同于简单的协议封装，V2Ray可以模拟特定网站（如GitHub、Cloudflare）的通信特征，使得流量识别更加困难。</p>  <h2>三、从源码到实践：编译与运行全指南</h2>  <h3>3.1 开发环境配置要点</h3>  <p>要成功编译V2Ray源码，需要注意几个关键点：</p>  <ol> <li><strong>Golang版本选择</strong>：推荐使用最新的稳定版，V2Ray通常会快速适配Golang的新特性</li> <li><strong>依赖管理</strong>：V2Ray使用Go Modules管理依赖，需要设置正确的GOPROXY</li> <li><strong>交叉编译</strong>：通过设置GOOS和GOARCH环境变量，可以轻松编译不同平台的版本</li> </ol>  <h3>3.2 编译过程详解</h3>  <p>V2Ray的编译流程经过精心设计，简单而高效：</p>  <p>```bash</p>  <h1>获取源码  <p>git clone https://github.com/v2fly/v2ray-core.git cd v2ray-core</p>  <h1>编译主程序  <p>go build -o v2ray ./main</p>  <h1>编译额外工具  <p>go build -o v2ctl ./infra/control/main ```</p>  <p>编译系统的一个亮点是自动化的版本信息嵌入。编译时会自动将Git提交哈希、构建时间等信息写入二进制文件，方便问题追踪。</p>  <h3>3.3 运行测试与性能调优</h3>  <p>启动V2Ray后，可以通过多种方式验证其运行状态：</p>  <p>```bash</p>  <h1>基本启动  <p>./v2ray -config config.json</p>  <h1>测试模式(不处理实际流量)  <p>./v2ray -test -config config.json</p>  <h1>性能分析模式  <p>./v2ray -trace -config config.json ```</p>  <p>对于高性能场景，建议调整以下参数： - 连接池大小 - 并发工作协程数 - 内存缓存大小</p>  <h2>四、开源生态与未来发展</h2>  <p>V2Ray拥有活跃的开源社区，在GitHub上有超过20k的star。社区不仅维护核心项目，还开发了大量周边工具：</p>  <ul> <li><strong>v2rayN</strong>：Windows图形客户端</li> <li><strong>v2rayNG</strong>：Android客户端</li> <li><strong>Qv2ray</strong>：跨平台GUI客户端</li> </ul>  <p>项目采用开放的治理模式，核心开发者来自全球各地，通过RFC流程决定重大功能变更。这种开放透明的开发模式保证了项目的长期健康发展。</p>  <h2>五、技术点评与前景展望</h2>  <p>从技术架构角度看，V2Ray代表了现代代理工具的先进设计理念：</p>  <ol> <li><strong>模块化设计</strong>：清晰的接口定义和职责划分使系统易于理解和扩展</li> <li><strong>高性能实现</strong>：充分利用Golang的并发特性，在多核系统上表现出色</li> <li><strong>协议创新</strong>：不断引入新的协议和伪装技术，保持对抗审查的有效性</li> </ol>  <p>与同类工具相比，V2Ray的优势在于： - 比Shadowsocks更灵活的配置能力 - 比Tor更高的性能和更低的延迟 - 比WireGuard更好的抗审查特性</p>  <p>未来发展方向可能包括： - 更智能的协议自动选择 - 增强的移动端体验 - 与云原生技术的深度集成</p>  <h2>结语：技术自由的实践典范</h2>  <p>V2Ray不仅仅是一个代理工具，它体现了互联网最初的理念——自由、开放和去中心化。通过对其源码的深入分析，我们不仅学到了优秀的软件设计实践，更看到了技术如何为网络自由提供可能。</p>  <p>对于开发者而言，研究V2Ray源码是提升系统设计能力的绝佳途径；对于隐私倡导者，V2Ray提供了保护网络自由的有力工具；对于技术爱好者，V2Ray展示了现代网络协议的精彩世界。</p>  <p>正如V2Ray项目标语所言："A platform for building proxies to bypass network restrictions." 在这个网络管控日益严格的时代，V2Ray及其代表的开放技术理念显得尤为珍贵。期待更多开发者加入这个充满活力的社区，共同推动网络自由技术的发展。</p>                 </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 mt-5">
+                                        <p>上一个：<a href="/news/article-125635.htm">苹果Clash终极指南：从入门到精通的完整使用手册</a></p>
+                                        <p>下一个：<a href="/news/article-126292.htm">Shadowrocket账号共享：从原理到实践的深度指南与风险规避</a></p>
+                                    </div>
+                                </div>
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">热门文章</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2"><a href="/news/article-125287.htm" title="突破网络边界：Miaoss妙速加速器全方位使用指南与深度解析">突破网络边界：Miaoss妙速加速器全方位使用指南与深度解析</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-29-free-subscribe-node.htm" title="「5月29日」最高速度20.6M/S，2025年Nekoray每天更新免费机场订阅分享">「5月29日」最高速度20.6M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-110854.htm" title="Vue项目引进sass方法详解">Vue项目引进sass方法详解</a></li>
+                        <li class="py-2"><a href="/news/article-123354.htm" title="Clash代理一开就失效？深度解析原因与终极解决方案">Clash代理一开就失效？深度解析原因与终极解决方案</a></li>
+                        <li class="py-2"><a href="/news/article-120194.htm" title="科学上网激活可行吗？法律风险、技术选择与安全指南深度解析">科学上网激活可行吗？法律风险、技术选择与安全指南深度解析</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-24-node-share-links.htm" title="「5月24日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享">「5月24日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-125635.htm" title="苹果Clash终极指南：从入门到精通的完整使用手册">苹果Clash终极指南：从入门到精通的完整使用手册</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-27-linux-nekoray.htm" title="「5月27日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享">「5月27日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/news/article-123025.htm" title="突破网络限制：免费SSRhub V2Ray全面使用指南与深度解析">突破网络限制：免费SSRhub V2Ray全面使用指南与深度解析</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-5-15-share-windows-nekoray.htm" title="「5月15日」最高速度21.2M/S，2025年Nekoray每天更新免费机场订阅分享">「5月15日」最高速度21.2M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                    </ul>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">归纳</h3>
+    </div>
+    <div class="panel-body">
+        <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2025-06/" title="2025-06 归档">2025-06</a></h4>
+            </li>
+                        <li class="py-2">
+                <h4><span class="badge" style="float: right;">33</span> <a href="/date/2025-05/" title="2025-05 归档">2025-05</a></h4>
+            </li>
+                    </ul>
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //about section -->
+        <!-- footer -->
+    <footer class="w3l-footer-16">
+        <div class="w3l-footer-16-main">
+            <div class="container">
+                <div class="below-section mt-5 text-center">
+                                        <p>
+                                                <a href="/">首页</a> |
+                                                <a href="/paid-subscribe/">推荐机场</a> |
+                                                <a href="/client.htm">客户端</a> |
+                                                <a href="/news/">新闻资讯</a> |
+                                                <a href="/about-us.htm">关于我们</a> |
+                        <a href="/disclaimer.htm">免责申明</a> |
+                        <a href="/privacy.htm">隐私申明</a> |
+                        <a href="/sitemap.xml">网站地图</a>
+                    </p>
+                    <p class="copy-text">
+                        Nekoray Github节点订阅官网 版权所有
+                        <br />
+                        Powered by WordPress
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- //footer -->
+    <!-- Js scripts -->
+    <!-- move top -->
+    <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fas fa-level-up-alt" aria-hidden="true"></span>
+    </button>
+    <script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {
+        scrollFunction()
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+        } else {
+            document.getElementById("movetop").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    </script>
+    <!-- //move top -->
+    <!-- common jquery plugin -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery-3.5.1.min.js"></script>
+    <!-- //common jquery plugin -->
+    <!-- banner image moving effect -->
+    <script>
+    var lFollowX = 0,
+        lFollowY = 0,
+        x = 0,
+        y = 0,
+        friction = 1 / 30;
+
+    function animate() {
+        x += (lFollowX - x) * friction;
+        y += (lFollowY - y) * friction;
+
+        translate = 'translate(' + x + 'px, ' + y + 'px) scale(1.1)';
+
+        $('.banner-image').css({
+            '-webit-transform': translate,
+            '-moz-transform': translate,
+            'transform': translate
+        });
+
+        window.requestAnimationFrame(animate);
+    }
+
+    $(window).on('mousemove click', function(e) {
+
+        var lMouseX = Math.max(-100, Math.min(100, $(window).width() / 2 - e.clientX));
+        var lMouseY = Math.max(-100, Math.min(100, $(window).height() / 2 - e.clientY));
+        lFollowX = (20 * lMouseX) / 100; // 100 : 12 = lMouxeX : lFollow
+        lFollowY = (10 * lMouseY) / 100;
+
+    });
+
+    animate();
+    </script>
+    <!-- //banner image moving effect -->
+    <!-- typig-text-->
+    <script>
+    const typedTextSpan = document.querySelector(".typed-text");
+    const cursorSpan = document.querySelector(".cursor");
+
+    const textArray = ["Designer's", "Developer's", "Creator's"];
+    const typingDelay = 300;
+    const erasingDelay = 10;
+    const newTextDelay = 100; // Delay between current and next text
+    let textArrayIndex = 0;
+    let charIndex = 0;
+
+    function type() {
+        if (charIndex < textArray[textArrayIndex].length) {
+            if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+            typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(type, typingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            setTimeout(erase, newTextDelay);
+        }
+    }
+
+    function erase() {
+        if (charIndex > 0) {
+            // add class 'typing' if there's none
+            if (!cursorSpan.classList.contains("typing")) {
+                cursorSpan.classList.add("typing");
+            }
+            typedTextSpan.textContent = textArray[textArrayIndex].substring(0, 0);
+            charIndex--;
+            setTimeout(erase, erasingDelay);
+        } else {
+            cursorSpan.classList.remove("typing");
+            textArrayIndex++;
+            if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+            setTimeout(type, typingDelay);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() { // On DOM Load initiate the effect
+        if (textArray.length) setTimeout(type, newTextDelay + 250);
+    });
+    </script>
+    <!-- //typig-text-->
+    <!-- owl carousel -->
+    <script src="/assets/website/js/frontend/nekoraygithub/owl.carousel.js"></script>
+    <!-- script for tesimonials carousel slider -->
+    <script>
+    $(document).ready(function() {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplaySpeed: 1000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+    </script>
+    <!-- //script for tesimonials carousel slider -->
+    <!-- //owl carousel -->
+    <!-- theme switch js (light and dark)-->
+    <script src="/assets/website/js/frontend/nekoraygithub/theme-change.js"></script>
+    <script>
+    function autoType(elementClass, typingSpeed) {
+        var thhis = $(elementClass);
+        thhis.css({
+            "position": "relative",
+            "display": "inline-block"
+        });
+        thhis.prepend('<div class="cursor" style="right: initial; left:0;"></div>');
+        thhis = thhis.find(".text-js");
+        var text = thhis.text().trim().split('');
+        var amntOfChars = text.length;
+        var newString = "";
+        thhis.text("|");
+        setTimeout(function() {
+            thhis.css("opacity", 1);
+            thhis.prev().removeAttr("style");
+            thhis.text("");
+            for (var i = 0; i < amntOfChars; i++) {
+                (function(i, char) {
+                    setTimeout(function() {
+                        newString += char;
+                        thhis.text(newString);
+                    }, i * typingSpeed);
+                })(i + 1, text[i]);
+            }
+        }, 1500);
+    }
+
+    $(document).ready(function() {
+        // Now to start autoTyping just call the autoType function with the 
+        // class of outer div
+        // The second paramter is the speed between each letter is typed.   
+        autoType(".type-js", 200);
+    });
+    </script>
+    <!-- //theme switch js (light and dark)-->
+    <!-- magnific popup -->
+    <script src="/assets/website/js/frontend/nekoraygithub/jquery.magnific-popup.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+        $('.popup-with-move-anim').magnificPopup({
+            type: 'inline',
+
+            fixedContentPos: false,
+            fixedBgPos: true,
+
+            overflowY: 'auto',
+
+            closeBtnInside: true,
+            preloader: false,
+
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-slide-bottom'
+        });
+    });
+    </script>
+    <!-- //magnific popup -->
+    <!-- MENU-JS -->
+    <script>
+    $(window).on("scroll", function() {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function() {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function() {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function() {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+    </script>
+    <!-- //MENU-JS -->
+    <!-- disable body scroll which navbar is in active -->
+    <script>
+    $(function() {
+        $('.navbar-toggler').click(function() {
+            $('body').toggleClass('noscroll');
+        })
+    });
+    </script>
+    <!-- //disable body scroll which navbar is in active -->
+    <!--bootstrap-->
+    <script src="/assets/website/js/frontend/nekoraygithub/bootstrap.min.js"></script>
+    <!-- //bootstrap-->
+    <script src="https://www.freeclashnode.com/assets/js/frontend/invite-url.js"></script><script src="/assets/website/js/frontend/G.js"></script>
+    <!-- //Js scripts -->
+</body>
+
+</html>
