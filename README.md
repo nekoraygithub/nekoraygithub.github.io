@@ -1,4 +1,4 @@
-# 「8月28日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享  更新时间 2025-08-28 11:54:05
+# 「9月3日」最高速度20.3M/S，2025年Nekoray每天更新免费机场订阅分享  更新时间 2025-09-03 06:00:24
 所有免费clash节点都爬取自网络，请勿用于非法用途 。节点地址：<a href="https://nekoraygithub.github.io" target="_blank">点击跳转</a>
 
 ## clash使用教程：
@@ -9,23 +9,23 @@
 
 ### Clash订阅链接
 
-- https://nekoraygithub.github.io/uploads/2025/08/0-20250828.yaml
-- https://nekoraygithub.github.io/uploads/2025/08/1-20250828.yaml
-- https://nekoraygithub.github.io/uploads/2025/08/2-20250828.yaml
-- https://nekoraygithub.github.io/uploads/2025/08/3-20250828.yaml
-- https://nekoraygithub.github.io/uploads/2025/08/4-20250828.yaml
+- https://nekoraygithub.github.io/uploads/2025/09/0-20250903.yaml
+- https://nekoraygithub.github.io/uploads/2025/09/1-20250903.yaml
+- https://nekoraygithub.github.io/uploads/2025/09/2-20250903.yaml
+- https://nekoraygithub.github.io/uploads/2025/09/3-20250903.yaml
+- https://nekoraygithub.github.io/uploads/2025/09/4-20250903.yaml
 
 ### V2ray订阅链接
 
-- https://nekoraygithub.github.io/uploads/2025/08/0-20250828.txt
-- https://nekoraygithub.github.io/uploads/2025/08/1-20250828.txt
-- https://nekoraygithub.github.io/uploads/2025/08/2-20250828.txt
-- https://nekoraygithub.github.io/uploads/2025/08/3-20250828.txt
-- https://nekoraygithub.github.io/uploads/2025/08/4-20250828.txt
+- https://nekoraygithub.github.io/uploads/2025/09/0-20250903.txt
+- https://nekoraygithub.github.io/uploads/2025/09/1-20250903.txt
+- https://nekoraygithub.github.io/uploads/2025/09/2-20250903.txt
+- https://nekoraygithub.github.io/uploads/2025/09/3-20250903.txt
+- https://nekoraygithub.github.io/uploads/2025/09/4-20250903.txt
 
 ### Sing-box订阅链接
 
-- https://nekoraygithub.github.io/uploads/2025/08/20250828.json
+- https://nekoraygithub.github.io/uploads/2025/09/20250903.json
 
 ## 更多clash节点订阅 ：
 
