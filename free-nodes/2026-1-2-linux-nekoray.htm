@@ -256,14 +256,19 @@ net.ipv4.tcp_congestion_control = bbr
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Hiddify Next 如何管理不同用户的带宽？</h5></div>
+    <div class="panel-heading"><h5>V2Ray 的 outbound freedom 模式有什么作用？</h5></div>
     <div class="panel-body">
-        管理员可以为每个用户设置独立带宽限制和流量配额。超出配额时可自动阻断或降速，确保服务器资源合理分配，避免单用户占用过多带宽，保障整体网络体验。<hr />    </div>
+        freedom 是直连模块，可用于分流策略中实现部分流量直连。用户可在 routing 中设置匹配规则，将国内域名或局域网 IP 指向 freedom 出口，从而减少代理开销和延迟。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Sing-box 的性能比 Clash 好吗？</h5></div>
+    <div class="panel-heading"><h5>V2Ray 使用 mKCP 有哪些适合场景？</h5></div>
     <div class="panel-body">
-        Sing-box 在性能优化上更为出色，特别是在高并发连接下延迟更低。它采用 Go 语言编写并优化了内存占用，比传统 Clash 内核运行更轻盈，尤其适合服务器端部署或移动端设备使用。<hr />    </div>
+        mKCP 是基于 UDP 的传输协议，适合高丢包或不稳定网络环境。结合策略组使用，可优化网页浏览、视频播放和游戏体验，减少延迟和掉线，提高连接稳定性。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hysteria2 的多路复用在短连接场景下有什么优势？</h5></div>
+    <div class="panel-body">
+        多路复用允许多个短连接共享同一通道，减少握手延迟和资源消耗。适合高频短连接应用，如游戏和即时通讯，能提高吞吐量和连接稳定性，优化网络体验。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Quantumult X 中自定义脚本导致规则异常，该如何恢复？</h5></div>
@@ -276,24 +281,14 @@ net.ipv4.tcp_congestion_control = bbr
         Trojan-Go 在配置文件中通过启用 mux 参数即可实现多路复用。此功能允许多个连接共享同一隧道，减少握手延迟并提升整体传输效率，尤其在移动网络中表现出色。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 使用 mKCP 有哪些适合场景？</h5></div>
-    <div class="panel-body">
-        mKCP 是基于 UDP 的传输协议，适合高丢包或不稳定网络环境。结合策略组使用，可优化网页浏览、视频播放和游戏体验，减少延迟和掉线，提高连接稳定性。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray 是否支持订阅自动更新？</h5></div>
     <div class="panel-body">
         是的，WinXray 支持定时订阅更新。用户可在设置中开启自动更新周期（如每天或每小时），程序会自动下载新节点并替换旧配置，确保使用最新的线路资源。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 的 outbound freedom 模式有什么作用？</h5></div>
+    <div class="panel-heading"><h5>Sing-box 的性能比 Clash 好吗？</h5></div>
     <div class="panel-body">
-        freedom 是直连模块，可用于分流策略中实现部分流量直连。用户可在 routing 中设置匹配规则，将国内域名或局域网 IP 指向 freedom 出口，从而减少代理开销和延迟。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 的多路复用在短连接场景下有什么优势？</h5></div>
-    <div class="panel-body">
-        多路复用允许多个短连接共享同一通道，减少握手延迟和资源消耗。适合高频短连接应用，如游戏和即时通讯，能提高吞吐量和连接稳定性，优化网络体验。<hr />    </div>
+        Sing-box 在性能优化上更为出色，特别是在高并发连接下延迟更低。它采用 Go 语言编写并优化了内存占用，比传统 Clash 内核运行更轻盈，尤其适合服务器端部署或移动端设备使用。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>WinXray PAC 模式如何提高访问速度和便利性？</h5></div>
@@ -303,7 +298,12 @@ net.ipv4.tcp_congestion_control = bbr
 <div class="panel panel-default">
     <div class="panel-heading"><h5>如何在 Sing-box 中设置多个 outbound 实现策略路由？</h5></div>
     <div class="panel-body">
-        在 sing-box 的配置中定义多个 outbound 对象并为 routing 模块配置 rules，将不同目的地或应用流量指向对应 outbound，从而实现分流、负载均衡或故障转移等复杂路由策略。    </div>
+        在 sing-box 的配置中定义多个 outbound 对象并为 routing 模块配置 rules，将不同目的地或应用流量指向对应 outbound，从而实现分流、负载均衡或故障转移等复杂路由策略。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hiddify Next 如何管理不同用户的带宽？</h5></div>
+    <div class="panel-body">
+        管理员可以为每个用户设置独立带宽限制和流量配额。超出配额时可自动阻断或降速，确保服务器资源合理分配，避免单用户占用过多带宽，保障整体网络体验。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -332,16 +332,16 @@ net.ipv4.tcp_congestion_control = bbr
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-23-node-share.htm" title="「11月23日」最高速度19.4M/S，2025年Nekoray每天更新免费机场订阅分享">「11月23日」最高速度19.4M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-14-linux-nekoray-node.htm" title="「12月14日」最高速度18.5M/S，2025年Nekoray每天更新免费机场订阅分享">「12月14日」最高速度18.5M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-15-free-nekoray.htm" title="「11月15日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享">「11月15日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-11-linux-nekoray.htm" title="「11月11日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享">「11月11日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-10-free-nekoray.htm" title="「12月10日」最高速度22.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月10日」最高速度22.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-13-node-share.htm" title="「12月13日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月13日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-8-free-high-speed-nodes.htm" title="「11月8日」最高速度23M/S，2025年Nekoray每天更新免费机场订阅分享">「11月8日」最高速度23M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-7-nekoray-node.htm" title="「12月7日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享">「12月7日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-22-nekoray-node.htm" title="「11月22日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享">「11月22日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-22-share-windows-nekoray.htm" title="「12月22日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享">「12月22日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-27-node-share.htm" title="「12月27日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享">「12月27日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-20-free-nekoray-node.htm" title="「12月20日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月20日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-23-node-share.htm" title="「12月23日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月23日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-4-node-share.htm" title="「1月4日」最高速度20.4M/S，2025年Nekoray每天更新免费机场订阅分享">「1月4日」最高速度20.4M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-18-free-high-speed-nodes.htm" title="「12月18日」最高速度22.3M/S，2025年Nekoray每天更新免费机场订阅分享">「12月18日」最高速度22.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-9-free-nekoray-node.htm" title="「12月9日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享">「12月9日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-5-linux-nekoray-node.htm" title="「1月5日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享">「1月5日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2025-12-25-free-node-subscribe-links.htm" title="「12月25日」最高速度20.2M/S，2025年Nekoray每天更新免费机场订阅分享">「12月25日」最高速度20.2M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-24-free-subscribe-node.htm" title="「12月24日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享">「12月24日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
                     </ul>
     </div>
 </div>
@@ -356,10 +356,7 @@ net.ipv4.tcp_congestion_control = bbr
                 <h4><span class="badge" style="float: right;">7</span> <a href="/date/2026-01/" title="2026-01 归档">2026-01</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                     </ul>
     </div>

@@ -390,6 +390,26 @@ Shadowrocket就像一个沉默的网络护卫，默默在背后为用户搭建�
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>VLESS + XTLS 如何在高延迟网络中优化连接？</h5></div>
+    <div class="panel-body">
+        XTLS 模式通过减少握手和加密开销降低延迟。结合策略组和多节点切换，可在高延迟或不稳定网络环境下保证网页浏览、视频播放和游戏连接稳定，提高整体体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray 的 WebSocket 传输与 TCP 有何区别？</h5></div>
+    <div class="panel-body">
+        WebSocket 通过 HTTP 封装 TCP 流量，适合伪装成正常网页请求，增加隐蔽性。相比原生 TCP，可更好地绕过封锁和 DPI 检测，但略增加协议开销。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Sing-box 可以替换 Clash 配置文件吗？</h5></div>
+    <div class="panel-body">
+        Sing-box 支持直接解析 Clash YAML 配置，并转换为自身 JSON 格式。节点、策略组和规则基本兼容，但部分自定义脚本可能需要手动调整才能完全使用。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Mellow 的 TUN 模式能全局代理吗？</h5></div>
+    <div class="panel-body">
+        TUN 模式拦截系统 IP 层流量，可实现全局代理，无需手动设置浏览器或应用代理。适合需要全局科学上网或游戏加速的场景，保证所有流量均走代理节点。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Netch 全局与规则代理如何合理选择？</h5></div>
     <div class="panel-body">
         全局代理适合游戏或全局科学上网，将所有流量通过节点；规则代理仅对指定应用或 IP 走代理，可提高带宽利用率和访问效率，根据使用场景灵活选择模式。<hr />    </div>
@@ -400,14 +420,14 @@ Shadowrocket就像一个沉默的网络护卫，默默在背后为用户搭建�
         混淆方式决定流量伪装特性，不同方式适应不同封锁环境。常用方式如 tls1.2_ticket_auth 模拟 HTTPS，http_simple 模拟 HTTP 请求，根据环境选择可提高抗封锁能力。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Mellow 的 TUN 模式能全局代理吗？</h5></div>
+    <div class="panel-heading"><h5>如何配置 Sing-box 使用 DoH 加密 DNS？</h5></div>
     <div class="panel-body">
-        TUN 模式拦截系统 IP 层流量，可实现全局代理，无需手动设置浏览器或应用代理。适合需要全局科学上网或游戏加速的场景，保证所有流量均走代理节点。<hr />    </div>
+        在 dns 模块中添加类型为 doh 的上游，如 `https://1.1.1.1/dns-query`，并指定 bootstrap 地址。启用加密 DNS 可防止 DNS 泄露并加快国际解析速度，提高整体隐私保护。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Clash 策略组如何实现节点优先级切换？</h5></div>
+    <div class="panel-heading"><h5>Hysteria2 多路复用如何优化高频短连接？</h5></div>
     <div class="panel-body">
-        用户可以在 Clash 策略组中设置节点优先级，结合规则文件，自动选择延迟低、稳定性高的节点处理流量。优化网页浏览、视频播放和游戏访问速度，提高整体网络效率。<hr />    </div>
+        多路复用允许多个短连接共享同一通道，减少握手次数和加密开销。适合游戏和即时通讯等高频短连接场景，提高吞吐量和连接稳定性，保证流量快速传输。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>何时应选择 VLess 而非 Vmess？</h5></div>
@@ -415,29 +435,9 @@ Shadowrocket就像一个沉默的网络护卫，默默在背后为用户搭建�
         若追求更轻量、高性能的连接且采用外部 TLS 或 XTLS 进行加密，建议选择 VLess。VLess 去除了内嵌加密，能更好配合现代传输（XTLS/Reality）实现更低延迟与更好扩展性。<hr />    </div>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>如何配置 Sing-box 使用 DoH 加密 DNS？</h5></div>
+    <div class="panel-heading"><h5>Clash 策略组如何实现节点优先级切换？</h5></div>
     <div class="panel-body">
-        在 dns 模块中添加类型为 doh 的上游，如 `https://1.1.1.1/dns-query`，并指定 bootstrap 地址。启用加密 DNS 可防止 DNS 泄露并加快国际解析速度，提高整体隐私保护。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VLESS + XTLS 如何在高延迟网络中优化连接？</h5></div>
-    <div class="panel-body">
-        XTLS 模式通过减少握手和加密开销降低延迟。结合策略组和多节点切换，可在高延迟或不稳定网络环境下保证网页浏览、视频播放和游戏连接稳定，提高整体体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Sing-box 可以替换 Clash 配置文件吗？</h5></div>
-    <div class="panel-body">
-        Sing-box 支持直接解析 Clash YAML 配置，并转换为自身 JSON 格式。节点、策略组和规则基本兼容，但部分自定义脚本可能需要手动调整才能完全使用。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 的 WebSocket 传输与 TCP 有何区别？</h5></div>
-    <div class="panel-body">
-        WebSocket 通过 HTTP 封装 TCP 流量，适合伪装成正常网页请求，增加隐蔽性。相比原生 TCP，可更好地绕过封锁和 DPI 检测，但略增加协议开销。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 多路复用如何优化高频短连接？</h5></div>
-    <div class="panel-body">
-        多路复用允许多个短连接共享同一通道，减少握手次数和加密开销。适合游戏和即时通讯等高频短连接场景，提高吞吐量和连接稳定性，保证流量快速传输。    </div>
+        用户可以在 Clash 策略组中设置节点优先级，结合规则文件，自动选择延迟低、稳定性高的节点处理流量。优化网页浏览、视频播放和游戏访问速度，提高整体网络效率。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -466,16 +466,16 @@ Shadowrocket就像一个沉默的网络护卫，默默在背后为用户搭建�
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/2025-11-29-linux-nekoray.htm" title="「11月29日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享">「11月29日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-6-free-high-speed-nodes.htm" title="「12月6日」最高速度18.6M/S，2025年Nekoray每天更新免费机场订阅分享">「12月6日」最高速度18.6M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-23-node-share.htm" title="「11月23日」最高速度19.4M/S，2025年Nekoray每天更新免费机场订阅分享">「11月23日」最高速度19.4M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-13-node-share.htm" title="「12月13日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月13日」最高速度21.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-20-free-nekoray-node.htm" title="「12月20日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月20日」最高速度18.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-21-node-share-links.htm" title="「12月21日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享">「12月21日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-22-share-windows-nekoray.htm" title="「12月22日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享">「12月22日」最高速度18.9M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2026-1-6-free-node-subscribe-links.htm" title="「1月6日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享">「1月6日」最高速度19.1M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-11-windows-nekoray.htm" title="「12月11日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享">「12月11日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-26-node-share.htm" title="「12月26日」最高速度20.5M/S，2025年Nekoray每天更新免费机场订阅分享">「12月26日」最高速度20.5M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
                         <li class="py-2"><a href="/free-nodes/2026-1-7-share-windows-nekoray.htm" title="「1月7日」最高速度20.7M/S，2025年Nekoray每天更新免费机场订阅分享">「1月7日」最高速度20.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-7-nekoray-node.htm" title="「12月7日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享">「12月7日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-20-linux-nekoray-node.htm" title="「11月20日」最高速度19.6M/S，2025年Nekoray每天更新免费机场订阅分享">「11月20日」最高速度19.6M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-11-26-share-windows-nekoray.htm" title="「11月26日」最高速度22.4M/S，2025年Nekoray每天更新免费机场订阅分享">「11月26日」最高速度22.4M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-1-linux-nekoray-node.htm" title="「12月1日」最高速度19.4M/S，2025年Nekoray每天更新免费机场订阅分享">「12月1日」最高速度19.4M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2025-12-10-free-nekoray.htm" title="「12月10日」最高速度22.7M/S，2025年Nekoray每天更新免费机场订阅分享">「12月10日」最高速度22.7M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
-                        <li class="py-2"><a href="/free-nodes/2026-1-2-linux-nekoray.htm" title="「1月2日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享">「1月2日」最高速度18.3M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-14-linux-nekoray-node.htm" title="「12月14日」最高速度18.5M/S，2025年Nekoray每天更新免费机场订阅分享">「12月14日」最高速度18.5M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
+                        <li class="py-2"><a href="/free-nodes/2025-12-19-share-windows-nekoray.htm" title="「12月19日」最高速度21M/S，2025年Nekoray每天更新免费机场订阅分享">「12月19日」最高速度21M/S，2025年Nekoray每天更新免费机场订阅分享</a></li>
                     </ul>
     </div>
 </div>
@@ -490,10 +490,7 @@ Shadowrocket就像一个沉默的网络护卫，默默在背后为用户搭建�
                 <h4><span class="badge" style="float: right;">7</span> <a href="/date/2026-01/" title="2026-01 归档">2026-01</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">27</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
-            </li>
-                        <li class="py-2">
-                <h4><span class="badge" style="float: right;">23</span> <a href="/date/2025-11/" title="2025-11 归档">2025-11</a></h4>
+                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2025-12/" title="2025-12 归档">2025-12</a></h4>
             </li>
                     </ul>
     </div>
