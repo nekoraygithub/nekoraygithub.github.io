@@ -366,44 +366,14 @@ iOS推荐Shadowrocket、QuantumultX等（需美区App Store），安卓可用Cla
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 服务器启动后提示端口被占用，该如何处理？</h5></div>
+    <div class="panel-heading"><h5>VMess 协议的核心优势是什么？</h5></div>
     <div class="panel-body">
-        先用 netstat 或 ss 工具查看占用该端口的进程（例如 `ss -ltnp`），确认是旧进程或其他服务占用。停止占用进程或修改 V2Ray 配置端口，然后重启服务并检查防火墙规则是否开放了新端口。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Potatso Lite 在新版 iOS 上无法连接怎么办？</h5></div>
-    <div class="panel-body">
-        苹果系统更新后，Potatso Lite 可能需要重新授权 VPN 权限。请删除旧的 VPN 配置，重新安装并导入节点。若仍无法使用，可尝试更换网络模式或等待开发者更新兼容版本。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Hysteria2 的 QUIC 协议相比 TCP 有什么优势？</h5></div>
-    <div class="panel-body">
-        QUIC 协议基于 UDP，减少了握手延迟，支持多路复用和拥塞控制优化。Hysteria2 利用 QUIC 提供更低延迟、更高稳定性的网络连接，尤其适合高延迟或丢包环境。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>如何防止 Clash 被系统防火墙阻断？</h5></div>
-    <div class="panel-body">
-        请在防火墙设置中允许 Clash 的执行文件通过网络访问，并开放其监听端口。若使用 Windows Defender，可在防火墙高级规则中手动添加入站和出站规则，确保代理通信正常。<hr />    </div>
+        VMess 是 V2Ray 项目的核心协议，支持加密、认证和多路复用功能。它能有效防止中间人攻击和流量识别，具有较高的安全性和灵活性，是目前科学上网中最常见的加密协议之一。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Mellow TUN 模式与 SOCKS5 代理有什么区别？</h5></div>
     <div class="panel-body">
         TUN 模式拦截系统 IP 层流量，实现全局代理；SOCKS5 代理通常只影响指定应用。TUN 更适合全局加速，如游戏、视频和浏览器流量，提高网络稳定性和覆盖范围。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 如何选择合适混淆提高稳定性？</h5></div>
-    <div class="panel-body">
-        选择混淆方式时应根据网络环境和封锁程度，例如 tls1.2_ticket_auth 可模拟 HTTPS 流量。合理组合协议和混淆可提升节点稳定性和抗封锁能力，确保长期科学上网体验。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Netch 如何选择全局代理与规则代理模式？</h5></div>
-    <div class="panel-body">
-        全局代理适合所有流量走节点，如游戏和全局科学上网；规则代理仅针对指定应用、IP 或端口走节点，可优化带宽使用和访问效率，根据使用场景选择模式。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>VMess 协议的核心优势是什么？</h5></div>
-    <div class="panel-body">
-        VMess 是 V2Ray 项目的核心协议，支持加密、认证和多路复用功能。它能有效防止中间人攻击和流量识别，具有较高的安全性和灵活性，是目前科学上网中最常见的加密协议之一。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Potatso Lite 是否支持多节点测试？</h5></div>
@@ -413,7 +383,37 @@ iOS推荐Shadowrocket、QuantumultX等（需美区App Store），安卓可用Cla
 <div class="panel panel-default">
     <div class="panel-heading"><h5>PassWall2 的“节点切换策略”如何配置？</h5></div>
     <div class="panel-body">
-        在 PassWall2 中可设置多节点策略，如“按延迟排序”、“自动选择最快节点”等。程序会定期测速，根据实时数据自动切换线路，保证连接的稳定性和速度。    </div>
+        在 PassWall2 中可设置多节点策略，如“按延迟排序”、“自动选择最快节点”等。程序会定期测速，根据实时数据自动切换线路，保证连接的稳定性和速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Hysteria2 的 QUIC 协议相比 TCP 有什么优势？</h5></div>
+    <div class="panel-body">
+        QUIC 协议基于 UDP，减少了握手延迟，支持多路复用和拥塞控制优化。Hysteria2 利用 QUIC 提供更低延迟、更高稳定性的网络连接，尤其适合高延迟或丢包环境。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray 服务器启动后提示端口被占用，该如何处理？</h5></div>
+    <div class="panel-body">
+        先用 netstat 或 ss 工具查看占用该端口的进程（例如 `ss -ltnp`），确认是旧进程或其他服务占用。停止占用进程或修改 V2Ray 配置端口，然后重启服务并检查防火墙规则是否开放了新端口。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>如何防止 Clash 被系统防火墙阻断？</h5></div>
+    <div class="panel-body">
+        请在防火墙设置中允许 Clash 的执行文件通过网络访问，并开放其监听端口。若使用 Windows Defender，可在防火墙高级规则中手动添加入站和出站规则，确保代理通信正常。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Potatso Lite 在新版 iOS 上无法连接怎么办？</h5></div>
+    <div class="panel-body">
+        苹果系统更新后，Potatso Lite 可能需要重新授权 VPN 权限。请删除旧的 VPN 配置，重新安装并导入节点。若仍无法使用，可尝试更换网络模式或等待开发者更新兼容版本。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 如何选择合适混淆提高稳定性？</h5></div>
+    <div class="panel-body">
+        选择混淆方式时应根据网络环境和封锁程度，例如 tls1.2_ticket_auth 可模拟 HTTPS 流量。合理组合协议和混淆可提升节点稳定性和抗封锁能力，确保长期科学上网体验。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Netch 如何选择全局代理与规则代理模式？</h5></div>
+    <div class="panel-body">
+        全局代理适合所有流量走节点，如游戏和全局科学上网；规则代理仅针对指定应用、IP 或端口走节点，可优化带宽使用和访问效率，根据使用场景选择模式。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -462,15 +462,15 @@ iOS推荐Shadowrocket、QuantumultX等（需美区App Store），安卓可用Cla
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2"><a href="/free-nodes/2026-8-14-node-share.htm" title="「8月14日」最高速度21.6M/S，2025年Nekoray每天更新免费机场订阅分享">「8月14日」最高速度21.6M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/share-windows-nekoray-2026-8-17.htm" title="「8月17日」最高速度19.3M/S，2025年Nekoray每天更新免费机场订阅分享">「8月17日」最高速度19.3M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-7-29.htm" title="「7月29日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享">「7月29日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-16-node-share.htm" title="「8月16日」最高速度21.4M/S，2025年Nekoray每天更新免费机场订阅分享">「8月16日」最高速度21.4M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-6-free-nekoray.htm" title="「8月6日」最高速度23M/S，2025年Nekoray每天更新免费机场订阅分享">「8月6日」最高速度23M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-30-node-share.htm" title="「7月30日」最高速度21.6M/S，2025年Nekoray每天更新免费机场订阅分享">「7月30日」最高速度21.6M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-22-free-subscribe-node.htm" title="「7月22日」最高速度20.5M/S，2025年Nekoray每天更新免费机场订阅分享">「7月22日」最高速度20.5M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-2-node-share.htm" title="「8月2日」最高速度21M/S，2025年Nekoray每天更新免费机场订阅分享">「8月2日」最高速度21M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-8-1.htm" title="「8月1日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享">「8月1日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-12-nekoray-node.htm" title="「8月12日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享">「8月12日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-9-1.htm" title="「9月1日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享">「9月1日」最高速度19.9M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-node-subscribe-links-2026-8-9.htm" title="「8月9日」最高速度19.6M/S，2025年Nekoray每天更新免费机场订阅分享">「8月9日」最高速度19.6M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-26-free-subscribe-node.htm" title="「8月26日」最高速度20.6M/S，2025年Nekoray每天更新免费机场订阅分享">「8月26日」最高速度20.6M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-8-node-share.htm" title="「8月8日」最高速度22.9M/S，2025年Nekoray每天更新免费机场订阅分享">「8月8日」最高速度22.9M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-18-free-subscribe-node.htm" title="「8月18日」最高速度20.3M/S，2025年Nekoray每天更新免费机场订阅分享">「8月18日」最高速度20.3M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/linux-nekoray-2026-8-13.htm" title="「8月13日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享">「8月13日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-nekoray-node-2026-8-19.htm" title="「8月19日」最高速度18.2M/S，2025年Nekoray每天更新免费机场订阅分享">「8月19日」最高速度18.2M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-8-7.htm" title="「8月7日」最高速度22.5M/S，2025年Nekoray每天更新免费机场订阅分享">「8月7日」最高速度22.5M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-28-free-subscribe-node.htm" title="「8月28日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享">「8月28日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -482,10 +482,10 @@ iOS推荐Shadowrocket、QuantumultX等（需美区App Store），安卓可用Cla
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">13</span> <a href="/date/2026-07/" title="2026-07 归档">2026-07</a></h4>
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
             </li>
                     </ul>
     </div>

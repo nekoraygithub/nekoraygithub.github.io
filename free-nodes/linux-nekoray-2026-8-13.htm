@@ -318,44 +318,9 @@ Clash本身为开源免费，但部分订阅节点服务可能需要付费。</p
     </div>
 <h4>FAQ</h4>
 <div class="panel panel-default">
-    <div class="panel-heading"><h5>Quantumult X 的“分流规则”如何管理？</h5></div>
-    <div class="panel-body">
-        Quantumult X 使用策略组管理分流规则。用户可将规则文件导入应用，通过“policy group”定义不同流量走向，实现国内直连、国外代理、广告拦截等功能的自动分配。<hr />    </div>
-</div>
-<div class="panel panel-default">
     <div class="panel-heading"><h5>V2Ray 的流量分流规则支持哪些条件？</h5></div>
     <div class="panel-body">
         V2Ray 支持按域名、IP、端口、协议或用户标签进行分流。用户可灵活设置国内直连、国外代理或特定节点，实现精准控制和网络优化。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的混淆方式选择有什么讲究？</h5></div>
-    <div class="panel-body">
-        混淆方式决定流量伪装特性，不同方式适应不同封锁环境。常用方式如 tls1.2_ticket_auth 模拟 HTTPS，http_simple 模拟 HTTP 请求，根据环境选择可提高抗封锁能力。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>V2Ray 的 TCP + TLS 模式适合什么场景？</h5></div>
-    <div class="panel-body">
-        TCP + TLS 模式可模拟 HTTPS 流量，增强抗封锁能力。适合网络封锁严格的环境，通过策略组选择最佳节点，可保证访问速度和连接稳定性，尤其适用于网页浏览和视频播放。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekoray 与 Nekobox 有什么不同？</h5></div>
-    <div class="panel-body">
-        Nekoray 是一款基于 Qt 的跨平台代理前端，而 Nekobox 更偏向移动端简化使用。两者均支持 V2Ray/VLESS/Trojan 协议，但 Nekobox 提供了更轻量的界面和更快的连接启动速度。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>SSR 的混淆方式如何选择最合适？</h5></div>
-    <div class="panel-body">
-        根据网络环境选择适合的混淆方式，如 tls1.2_ticket_auth 模拟 HTTPS 流量，可隐藏真实特征。结合协议插件使用，可以提高抗封锁能力和节点可用性。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Quantumult X 中自定义脚本导致规则异常，该如何恢复？</h5></div>
-    <div class="panel-body">
-        先停用或删除最近添加的自定义脚本，重启应用并观察网络行为是否恢复。若无法恢复，备份并重置配置为默认，然后逐个添加脚本以定位导致异常的具体脚本并修复。<hr />    </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading"><h5>Nekobox 能否使用订阅链接？</h5></div>
-    <div class="panel-body">
-        Nekobox 支持通过订阅 URL 导入节点。用户在应用中选择“添加订阅”，输入链接后系统会自动更新节点数据，并支持定期刷新，确保始终使用最新线路。<hr />    </div>
 </div>
 <div class="panel panel-default">
     <div class="panel-heading"><h5>Sing-box 的 JSON 配置文件常见语法错误如何快速定位？</h5></div>
@@ -363,9 +328,44 @@ Clash本身为开源免费，但部分订阅节点服务可能需要付费。</p
         通过 JSON 校验工具或编辑器（例如 VSCode）打开配置文件，查看语法高亮与错误提示；也可运行 sing-box 并观察控制台错误信息，错误通常会指出第几行或哪个字段不合法以便修正。<hr />    </div>
 </div>
 <div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekobox 能否使用订阅链接？</h5></div>
+    <div class="panel-body">
+        Nekobox 支持通过订阅 URL 导入节点。用户在应用中选择“添加订阅”，输入链接后系统会自动更新节点数据，并支持定期刷新，确保始终使用最新线路。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Nekoray 与 Nekobox 有什么不同？</h5></div>
+    <div class="panel-body">
+        Nekoray 是一款基于 Qt 的跨平台代理前端，而 Nekobox 更偏向移动端简化使用。两者均支持 V2Ray/VLESS/Trojan 协议，但 Nekobox 提供了更轻量的界面和更快的连接启动速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
     <div class="panel-heading"><h5>Mellow 的 TUN 模式与系统代理有何区别？</h5></div>
     <div class="panel-body">
-        TUN 模式拦截系统 IP 层流量，实现全局代理，而系统代理通常只影响支持代理的应用。TUN 更适合游戏、视频和全局科学上网场景，保证所有流量通过节点，提高稳定性和速度。    </div>
+        TUN 模式拦截系统 IP 层流量，实现全局代理，而系统代理通常只影响支持代理的应用。TUN 更适合游戏、视频和全局科学上网场景，保证所有流量通过节点，提高稳定性和速度。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Quantumult X 中自定义脚本导致规则异常，该如何恢复？</h5></div>
+    <div class="panel-body">
+        先停用或删除最近添加的自定义脚本，重启应用并观察网络行为是否恢复。若无法恢复，备份并重置配置为默认，然后逐个添加脚本以定位导致异常的具体脚本并修复。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的混淆方式选择有什么讲究？</h5></div>
+    <div class="panel-body">
+        混淆方式决定流量伪装特性，不同方式适应不同封锁环境。常用方式如 tls1.2_ticket_auth 模拟 HTTPS，http_simple 模拟 HTTP 请求，根据环境选择可提高抗封锁能力。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>Quantumult X 的“分流规则”如何管理？</h5></div>
+    <div class="panel-body">
+        Quantumult X 使用策略组管理分流规则。用户可将规则文件导入应用，通过“policy group”定义不同流量走向，实现国内直连、国外代理、广告拦截等功能的自动分配。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>V2Ray 的 TCP + TLS 模式适合什么场景？</h5></div>
+    <div class="panel-body">
+        TCP + TLS 模式可模拟 HTTPS 流量，增强抗封锁能力。适合网络封锁严格的环境，通过策略组选择最佳节点，可保证访问速度和连接稳定性，尤其适用于网页浏览和视频播放。<hr />    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading"><h5>SSR 的混淆方式如何选择最合适？</h5></div>
+    <div class="panel-body">
+        根据网络环境选择适合的混淆方式，如 tls1.2_ticket_auth 模拟 HTTPS 流量，可隐藏真实特征。结合协议插件使用，可以提高抗封锁能力和节点可用性。    </div>
 </div>
 <div class="panel panel-default mt-5">
     <div class="panel-heading">
@@ -413,16 +413,16 @@ Clash本身为开源免费，但部分订阅节点服务可能需要付费。</p
     </div>
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
-                        <li class="py-2"><a href="/free-nodes/linux-nekoray-2026-8-13.htm" title="「8月13日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享">「8月13日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-7-29.htm" title="「7月29日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享">「7月29日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-8-1.htm" title="「8月1日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享">「8月1日」最高速度22.8M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-25-node-share-links.htm" title="「7月25日」最高速度18.1M/S，2025年Nekoray每天更新免费机场订阅分享">「7月25日」最高速度18.1M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-12-nekoray-node.htm" title="「8月12日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享">「8月12日」最高速度21.9M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-8-16-node-share.htm" title="「8月16日」最高速度21.4M/S，2025年Nekoray每天更新免费机场订阅分享">「8月16日」最高速度21.4M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-20-linux-nekoray-node.htm" title="「8月20日」最高速度18.6M/S，2025年Nekoray每天更新免费机场订阅分享">「8月20日」最高速度18.6M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-node-subscribe-links-2026-8-11.htm" title="「8月11日」最高速度21.6M/S，2025年Nekoray每天更新免费机场订阅分享">「8月11日」最高速度21.6M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-30-windows-nekoray.htm" title="「8月30日」最高速度20.9M/S，2025年Nekoray每天更新免费机场订阅分享">「8月30日」最高速度20.9M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
                         <li class="py-2"><a href="/free-nodes/2026-8-6-free-nekoray.htm" title="「8月6日」最高速度23M/S，2025年Nekoray每天更新免费机场订阅分享">「8月6日」最高速度23M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-27-free-nekoray-node.htm" title="「7月27日」最高速度19.3M/S，2025年Nekoray每天更新免费机场订阅分享">「7月27日」最高速度19.3M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/2026-7-28-free-nekoray.htm" title="「7月28日」最高速度18.5M/S，2025年Nekoray每天更新免费机场订阅分享">「7月28日」最高速度18.5M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
-                        <li class="py-2"><a href="/free-nodes/free-high-speed-nodes-2026-8-15.htm" title="「8月15日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享">「8月15日」最高速度18M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/linux-nekoray-2026-8-31.htm" title="「8月31日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享">「8月31日」最高速度20M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-28-free-subscribe-node.htm" title="「8月28日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享">「8月28日」最高速度19.7M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/free-nekoray-node-2026-8-19.htm" title="「8月19日」最高速度18.2M/S，2025年Nekoray每天更新免费机场订阅分享">「8月19日」最高速度18.2M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/2026-8-8-node-share.htm" title="「8月8日」最高速度22.9M/S，2025年Nekoray每天更新免费机场订阅分享">「8月8日」最高速度22.9M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/node-share-links-2026-8-7.htm" title="「8月7日」最高速度22.5M/S，2025年Nekoray每天更新免费机场订阅分享">「8月7日」最高速度22.5M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
+                        <li class="py-2"><a href="/free-nodes/linux-nekoray-2026-8-13.htm" title="「8月13日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享">「8月13日」最高速度21.3M/S，2025年Nekoray每天更新免费机场订阅分享</a><hr /></li>
                     </ul>
     </div>
 </div>
@@ -434,10 +434,10 @@ Clash本身为开源免费，但部分订阅节点服务可能需要付费。</p
     <div class="panel-body">
         <ul class="p-0 x-0" style="list-style: none;margin: 0;padding: 0;">
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">19</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
+                <h4><span class="badge" style="float: right;">4</span> <a href="/date/2026-09/" title="2026-09 归档">2026-09</a></h4>
             </li>
                         <li class="py-2">
-                <h4><span class="badge" style="float: right;">13</span> <a href="/date/2026-07/" title="2026-07 归档">2026-07</a></h4>
+                <h4><span class="badge" style="float: right;">26</span> <a href="/date/2026-08/" title="2026-08 归档">2026-08</a></h4>
             </li>
                     </ul>
     </div>
